@@ -1,0 +1,678 @@
+{
+    "ewt-dev-1": {
+        "sample": "From the AP comes this story :",
+        "word_labels": {
+            "('AP', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1642, -1.1642, 1.2257, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('comes', 3)": [-0.0469, -0.0416, 1.1753, -1.3247, -1.1146, 0.8558, 0.9952, 0.8931, -1.4626, -1.1688, -1.4106, 0.9252, -0.9337, -1.2142, 0.967, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('story', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.035, -1.1685, 1.2257, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3996, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2016, -3.0]
+        },
+        "edge_labels": {
+            "((4, 'comes'), (3, 'AP'))": [-1.3932, -1.3941, 1.4353, -1.3913, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((4, 'comes'), (6, 'story'))": [null, null, null, null, 0.0458, -0.0, -0.0, -0.3556, -0.0561, 0.1096, 0.236, 0.236, -0.0561, -0.1343, -0.0, -0.0204, -0.1343, -0.2656]
+        }
+    },
+    "ewt-dev-2": {
+        "sample": "President Bush on Tuesday nominated two individuals to replace retiring jurists on federal courts in the Washington area .",
+        "word_labels": {
+            "('Bush', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1641, -1.1642, 1.2257, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Tuesday', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1685, -1.1685, 1.2257, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('nominated', 4)": [1.1842, -1.1557, 1.1733, 0.3015, -1.5965, 0.51, 0.4587, -1.3533, -1.5836, -1.3346, 0.121, 0.4524, 0.982, -1.4803, 1.033, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('individuals', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.035, -1.1685, 1.2257, -3.0, 1.4852, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4863, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('replace', 8)": [0.22, -1.1557, 0.1639, 0.6159, -1.3384, -1.2478, -1.1443, 0.8526, -1.3644, -1.1448, -1.289, 0.6675, 1.1413, -1.356, -0.1483, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('jurists', 10)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.035, -0.035, 1.2257, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5439, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-3": {
+        "sample": "Bush nominated Jennifer M. Anderson for a 15 - year term as associate judge of the Superior Court of the District of Columbia , replacing Steffen W. Graae .",
+        "word_labels": {
+            "('Bush', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1642, -1.1642, 1.2257, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('nominated', 1)": [0.2395, -1.1557, 1.18, -1.438, -1.454, -1.2314, 0.7647, -1.3374, -1.3029, -1.4028, 0.366, 0.7441, 1.0921, -1.1543, 1.033, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Anderson', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0069, 0.0069, 1.2257, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('term', 10)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0197, -1.1685, 1.1637, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5497, -3.0, -3.0, -3.0, -1.3667, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3667, -3.0, -3.0, -1.3667, -3.0],
+            "('replacing', 24)": [0.1469, -1.1557, 0.1276, -1.2994, 0.7963, -1.1325, -1.1538, -1.128, -1.3377, -1.2342, 1.0012, -1.0962, 1.171, -1.134, 0.0491, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Graae', 27)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1641, -1.1641, 1.2257, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-4": {
+        "sample": "***",
+        "word_labels": {},
+        "edge_labels": {}
+    },
+    "ewt-dev-5": {
+        "sample": "Bush also nominated A. Noel Anketell Kramer for a 15 - year term as associate judge of the District of Columbia Court of Appeals , replacing John Montague Steadman .",
+        "word_labels": {
+            "('Bush', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.074, -0.074, 1.2156, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('nominated', 2)": [1.1551, -1.1557, 0.0832, null, null, null, null, null, null, null, null, null, null, null, 1.033, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Kramer', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.074, -1.2304, 1.2156, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('term', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2156, -0.3979, -0.074, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4995, -3.0, -3.0, -3.0, -1.4135, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4135, -3.0, -3.0, -1.4135, -3.0],
+            "('replacing', 25)": [1.1529, -1.1557, 0.1308, null, null, null, null, null, null, null, null, null, null, null, 0.0491, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Steadman', 28)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.2304, -1.2304, 1.2156, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-6": {
+        "sample": "The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb .",
+        "word_labels": {
+            "('sheikh', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0099, -0.074, 0.2198, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4939, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('attacked', 8)": [0.0838, -1.1557, 1.1667, -1.6516, -1.8683, 0.279, 0.5455, 0.9269, -1.4806, -1.5223, -1.788, 0.1948, 1.0193, 0.1769, 1.033, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('launched', 15)": [1.1529, -1.1557, 1.1669, -2.7046, -2.1073, -2.5017, -2.1806, 2.3797, -0.5644, -2.3703, -1.7623, -0.2966, -1.5515, -2.5314, 1.033, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('bomb', 16)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.2607, -1.2304, 0.1043, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4884, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4823, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-7": {
+        "sample": "He could be killed years ago and the israelians have all the reasons , since he founded and he is the spiritual leader of Hamas , but they did n't .",
+        "word_labels": {
+            "('killed', 3)": [1.1733, 0.0732, 0.0927, -1.6455, 0.1871, 0.3039, 0.5034, 0.2356, 0.5204, -1.5564, -1.7025, 0.5931, 0.6853, 0.2397, 0.0225, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('years', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0415, -0.3924, -1.2304, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('israelians', 8)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0452, -0.074, -0.0099, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('have', 9)": [-0.0777, -1.1735, 1.2097, -1.4767, 0.3931, -1.3822, 0.5633, 0.4889, 0.2233, 0.4255, 0.3479, 0.6721, 0.7082, 0.5821, 1.2321, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('reasons', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0318, -0.0492, -1.2445, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5209, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2085, -3.0, -1.4822, 0.2085, -3.0],
+            "('founded', 16)": [0.0352, -1.1735, 1.2097, -1.4278, 0.3513, 0.7699, 0.603, -1.2312, -1.4235, -1.8777, -1.5657, 0.8146, 0.8559, 0.5068, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('leader', 22)": [0.0787, -0.0607, 1.2097, 0.0566, -1.504, 0.4447, 0.1861, -1.6319, -1.6696, -1.3919, -1.9839, 0.8724, 0.7349, 0.5213, null, -0.0452, -0.1793, 1.2003, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Hamas', 24)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.2445, -0.2645, 1.1909, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('they', 27)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0397, -1.1694, 1.2002, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('did', 28)": [0.0787, -1.1735, 0.075, 0.4047, 0.4516, -1.3273, 0.3818, 0.5, -1.5968, -1.3826, 0.1403, 0.6734, 0.8977, 0.5248, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-8": {
+        "sample": "Today 's incident proves that Sharon has lost his patience and his hope in peace .",
+        "word_labels": {
+            "('incident', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0452, -1.1694, 1.2002, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.523, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0332, -3.0, -3.0],
+            "('proves', 3)": [0.0787, -1.1735, 1.2097, -1.3001, -1.2503, -1.1525, 1.1331, 0.7907, -1.4082, -2.1126, 0.7184, 0.9036, 1.3611, -1.0565, 0.967, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Sharon', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1694, -1.1694, 1.2003, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('lost', 7)": [1.2097, -1.1735, 0.0787, 0.4995, -1.6732, 0.3937, 0.4532, -0.0886, 0.259, -1.993, -0.1144, 0.2587, 0.4422, 0.3444, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('patience', 9)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0875, -0.0452, 1.2003, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5118, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4055, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((4, 'proves'), (3, 'incident'))": [null, null, null, null, 1.389, -0.0, -0.0, -1.3053, -0.17, -1.3995, 1.3903, 0.1093, -0.0, -1.307, -0.0, 0.0618, -0.0, 0.1093],
+            "((8, 'lost'), (6, 'Sharon'))": [null, null, null, null, 0.0882, 1.3644, 1.3641, 1.3616, -0.0525, 1.3639, 1.3639, 1.3642, -1.2224, -0.0246, -0.0246, -0.0246, -1.3138, -0.0],
+            "((8, 'lost'), (10, 'patience'))": [null, null, null, null, -0.0593, -1.4459, -0.1038, -1.4433, -0.0132, 1.2805, 0.0017, -0.1003, -0.0103, 0.0571, 1.2804, -1.4439, -0.1003, -0.1713]
+        }
+    },
+    "ewt-dev-9": {
+        "sample": "Nervous people make mistakes , so I suppose there will be a wave of succesfull arab attacks .",
+        "word_labels": {
+            "('people', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2002, -1.1694, -1.1694, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5223, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('make', 2)": [0.0084, 0.0938, 1.2097, -1.3039, -1.1807, 0.7582, -1.1715, 0.7767, 0.6178, -1.1218, -1.4811, 0.8279, 0.9717, -1.2569, 1.1095, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('mistakes', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2003, -0.1793, -1.1694, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0411, 1.5086, -3.0, -1.3954, -3.0],
+            "('suppose', 7)": [-1.1734, 0.0938, 0.0084, -1.2266, -1.0862, -1.1717, -1.1513, 0.9213, -1.868, -1.033, 0.5981, 1.0099, 1.0775, -1.1357, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('be', 10)": [-0.0777, 0.0787, -0.0641, 0.7185, -1.4395, 0.8144, -1.17, -1.4446, -1.0396, -1.169, -1.6383, 0.5524, 0.7302, 0.8228, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('wave', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.2402, 1.1833, 0.2199, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4485, 0.0453, -3.0, -3.0, -3.0, -1.4485, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4485, -3.0, 0.1681, -3.0, -1.4485, -1.4485]
+        },
+        "edge_labels": {
+            "((3, 'make'), (2, 'people'))": [null, null, null, null, 1.2756, -0.0215, 0.0402, 1.2755, -0.1007, 1.2757, 1.2756, 1.2753, -0.3985, -0.0215, -0.0349, 0.0402, -0.0306, -0.0215],
+            "((3, 'make'), (4, 'mistakes'))": [null, null, null, null, 0.0014, -1.0664, -1.0656, -1.0663, -0.1772, 0.0014, 0.2206, 0.2206, -0.1772, -0.059, -0.0, 0.2206, -0.0, -0.059],
+            "((8, 'suppose'), (7, 'I'))": [null, null, null, null, 1.3672, 1.3695, 1.3675, 1.3669, -0.0195, 1.3672, 1.3672, 1.3693, -0.8571, -0.0823, -0.0, 0.0143, 0.0241, -0.1303]
+        }
+    },
+    "ewt-dev-10": {
+        "sample": "A la guerre c'est comme a la guerre !",
+        "word_labels": {},
+        "edge_labels": {}
+    },
+    "ewt-dev-11": {
+        "sample": "In the eastern city of Baqubah , guerrillas detonated a car bomb outside a police station , killing several people .",
+        "word_labels": {
+            "('city', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0452, -1.1694, 1.2163, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0169, -3.0, 1.5211, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('guerrillas', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0875, -0.1793, 0.0632, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5506, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('detonated', 8)": [0.0787, -1.1735, 1.2097, -1.1778, 0.6842, -1.1941, 0.8857, 0.9036, -1.3482, 0.8624, 0.855, -1.2241, 1.0371, -1.2111, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('bomb', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1093, -0.1093, 1.3203, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.384, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5047, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('station', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1093, -0.1093, 1.3203, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.5126, 1.3827, -3.0, -3.0, -1.5126, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.5127, -3.0, -3.0],
+            "('killing', 17)": [0.4562, -1.1645, 0.0831, -1.3254, -1.5407, -1.1349, 0.9852, -1.2041, 0.8347, -1.3094, -1.3034, -1.1932, 1.0382, -1.2243, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('people', 19)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.3203, -0.1093, 0.1194, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5249, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-12": {
+        "sample": "The US lost yet another helicopter to hostile fire near Habbaniyah in the Sunni heartland , but this time the crew was safe .",
+        "word_labels": {
+            "('US', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1093, -0.1093, 1.3203, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('lost', 2)": [-0.0531, -1.1645, 1.1895, 0.3467, -1.5882, 0.6478, 0.7146, -1.376, -1.3525, -1.5722, -1.4832, 0.5181, 1.0826, -1.3913, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('helicopter', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1093, -0.1093, 1.3203, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4479, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('fire', 8)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0601, -0.1335, 0.1194, -3.0, -3.0, -3.0, -1.4305, -3.0, -3.0, -1.4305, -3.0, -1.4305, -3.0, -3.0, -1.4305, -3.0, -1.4305, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4933, -3.0, -1.4306, -3.0],
+            "('time', 18)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1194, 0.4113, 0.1194, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('crew', 20)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1093, -0.0932, 1.3203, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4856, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('safe', 22)": [1.2274, -1.1644, 0.0831, -1.4579, -1.4247, 0.4396, -1.1882, -1.1364, -1.2537, -1.2588, -0.9856, 0.8448, 1.0715, -1.4234, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((3, 'lost'), (2, 'US'))": [null, null, null, null, -0.0314, -0.1061, 1.2768, -0.0874, -0.0, 1.2746, 1.2751, 1.2768, -0.0, 1.2767, 1.2771, 0.0207, -0.1647, 1.2768],
+            "((3, 'lost'), (6, 'helicopter'))": [null, null, null, null, -0.0053, -0.6655, -0.6658, -0.6657, 1.3761, 1.3755, 1.3774, 0.0879, 0.0879, 1.377, 0.0587, 0.0318, -1.2256, -1.2267],
+            "((3, 'lost'), (9, 'fire'))": [1.3642, -0.0246, 1.3637, -0.0, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        }
+    },
+    "ewt-dev-13": {
+        "sample": "In Fallujah , hundreds of demonstrators came out against US troops when they briefly arrested a yound newlywed bride .",
+        "word_labels": {
+            "('Fallujah', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1093, -0.349, 1.3203, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('hundreds', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.3203, -0.2556, 0.1194, -3.0, -3.0, 1.4856, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('came', 6)": [-0.0175, -1.1644, 0.1953, -1.3235, -1.6741, 0.8952, 1.0942, -1.1928, -1.5493, -1.5813, -1.7864, -1.1255, -0.9416, 0.5988, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('troops', 10)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1797, -0.1134, 0.0542, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5148, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('they', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2039, -0.258, 0.0542, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('arrested', 14)": [0.0087, -1.1645, 0.1531, -1.2092, -1.7131, 0.9422, -1.0119, -1.2924, -1.5702, -1.6244, -1.818, 1.0085, 1.2118, -1.0354, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('bride', 18)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1134, -0.1134, 1.1797, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2385, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-14": {
+        "sample": "( I hope that the US army got an enormous amount of information from her relatives , because otherwise this move was a bad , bad tradeoff ) .",
+        "word_labels": {
+            "('hope', 2)": [0.0831, -0.0347, 0.0831, 0.5559, 0.3624, -1.2378, 0.6756, 0.8814, -1.1199, -1.2257, -1.1039, -1.3261, 1.0374, 0.4891, 1.2321, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('army', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0542, -0.1134, 1.1797, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5081, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('got', 7)": [-0.0639, 0.1148, -0.0639, 0.4984, -1.7079, 0.7794, 0.685, -1.1995, -1.3394, -1.6675, -1.6228, 0.6384, 0.5043, 0.5676, 0.2425, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('amount', 10)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.2582, -0.1335, -0.1265, -3.0, 0.2021, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.371, -3.0, -3.0, -3.0, -3.0, -3.0, -1.371, -3.0, -3.0, 0.2021, -3.0, -3.0, -3.0, -3.0],
+            "('relatives', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1959, -0.258, 0.0542, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4808, -3.0, -3.0, -3.0, -3.0, -1.4266, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('move', 20)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.3709, -0.1335, -0.1265, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2065, -3.0, -3.0, -3.0],
+            "('tradeoff', 26)": [-1.1645, 0.1148, 0.0831, 0.6973, -1.3818, 0.5905, 0.7853, -1.3916, -1.3927, -1.3261, -1.6198, -1.2284, 0.5631, 0.5468, null, 1.2055, -0.1134, 0.0542, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-15": {
+        "sample": "The US troops fired into the hostile crowd , killing 4 .",
+        "word_labels": {
+            "('troops', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1797, -0.1134, 0.0542, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5018, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('fired', 3)": [1.2274, -1.1645, 0.0831, -1.6118, -0.2778, 0.1606, 0.3481, 0.6956, -1.587, -0.0847, -0.307, -1.516, 0.9101, -1.5275, 1.2088, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('crowd', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1797, -0.1134, 0.0542, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5636, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('killing', 9)": [0.1095, -1.1645, 0.0831, -1.1521, -1.5874, -1.1684, -1.167, 0.8669, 0.7887, -1.523, -1.468, -1.1885, 1.1835, -1.0789, 1.2088, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('4', 10)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0638, -0.0762, 0.0892, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-16": {
+        "sample": "It seems clear to me that the manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis .",
+        "word_labels": {
+            "('seems', 1)": [1.1437, -0.0039, -0.1429, 1.0333, -1.5207, -0.9377, -0.8543, -0.8432, -1.0499, -1.4864, 0.6402, -1.0328, -0.7041, 1.036, 1.2321, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('clear', 2)": [-0.0359, -0.3028, 0.1817, -1.2573, -1.695, 0.8125, 0.9293, -1.1181, -1.237, -1.832, -1.6773, -0.9874, -0.9109, 1.0419, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('manhunt', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0892, -0.2971, 0.0892, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4644, -3.0, -3.0, -3.0],
+            "('done', 18)": [-0.0838, -0.0838, 1.1437, -1.3037, -1.3184, 1.0595, -1.1434, -1.0931, -1.3062, -0.9964, -1.6163, -1.1197, -0.9065, 0.7383, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('ways', 25)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0892, 1.2208, -0.0638, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('bad', 28)": [0.0277, -0.0838, 1.1437, -1.2497, -1.542, -1.1113, -1.0657, -1.1381, -1.1913, -1.4621, -1.5274, 0.8938, -0.9423, 0.985, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('standing', 31)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0638, 1.2018, -0.0638, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.4294, 1.503, -0.4294, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-17": {
+        "sample": "Google has finally had an analyst day -- a chance to present the company 's story to the ( miniscule number of ) people who have n't heard it .",
+        "word_labels": {
+            "('Google', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0472, -1.2174, 1.2018, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('had', 3)": [0.0277, -0.0838, 1.14, -1.2071, -1.4618, 0.9002, 1.1475, -1.1811, -1.5531, -1.6012, -1.5876, -1.226, 0.8919, -1.4562, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('day', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0892, 0.07, 0.0892, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1167, -1.3793, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1167, -3.0, -3.0],
+            "('chance', 9)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0892, 1.2018, -0.0638, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('present', 11)": [-0.0838, 1.1508, 0.0537, -0.7683, -0.7068, 1.7817, 1.9531, -3.832, -3.3895, -2.338, -0.998, -0.7615, -3.4911, -2.6483, 0.1019, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('story', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0638, 0.07, 0.0892, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.441, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4844, -3.0],
+            "('number', 20)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1265, -1.2178, -0.0432, -3.0, -3.0, 0.0719, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4314, -1.4315, 0.0719, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4314, -3.0],
+            "('people', 23)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0892, -1.1276, 1.2018, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('heard', 27)": [0.0188, 1.1437, -0.0306, -0.5695, 1.1991, -0.5958, 1.7108, -2.9583, -2.5414, -1.4899, 1.2559, 1.4558, -2.6266, 0.1417, -0.001, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-18": {
+        "sample": "Usually , these are just a chance for the suckups to suck up , but this time people are actually concerned about the company 's plans .",
+        "word_labels": {
+            "('chance', 6)": [-0.0838, 1.1437, 0.0537, -1.6188, 0.1191, 0.4545, 0.5855, 0.2542, -1.8547, -1.7353, -0.4097, 0.238, 0.7865, 0.4486, null, -0.1268, 0.2197, 0.0578, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('suckups', 9)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2158, -1.1008, 0.0258, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('suck', 11)": [-0.0838, 0.0188, 0.0675, 0.3771, 0.4311, -1.3106, 0.8168, 0.7879, -1.6318, -1.3015, -1.4393, 0.454, 1.0549, -1.3826, -1.0638, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('time', 16)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0285, 0.1073, 1.2168, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('people', 17)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2373, -0.0285, -0.0858, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5009, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('concerned', 20)": [-0.0838, 0.0188, 0.0537, 0.6677, -1.4602, 0.722, 0.8505, -1.191, -1.1543, -1.2825, -1.5736, -1.2059, 0.706, 0.7396, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('plans', 25)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0859, -0.2053, 1.2347, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4001, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5562, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-19": {
+        "sample": "They work on Wall Street , after all , so when they hear a company who's stated goals include \" Do n't be evil , \" they imagine a company who's eventually history will be \" Do n't be profitable . \"",
+        "word_labels": {
+            "('They', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1377, -1.1658, 1.2017, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('work', 1)": [-0.0838, -0.1086, 1.1437, -0.0612, 0.044, -0.1246, 0.1762, -0.1961, -0.7301, -2.1649, -0.4021, 0.5267, 0.1161, 0.1362, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Street', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1357, -1.1007, 0.1073, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('they', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1377, -0.2611, 1.1849, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('hear', 12)": [-0.3144, 1.193, -0.0115, -1.3649, -1.1749, 0.7856, -1.0974, 0.9846, -1.4452, -1.3135, 0.4585, -1.1269, 1.2004, -1.2731, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('company', 14)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.2334, -1.1701, 0.1409, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3496, -3.0, -3.0, -3.0, 1.5506, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3496, -3.0, -3.0],
+            "('goals', 17)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0404, -0.2053, 0.1357, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.5482, -3.0, -3.0, -1.5481, -3.0, -3.0, -3.0, -3.0, 0.089, -1.5482, -3.0, -3.0, -3.0],
+            "('include', 18)": [0.2222, -0.0115, 0.0072, -1.5092, -1.5985, 0.4564, 0.4807, 0.5069, -1.6867, 0.4267, 0.4762, 0.6426, 0.5273, 0.3765, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('evil', 23)": [-0.5072, 0.1624, 0.1037, 0.3653, 0.6788, -1.2687, -1.1877, 0.5665, 0.2918, -1.3711, -1.7953, 0.8312, 0.6111, 0.6937, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('they', 26)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0861, -1.2078, -1.2078, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('imagine', 27)": [-0.3144, 1.2277, 0.0072, -1.6156, -1.402, 0.2157, 0.4795, 0.6483, -0.0122, -2.0624, -0.4949, 0.5474, 0.9618, -1.5397, 1.1135, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('company', 29)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0861, -1.2078, -1.2078, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3428, -3.0, -3.0, -3.0, 1.5554, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3427, -3.0, -3.0],
+            "('history', 32)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0278, 0.1233, 0.1258, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2529, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3704, -3.0, -3.0, -1.3704, -3.0],
+            "('be', 34)": [-0.0372, 0.1667, -0.0115, -1.3489, 0.404, -1.247, 0.7841, -1.3594, 0.4272, -1.5704, 0.207, 0.9149, 0.7725, 0.6437, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('profitable', 39)": [0.3205, 0.0537, 0.0072, -1.3609, 0.7644, -1.2727, -1.2557, -1.3434, -1.5685, -1.7745, 0.0991, 1.0884, 0.9029, 0.8958, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((2, 'work'), (1, 'They'))": [null, null, null, null, 0.1506, 1.3843, 1.3846, 0.1506, 0.0751, 1.3844, 1.3843, 0.1582, -0.0, 1.3847, 1.3846, 1.3843, 1.3845, -0.2221],
+            "((2, 'work'), (5, 'Street'))": [-0.124, -0.0353, 1.3938, -0.0353, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((2, 'work'), (8, 'all'))": [-0.0635, -0.0, -0.0, -0.0, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((13, 'hear'), (12, 'they'))": [null, null, null, null, 0.0755, 0.1123, 1.3675, 1.3671, -0.0519, 1.3676, 1.3667, 1.3678, -1.04, -1.0387, -0.0, 0.0201, -0.0519, -1.0394],
+            "((13, 'hear'), (15, 'company'))": [null, null, null, null, -0.1406, 0.0111, 0.0111, -0.1288, -0.1406, 1.3408, 1.342, 1.3416, -0.1406, -0.1406, -0.0, 0.0111, 0.0111, -0.0941],
+            "((19, 'include'), (18, 'goals'))": [null, null, null, null, -0.0001, -0.0001, -0.0001, -0.0001, -0.0001, -1.2658, 1.3913, 0.1463, -0.0001, -0.0291, -0.0001, 0.0724, -0.0001, 0.0724],
+            "((28, 'imagine'), (27, 'they'))": [null, null, null, null, 1.3885, 1.3866, 1.3885, 1.3885, 0.026, 1.39, 1.3889, 1.3893, -0.0, -0.0855, -0.0, 0.0618, 0.026, -0.0855],
+            "((28, 'imagine'), (30, 'company'))": [null, null, null, null, -0.0887, -0.8456, -0.8453, -0.8439, -0.8454, -0.0649, 0.1028, 0.1028, -1.3431, 0.0053, -0.0479, -0.8447, -0.8436, -0.0479]
+        }
+    },
+    "ewt-dev-20": {
+        "sample": "It 's not quite as freewheeling an environment as you 'd imagine : Sergey Brin has actually created a mathematical ' proof ' that the company 's self - driven research strategy , which gives employees one day a week to do research projects on their own , is a good , respectable idea .",
+        "word_labels": {
+            "('environment', 7)": [0.0439, 0.1586, 0.0072, -0.2957, 0.012, -1.5437, 0.1704, 0.2132, 0.0314, -1.8159, -2.0985, 0.7383, 0.4231, 0.3039, null, 0.0861, -0.0278, -1.2078, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('you', 9)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0807, -0.0278, -0.0744, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('imagine', 11)": [0.0441, 0.0036, 0.0072, 0.2626, -1.5864, 0.078, -1.3686, 0.4887, -1.9936, -1.6618, -0.0855, 0.3189, 0.8987, 0.073, -1.0638, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Brin', 14)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0278, -1.2078, 1.2205, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('created', 17)": [0.0439, -0.035, 0.4217, 0.6493, -1.4132, 0.493, 0.565, 0.2756, -1.4193, -1.4331, -1.985, 0.6096, 0.5462, 0.7218, 1.2321, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('proof', 21)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1311, -1.2078, 0.1258, -3.0, -3.0, -1.3629, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0259, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0259, 0.0259, -3.0, 0.2861, -3.0],
+            "('strategy', 31)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0861, -0.0278, -1.2078, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4743, -3.0, -3.0, -3.0, -3.0],
+            "('gives', 34)": [0.0439, 0.0966, 0.0072, -1.2548, -1.3827, 0.8998, 0.6318, -1.1688, -2.1648, 0.4426, 0.1617, 0.9865, -0.852, 0.7495, 1.0106, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('employees', 35)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1176, -1.1561, 0.1212, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5065, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('day', 37)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2328, -1.1761, -0.1, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0657, -1.5356, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.5356, -3.0, -3.0],
+            "('do', 41)": [1.1215, -0.0226, -0.2467, 0.5262, -1.7048, 0.8251, 0.3894, -1.3988, -1.5071, -1.8171, -1.7627, 0.6704, 0.6216, 0.3651, 0.0135, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('projects', 43)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2451, -1.0733, -0.3333, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2328, 1.5328, -3.0, -3.0, -3.0],
+            "('idea', 53)": [-0.078, -1.201, 0.02, -1.564, -1.5529, 0.327, 0.4822, 0.0312, 0.5138, -1.2123, 0.1355, 0.4699, 0.6007, 0.4474, null, 0.1284, 0.1284, 0.0346, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-21": {
+        "sample": "Read the entire article ; there 's a punchline , too .",
+        "word_labels": {
+            "('Read', 0)": [1.1215, -0.0796, 1.1215, -1.093, -0.9326, -1.0441, -1.3977, -1.3541, -1.7761, -1.8041, 0.9256, -1.0793, 1.3398, -1.1912, -1.2252, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('article', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0748, -1.0684, 1.2451, -3.0, -1.4841, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5011, -3.0],
+            "(\"'s\", 6)": [-1.2084, -1.211, 0.2165, -1.5251, -1.2947, -1.3435, -1.1207, 1.1147, -1.1602, -0.2626, -0.9229, 0.8376, -0.7323, 0.603, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('punchline', 8)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0588, 0.0339, 1.2451, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-22": {
+        "sample": "My opinion piece on the implications of Arafat 's passing for al - Qaeda has appeared at Newsday .",
+        "word_labels": {
+            "('piece', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0816, -1.0684, 1.2451, -1.4435, -3.0, -3.0, -3.0, -1.4435, -3.0, -1.4435, -3.0, -3.0, -1.4435, -3.0, -3.0, -1.4435, 0.0763, -3.0, -3.0, -3.0, -3.0, -1.4434, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0763, -3.0],
+            "('appeared', 15)": [0.1531, -1.201, 1.1215, null, null, null, null, null, null, null, null, null, null, null, 1.0215, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Newsday', 17)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0346, -1.0684, 0.2004, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-23": {
+        "sample": "Excerpt :",
+        "word_labels": {},
+        "edge_labels": {}
+    },
+    "ewt-dev-24": {
+        "sample": "\" Arafat 's secular nationalism was supple enough to compromise with Israel and to imagine a two - state solution , even if the road of negotiations remained rocky .",
+        "word_labels": {
+            "('nationalism', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0559, 1.251, -1.0684, -3.0, -3.0, -3.0, 0.0925, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2238, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2238, -3.0, -3.0, -3.0, -3.0],
+            "('enough', 7)": [-0.0545, -1.201, 1.1311, 0.2791, 0.3498, 0.4078, -0.083, -1.5718, -1.5032, -1.6174, -0.3442, 0.7503, 0.3603, 0.5466, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('compromise', 9)": [1.1215, -1.1943, 1.128, 0.5058, -1.3678, 0.4783, -1.3149, -1.199, 0.2335, -1.3359, -1.7603, 1.0032, 0.8495, -1.2759, 1.0173, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Israel', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0816, -1.0684, 1.251, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('imagine', 14)": [1.1215, -1.1966, 1.128, 0.606, -1.4074, 0.718, 0.8343, 0.8441, -1.8373, -1.3616, 0.0472, 0.8195, 1.0953, -1.1864, 1.0173, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('solution', 19)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0792, 0.188, 0.1657, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4251, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4251, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5002, -0.0498, -3.0, 0.0804, -3.0],
+            "('road', 24)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0784, 1.2377, -1.0816, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3274, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.6095, -3.0, -3.0, -3.0],
+            "('remained', 27)": [0.054, -0.1146, 1.1311, 0.5096, 0.6424, 0.3426, 0.3049, -1.6225, 0.0114, -0.697, -2.0064, 0.8321, 0.5782, 0.4378, -0.0715, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('rocky', 28)": [-0.2851, -0.2851, 1.1933, 0.9157, 0.885, -1.0116, -0.9949, -1.1185, 0.1826, -0.4697, -1.6476, 1.0409, -0.6655, 0.8121, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-25": {
+        "sample": "The continued Israeli colonization of the occupied Palestinian territories during the 1990s helped , along with terrorist attacks by radical groups such as Hamas , to derail the peace process , which Sharon had always opposed .",
+        "word_labels": {
+            "('colonization', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0686, 0.0309, 1.1877, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5317, -3.0, -3.0, -3.0],
+            "('helped', 12)": [1.1266, -0.1146, 1.128, 0.808, -1.195, 0.7537, 0.795, -1.2554, -0.9075, -1.0898, -2.0977, 1.1176, -0.9706, -1.1625, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('attacks', 17)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0686, -1.1971, 0.0496, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3984, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4992, -1.3985, -1.3984, -3.0],
+            "('derail', 26)": [1.1708, -1.191, 1.1933, 0.7177, 0.9178, 0.6751, 0.6127, -1.3039, -1.8314, -1.3014, -2.0472, 1.0581, -1.0112, 0.9206, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('process', 29)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0686, 0.036, 1.1877, -3.0, -0.0816, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4533, 1.4679, -3.0, -1.4533, -1.4534],
+            "('Sharon', 32)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1032, -1.1971, 0.0686, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('opposed', 35)": [-0.2814, 0.0235, 0.1381, -1.2722, 1.009, 0.6997, -1.2036, -1.3009, 0.983, -0.8607, -1.5086, 1.1526, -1.1929, 0.966, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((13, 'helped'), (4, 'colonization'))": [null, null, null, null, 0.1594, -0.0152, -0.0635, -0.0, -0.0657, 1.4402, 1.4402, 1.44, -0.0786, 0.0274, 0.0274, 0.1594, -0.0657, 0.0274],
+            "((13, 'helped'), (18, 'attacks'))": [0.0151, -0.169, -1.4209, -1.4224, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((27, 'derail'), (30, 'process'))": [null, null, null, null, 1.2806, -1.4433, -0.1038, -1.4442, -0.2349, 0.0663, 1.2804, 1.2807, -1.4442, 0.0571, 1.2807, 1.2806, 0.0571, -0.1713],
+            "((36, 'opposed'), (30, 'process'))": [null, null, null, null, -0.0, -0.0, -0.0, -0.0, -0.0, -0.8293, -0.103, -0.103, -0.0, -0.103, -0.103, -0.103, -0.0, -0.124],
+            "((36, 'opposed'), (33, 'Sharon'))": [null, null, null, null, 0.0555, 1.3484, 1.3473, 1.3498, 0.0054, 1.3496, 1.3502, 1.3484, -0.0, -0.14, -0.0, 1.3488, 0.0189, -1.3981]
+        }
+    },
+    "ewt-dev-26": {
+        "sample": "Arafat 's death creates a vacuum in Palestinian leadership that will not soon be filled .",
+        "word_labels": {
+            "('death', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0686, -1.1971, 1.1877, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1217, -3.0, -3.0, 0.2611, -1.444, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0357, -3.0, -1.444, 0.1217, -3.0, -3.0],
+            "('creates', 3)": [0.1431, -1.1263, 0.1149, 0.5608, 0.78, 0.6513, 0.7858, -1.2978, -1.4244, -1.2109, -1.8165, 0.7822, 0.7502, -1.3357, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('vacuum', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1877, 0.0686, -1.1971, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0387, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0885, -3.0, -3.0, 0.0387, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0387, -3.0, -3.0],
+            "('filled', 14)": [0.0235, -0.2814, 1.2164, 0.8491, -1.1611, -1.1159, 0.8911, -1.2822, -1.275, -1.0297, -1.7035, 1.0125, -0.9897, 0.9761, -1.1221, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((4, 'creates'), (3, 'death'))": [null, null, null, null, 1.38, -0.5328, -0.5336, -0.5331, -0.5339, -0.0896, 1.3814, 1.3786, -0.5331, -0.0332, -0.0, 0.0869, -0.5334, -0.5328],
+            "((4, 'creates'), (6, 'vacuum'))": [null, null, null, null, 0.0301, -0.268, -1.3798, -1.3796, -0.268, -1.3782, 1.4667, 0.2137, -0.268, 0.114, 0.114, 0.0301, -1.3795, -0.113],
+            "((15, 'filled'), (6, 'vacuum'))": [null, null, null, null, -0.0, -0.0, -0.0, -1.3047, -0.0, 0.1021, 0.0588, -0.0855, -0.0, 0.1021, -0.0188, -0.0, -0.0, -0.0027]
+        }
+    },
+    "ewt-dev-27": {
+        "sample": "Sharon 's assassination of major Hamas leaders has also weakened authority structures in that party .",
+        "word_labels": {
+            "('assassination', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0686, -1.1971, 0.0496, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5083, -3.0, -0.2505, -3.0],
+            "('weakened', 9)": [0.1347, -1.1176, 0.1431, 0.765, -1.2066, 0.9057, 0.6489, -1.4163, -1.4666, -1.1837, 0.1992, 0.8056, -1.06, 0.7196, 1.0173, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('structures', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1876, 0.0686, -0.0864, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0207, 0.118, 0.251, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0207, -3.0, -3.0, -3.0, -1.4106]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-28": {
+        "sample": "If the Israelis and the Palestinian leadership can not find a way to reinvigorate the peace process , cells of radical young Palestinians may grow up that look to bin Laden for their cues .",
+        "word_labels": {
+            "('Israelis', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0864, -0.0207, 0.0686, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('find', 9)": [-0.1357, 1.2228, -1.13, 0.5077, -1.5003, 0.3908, 0.5404, -1.296, -1.5105, -1.2071, 0.0988, 0.8365, -1.0948, 0.7464, -1.2321, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('way', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0686, -0.0442, -0.1032, -3.0, -3.0, -1.5175, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1434, -1.5176, -3.0, -3.0, -1.5175, -3.0, -1.5176, -3.0, -3.0, -1.5175, 0.1434, -0.144, -3.0, -3.0],
+            "('reinvigorate', 13)": [-0.0717, -0.0113, 0.1431, 0.7374, -1.4174, 0.3465, -1.1708, 0.7849, -1.6166, -1.0959, -1.5288, 0.8144, -0.9955, 0.8292, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('process', 16)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.2053, 0.0435, -0.042, -3.0, -1.3828, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3828, 1.547, -3.0, -1.3829, -1.3829],
+            "('cells', 18)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.042, -1.2299, 1.2051, -3.0, -0.0502, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0502, -0.0502, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('Palestinians', 22)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0435, -0.0661, 0.2053, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('grow', 24)": [0.0795, 0.0751, 0.0235, 0.3013, 0.8568, 0.506, -1.3363, -1.5066, -1.6218, -1.095, -1.6421, 1.1512, -1.1663, -1.2182, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('look', 27)": [0.071, 0.1149, -1.138, -1.404, -1.2922, 0.2254, -1.2078, -1.2197, -1.8263, -1.2313, -0.0205, 0.9766, -1.0625, 0.6273, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Laden', 30)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.247, -1.2299, 1.2151, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('cues', 33)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1316, -0.0661, -1.247, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4756, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.487, -3.0, -3.0, -1.4756, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-29": {
+        "sample": "Even if local Palestinian leaders remain strong enough to keep al - Qaida out , the festering Israeli - Palestinian struggle remains among the best recruiting posters for al - Qaida with young Muslim men .",
+        "word_labels": {
+            "('leaders', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0435, -1.2299, 0.2053, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4845, -3.0, -3.0, -0.2597, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('remain', 5)": [-0.0717, 1.2257, 0.0368, 0.5745, -1.3753, 0.7625, -1.1043, -1.4402, -1.1884, -1.3151, -1.4744, 1.0601, -0.9716, 0.8552, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('enough', 7)": [-0.2851, 1.1608, -0.0939, -1.2472, -1.356, 0.8674, -1.1403, -1.4196, -1.2609, -1.3073, -1.4444, 1.1094, 0.8267, 0.7642, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('keep', 9)": [-0.1289, 0.2112, -0.0358, 0.5708, -1.256, 0.4857, -1.318, 0.3303, -1.6105, -1.3009, -1.6468, 1.013, 0.5717, 0.7509, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Qaida', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.2205, -1.2299, 0.2053, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('struggle', 20)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.042, -0.2205, -0.0338, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4792, -3.0, -3.0, -3.0],
+            "('remains', 21)": [-0.1476, -0.243, -0.0333, -1.3253, 0.8432, 0.6042, -1.2565, 0.2935, -1.5277, -0.9841, -1.6969, 1.0158, -1.1397, 0.6812, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('posters', 26)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0435, -1.2299, 0.2053, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3986, -3.0, -3.0, -3.0, -3.0, -1.3986, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5094, -3.0],
+            "('men', 34)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0435, -1.2299, 1.2051, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5469, -3.0, -3.0, -1.3534, -3.0, -1.3534, -1.3534, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-30": {
+        "sample": "Resolving this conflict would be the most effective weapon the United States could deploy in its war on terror . \"",
+        "word_labels": {
+            "('Resolving', 0)": [-0.1052, 0.0215, -0.1732, -2.506, -0.779, -0.7305, -1.1086, -0.605, -2.1892, -0.7357, -1.1589, 0.0601, -0.5603, 1.5932, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('conflict', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0338, 0.0916, 1.2061, -3.0, -3.0, -3.0, -0.1414, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.1414, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.5059, -3.0, -3.0, 1.5119, 0.1617, 1.5119, -3.0],
+            "('weapon', 8)": [-0.1208, -0.0728, -0.0732, -1.3054, -1.2625, -1.1532, -1.1163, -1.1912, -0.7179, -0.997, -1.4805, 0.9566, -0.9945, 0.8798, null, 0.1989, 0.1765, -1.1432, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('States', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1493, -1.109, 0.2397, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('deploy', 13)": [-0.1445, 0.0009, -0.1732, 0.8373, -1.4079, -1.0897, -0.9915, -0.8369, -1.0466, -1.3044, -0.8336, -1.1343, -0.802, 0.8677, -1.1617, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('war', 16)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.075, 0.1765, 1.1807, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5734, 0.2013, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-31": {
+        "sample": "Xinhua reports that a wide range of Iraqi political forces on Tuesday condemned Sharon 's murder of Sheikh Ahmed Yassin , a religious leader of Hamas , the day before .",
+        "word_labels": {
+            "('Xinhua', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.109, -1.109, 1.2407, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('reports', 1)": [1.0837, -1.2268, 0.0813, -1.3475, -0.8231, -1.3253, 0.7402, -1.5197, -1.1784, -0.2706, -1.3301, -0.8839, 1.0716, -1.1167, 1.133, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('range', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.075, 0.3761, -1.1253, -1.4187, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4188, -0.0792, 0.2486, -3.0, -1.4188, -3.0, -3.0, -3.0, -3.0, -1.4188, -3.0, -3.0, -3.0, -3.0],
+            "('Tuesday', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1464, 0.0059, 1.2406, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('condemned', 12)": [-0.0779, -1.2274, 1.0975, 0.2982, -1.5927, 0.3082, -1.3496, 0.574, -1.384, -1.5007, -1.6748, -1.2535, 1.0877, -1.4444, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('murder', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0433, 0.0251, 1.2406, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5256, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((2, 'reports'), (1, 'Xinhua'))": [null, null, null, null, 0.1253, 1.3527, 1.3527, 0.0335, -0.0285, 1.3526, 1.3542, 1.352, -0.0, -0.0285, -0.1009, 1.352, 0.0411, -0.0723],
+            "((13, 'condemned'), (6, 'range'))": [null, null, null, null, 1.3498, 1.3474, 1.3474, 1.3498, -0.14, 1.3473, 1.3476, 1.3495, -0.5129, 0.0189, -0.0147, 1.3477, 0.0493, -0.0795],
+            "((13, 'condemned'), (16, 'murder'))": [null, null, null, null, 0.0201, -1.0393, 0.0201, -1.0393, -1.0374, 1.3668, 1.3671, 1.3677, -1.0384, -1.0383, -0.0, 0.0201, -1.0382, -1.3153]
+        }
+    },
+    "ewt-dev-32": {
+        "sample": "The Board of Muslim clerics in Fallujah , 50 km west of Baghdad , \" condemned the assassination and promised immediate revenge against the coalition soldiers in Iraq . \"",
+        "word_labels": {
+            "('Board', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.075, -0.2324, 1.2138, -3.0, -3.0, -3.0, -3.0, -1.45, -3.0, -3.0, -3.0, -1.45, -3.0, -3.0, -3.0, -3.0, -1.45, 1.4699, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('condemned', 15)": [-0.2272, -1.2274, 1.0953, -1.4095, -1.3773, 0.7709, 1.0113, -1.4092, -1.2834, -1.2314, -1.6099, -1.052, 1.2287, -1.119, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('assassination', 17)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.026, 0.1464, 0.1493, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5007, -3.0, -1.4241, -3.0],
+            "('promised', 19)": [1.0837, -1.2274, -0.0856, 0.4732, -1.1463, -1.3284, -1.1639, -1.1798, -1.4144, -1.1551, 0.36, 0.6625, 1.127, -1.3712, 1.1329, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('revenge', 21)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.069, 1.2168, -1.1822, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5225, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((16, 'condemned'), (2, 'Board'))": [null, null, null, null, -0.0074, 1.381, 1.3837, 1.3816, -0.1392, 1.3816, 1.3822, 1.3821, -0.0742, 0.0291, 0.0291, 0.0291, 0.0801, -0.0432],
+            "((16, 'condemned'), (18, 'assassination'))": [null, null, null, null, 0.1383, -0.0, -0.0, -0.0, -0.0902, 0.0181, 1.438, 1.4375, -0.0, -0.0902, -0.0, -0.0435, -0.0902, -0.0],
+            "((20, 'promised'), (22, 'revenge'))": [null, null, null, null, 1.2667, -0.1557, -0.1557, -0.1557, -0.1557, -1.4426, 1.2636, 1.2641, -1.4434, -0.0465, -0.0269, -0.1557, 1.2665, -0.1057]
+        }
+    },
+    "ewt-dev-33": {
+        "sample": "Ash - Sharq al - Awsat reports that Fallujah was closed Tuesday in a general strike .",
+        "word_labels": {
+            "('Awsat', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1696, -1.1696, 1.2087, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('reports', 6)": [-0.1177, -0.243, 1.0837, 0.4167, -1.3393, -1.2876, 0.853, 0.7233, -0.9677, -0.9014, -1.1113, -1.1536, 1.0558, -1.3381, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Fallujah', 8)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1696, -1.1697, 1.2087, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('closed', 10)": [-0.1052, -1.2273, 1.1089, 0.6699, -1.2363, 0.9262, 1.0522, 0.6175, -1.3974, -1.2577, -1.6095, -1.095, -0.9884, -1.1897, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Tuesday', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0312, -1.1697, 1.2087, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('strike', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0381, -0.0399, -0.0404, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4511, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.183, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((7, 'reports'), (6, 'Awsat'))": [null, null, null, null, 1.3226, 1.323, 1.3228, 1.3239, -0.1035, 1.3222, 1.3233, 1.3233, -0.1035, -0.1035, -0.0, 1.3232, -0.1035, 1.3233],
+            "((11, 'closed'), (9, 'Fallujah'))": [null, null, null, null, -0.1401, -0.0, -0.0, -0.0, -1.3627, 1.3927, 1.3925, 1.3927, -0.1401, -0.1401, -0.0, 1.3924, 0.0092, -0.0192]
+        }
+    },
+    "ewt-dev-34": {
+        "sample": "US troops there clashed with guerrillas in a fight that left one Iraqi dead .",
+        "word_labels": {
+            "('troops', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2169, -1.1697, 0.0381, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2271, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('clashed', 3)": [1.1911, -0.1442, 0.0283, 0.7795, -3.0438, 1.0692, 1.213, -0.968, -1.1084, -2.7017, -1.2158, -1.3513, 1.0872, 0.4951, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('guerrillas', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2168, -1.1696, -0.2769, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4848, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('fight', 8)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1126, -0.0399, -0.0404, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4838, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4409, -3.0, -1.4838, -3.0],
+            "('left', 10)": [1.1911, -0.1442, -0.1212, -1.439, -1.7154, -1.281, 0.914, 0.8458, 0.577, -1.3703, 0.5649, -1.2529, 1.2019, 0.5439, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Iraqi', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1663, -1.1696, 0.3186, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('dead', 13)": [-0.0939, -1.191, 1.1608, 0.6063, -1.1009, -1.3726, -1.3502, -1.4397, 1.097, -1.2768, 0.7646, -1.2003, 0.6095, 0.5488, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((4, 'clashed'), (2, 'troops'))": [null, null, null, null, 0.0221, 1.3255, 1.3243, 1.3256, -0.0864, 1.3238, 1.3242, 1.3256, -1.5344, -0.0864, -0.0033, 1.3256, -0.0864, -0.1376],
+            "((4, 'clashed'), (6, 'guerrillas'))": [0.0167, 1.3908, -0.2347, -1.5086, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((4, 'clashed'), (9, 'fight'))": [-0.0627, -0.8877, -1.3805, 0.1993, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        }
+    },
+    "ewt-dev-35": {
+        "sample": "In Ramadi , there was a big demonstration .",
+        "word_labels": {
+            "('Ramadi', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.1697, -1.1696, 1.2087, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('was', 4)": [1.1911, -0.1442, -0.1212, -1.1087, -3.0714, 0.972, 1.3247, -1.021, 0.3217, -2.675, -1.5693, -1.3926, -0.8249, -1.0202, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('demonstration', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1846, -0.0623, -0.0522, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5488, -3.0, -0.1225, -3.0]
+        },
+        "edge_labels": {
+            "((5, 'was'), (2, 'Ramadi'))": [-0.7211, -0.7208, 1.4382, -0.7212, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((5, 'was'), (8, 'demonstration'))": [null, null, null, null, 0.0129, 0.0129, 0.0129, 0.0129, 0.0498, -1.2592, 1.3667, -0.1636, -0.0, 1.3658, 0.1503, 0.0129, 0.0129, -1.2608]
+        }
+    },
+    "ewt-dev-36": {
+        "sample": "Radical Shiite cleric Muqtada al - Sadr said the attack was \" criminal \" and that \" the Zionists have left only one choice for the Arabs , that of fighting and jihad \" .",
+        "word_labels": {
+            "('Sadr', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0877, -1.1809, 1.1846, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('said', 7)": [0.0283, -0.1442, 0.0627, -1.5046, -1.1429, -1.3187, 0.7633, 0.9529, -0.2762, -1.4033, -1.7485, 0.7394, 1.0655, -1.3847, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('attack', 9)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0451, -0.0877, 0.1196, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4462, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1889, -0.0706, -1.4462, -3.0],
+            "('criminal', 12)": [1.1911, 0.0283, 0.0283, 0.3463, 0.2281, 0.0389, 0.686, -1.5905, -0.1352, -1.9681, -0.2194, 0.5689, 0.5539, 0.3691, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Zionists', 18)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0579, -0.0181, 0.0563, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('left', 20)": [0.006, 0.0283, 0.0627, -1.2603, -2.3837, 0.9883, -1.0597, -1.0069, 0.4968, -1.3414, -1.4621, 0.984, -0.905, 0.9207, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('choice', 23)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1718, -0.0451, -0.2341, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2209, -0.0588, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((8, 'said'), (7, 'Sadr'))": [null, null, null, null, 1.2924, 1.2921, 1.2929, -0.0001, -0.198, 1.2948, 1.2923, 1.2922, -0.6565, -0.0001, -0.0001, 1.2928, 1.2915, -0.0093]
+        }
+    },
+    "ewt-dev-37": {
+        "sample": "The interim Governing Council issued a communique saying , \" It is a proof of the emptiness of the Israeli authority and a destruction of the peace endeavors in the region . . .",
+        "word_labels": {
+            "('Council', 3)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0105, -1.1808, 1.1846, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('issued', 4)": [-0.1212, -0.1442, 1.1911, -1.5675, -1.4498, -1.2371, 0.785, 0.7416, -2.0048, -1.7634, -1.4471, -1.4444, 1.2523, -1.205, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('communique', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1846, -0.0572, -0.0522, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5112, -3.0],
+            "('saying', 7)": [0.0283, -0.1442, 1.1911, -1.375, -1.4877, -1.2315, 0.7533, 0.9664, -1.7416, -0.8377, -1.4021, -1.1995, 1.1903, -1.1917, 1.1245, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('proof', 13)": [-1.2302, 0.0283, -0.1144, 0.4812, -0.9709, 0.2047, -1.3704, -1.3597, 0.3935, -1.3403, 0.2382, 0.9867, 0.7271, 0.8483, null, 1.1846, 0.0994, 0.0579, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('emptiness', 16)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.2001, 1.1718, -0.1102, -3.0, -3.0, -3.0, -3.0, -3.0, -0.1592, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.538, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0307, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((5, 'issued'), (4, 'Council'))": [null, null, null, null, 1.4476, 1.4479, 0.1384, 0.1384, -0.1271, 1.4462, 1.4449, 1.4462, -0.2775, -0.0906, -0.1064, 1.4463, 0.012, 1.4489],
+            "((5, 'issued'), (7, 'communique'))": [null, null, null, null, 0.0202, -0.245, -0.2449, -0.2449, -0.2656, 1.5071, 1.5082, 1.5064, -0.0581, -0.0533, -0.0404, 1.5084, -0.1202, -0.0533]
+        }
+    },
+    "ewt-dev-38": {
+        "sample": "This operation would only consolidate the terrorist acts in the world and would not bring peace to the region , \" the message claimed .",
+        "word_labels": {
+            "('operation', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0105, -0.0081, 1.1846, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1871, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3401, 0.327, -1.3401, -3.0, -3.0],
+            "('consolidate', 4)": [0.0283, 1.1911, -0.1442, 0.5299, -1.558, 0.3293, 0.3812, -1.3849, -1.7951, -1.3564, 0.2077, 0.5905, 0.4561, 0.7756, -1.1499, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('acts', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.1931, -0.0653, -0.0574, -3.0, 1.5031, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.3937, -3.0],
+            "('bring', 14)": [-0.0795, 0.0971, -0.0983, -1.0385, 0.9244, -2.0279, -1.9807, -1.3648, -1.6971, -1.1525, 0.3836, 1.2666, -0.2243, 0.9523, -1.1499, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('peace', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0787, 1.2084, -0.0787, -3.0, -3.0, -3.0, -1.3752, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.254, -0.0044, -3.0],
+            "('region', 18)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0653, -1.2171, 1.1932, -3.0, -3.0, -0.0222, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.239, -3.0, -3.0, -3.0, -3.0, -1.3985, -3.0, -3.0, -3.0, -1.3985],
+            "('message', 22)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0653, -1.1149, 1.2084, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5348, -3.0],
+            "('claimed', 23)": [-0.0494, -1.1717, 1.1724, -1.3361, -1.3895, -1.1935, 0.6293, 0.6213, -1.518, -1.3903, 0.4762, -1.2448, 1.086, -1.2516, 1.0394, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((5, 'consolidate'), (2, 'operation'))": [null, null, null, null, 0.1058, -0.8572, -0.8592, -0.8583, -0.0823, 0.0746, 1.3687, 1.3668, -0.1303, -0.0195, -0.0, 0.1058, 0.1116, -0.117],
+            "((5, 'consolidate'), (8, 'acts'))": [null, null, null, null, -0.0, -0.0, -0.0, -1.3077, 0.0618, 1.389, 1.3889, 1.389, -0.0, 0.1764, 0.1408, 0.1408, 0.0243, 0.026],
+            "((15, 'bring'), (16, 'peace'))": [null, null, null, null, -0.1123, -0.0, -0.0, -0.0, -0.1123, -1.4845, -0.014, 0.0618, -0.0, -0.0301, 0.0102, -0.014, 0.0102, -0.1123],
+            "((24, 'claimed'), (23, 'message'))": [null, null, null, null, 0.0318, -0.6656, -0.6657, -0.6664, -1.226, -0.6655, 1.3753, 1.3769, -0.6655, -0.6656, -0.0, 1.3769, -0.6658, -0.666]
+        }
+    },
+    "ewt-dev-39": {
+        "sample": "Xinhua alleged that \" Many of the Iraqis , who suffer the American occupation of Iraq , relate their case with that of the Palestinian people , under the Israeli occupation . \"",
+        "word_labels": {
+            "('Xinhua', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.2297, -1.2171, 1.2084, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('alleged', 1)": [0.0749, -0.0795, 0.0749, -1.3361, -1.3436, 0.6975, -1.1637, 0.9233, -1.3149, -1.2404, -1.5722, -1.1909, 1.1753, -1.2853, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Iraqis', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0508, -1.2171, 0.0587, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('suffer', 10)": [-1.1843, 1.1734, -1.1843, -1.6175, -1.4169, -1.5146, 0.076, -1.5409, -1.5642, -1.5355, 0.0019, 1.0281, 0.6627, 0.41, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('occupation', 13)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1816, -0.0653, 1.1932, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2778, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2778, -3.0, -3.0, -3.0],
+            "('relate', 17)": [-0.0219, 1.1734, -1.1843, -1.5326, -1.1927, 0.4799, 0.4836, -1.3247, -1.445, -1.0237, -1.5444, 0.8856, 0.4885, 0.7312, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('case', 19)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0574, -0.0653, 1.1791, -3.0, -3.0, -1.414, -3.0, -3.0, -3.0, -0.0406, -3.0, -3.0, -3.0, -1.4139, -3.0, -3.0, -1.414, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0844, -1.414, 1.4971, -1.4139, -1.4139]
+        },
+        "edge_labels": {
+            "((2, 'alleged'), (1, 'Xinhua'))": [null, null, null, null, 1.3927, 1.3924, 1.3927, 1.3923, 0.0092, 1.3923, 1.3924, 1.3924, -0.0, -0.1282, -0.0, 0.0715, 0.0795, -0.0],
+            "((11, 'suffer'), (8, 'Iraqis'))": [null, null, null, null, -0.094, -0.1611, 1.3756, 1.3739, 0.077, 1.3763, 1.3747, 1.3749, -0.1535, 0.0463, 0.0463, -0.0896, -1.3928, 0.1658],
+            "((11, 'suffer'), (14, 'occupation'))": [null, null, null, null, 1.3659, -0.0246, -0.0246, -0.0246, -0.0246, 1.3636, 1.3641, 1.3651, -0.0, -0.0246, -0.0246, -0.0265, -1.2225, 0.0277],
+            "((18, 'relate'), (5, 'Many'))": [null, null, null, null, 1.3494, 1.3499, 1.3489, 1.35, 0.057, 1.3492, 1.3492, 1.351, -1.22, -0.0278, -0.1064, -0.0529, 0.1229, -0.0529],
+            "((18, 'relate'), (20, 'case'))": [null, null, null, null, -1.2245, -0.0246, -0.0246, -0.0246, -1.2216, 1.3647, 1.3636, 1.3639, -1.2229, -0.0922, -0.0246, 1.3647, -0.0246, 0.0882]
+        }
+    },
+    "ewt-dev-40": {
+        "sample": "In an apparently unrelated incidents , some eleven Iraqis were killed by snipers on Tuesday , including a group of police trainees in a bus near Hilla and two police in Kirkuk .",
+        "word_labels": {
+            "('incidents', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0574, -0.0787, 1.2083, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2334, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.0367, -3.0, -3.0],
+            "('Iraqis', 8)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0574, -1.2297, 1.1932, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('killed', 10)": [1.1724, -0.0795, 1.1724, -1.6562, -1.2291, 0.4925, -1.347, -1.2625, -0.4996, -1.1553, -1.0666, -1.1464, 1.0572, -1.3921, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('snipers', 12)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2599, -1.0488, 0.0897, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.489, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('Tuesday', 14)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0488, -1.0489, 1.2622, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('group', 18)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.2141, -1.0488, 0.0525, -3.0, 1.4912, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4431, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4431, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((11, 'killed'), (5, 'incidents'))": [0.0426, -1.3922, -0.1721, -0.172, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((11, 'killed'), (9, 'Iraqis'))": [null, null, null, null, -0.0472, -1.4338, -0.0879, 1.3467, -0.185, 1.3477, 1.3484, -1.4314, -0.0, 1.3473, 1.3466, 1.348, -1.4337, -1.4338],
+            "((11, 'killed'), (13, 'snipers'))": [1.4438, -0.0, -0.0, -0.0, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((11, 'killed'), (15, 'Tuesday'))": [-1.4224, -1.4218, -1.4224, 1.4374, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "((11, 'killed'), (19, 'group'))": [-0.0067, -0.0, -0.0067, -0.1819, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        }
+    },
+    "ewt-dev-41": {
+        "sample": "Ever since the first whispers about Google 's IPO , most investors have feared that the stock would come public at such a ridiculously high price that , even with a spectacularly profitable business model and some nearly flawless execution , the price would be too high for investors to make a real profit .",
+        "word_labels": {
+            "('whispers', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0768, 1.2728, -1.0549, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -0.1175, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1335, -3.0],
+            "('investors', 11)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2599, -1.0489, -1.0517, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4983, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('feared', 13)": [-1.1785, 0.0382, 0.1204, 0.9651, 0.8983, -1.4316, 0.4921, -1.2337, -1.2693, -1.2619, -1.0662, 1.2095, -1.438, 1.1884, 1.2089, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('stock', 16)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0737, -1.0488, 0.1929, -3.0, -3.0, -3.0, -3.0, -1.4024, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4023, -1.4024, -1.4024, -3.0, -1.4024, 0.1975, -3.0, -3.0, -3.0, -3.0, -1.4024, -3.0, -3.0],
+            "('come', 18)": [0.1204, -0.1327, -0.0494, -1.2995, -1.3084, 0.8354, 1.0243, -1.19, -0.9089, -1.4177, -1.3368, 0.7068, 1.0823, 0.7303, -1.2059, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('public', 19)": [-0.2082, 1.1608, 1.1608, -1.5732, 0.0318, 0.4938, 0.5208, 0.2782, -1.5871, -1.6035, 0.333, 0.4182, 0.7754, 0.5698, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('price', 25)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.1764, 1.2573, -1.0549, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.5579, -3.0, 0.0531, -3.0, -3.0, -3.0, -3.0, -3.0, 0.198, -3.0, -3.0, -3.0, -3.0, -3.0, -0.1249, -3.0],
+            "('model', 34)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.0345, 0.1454, 0.0637, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4161, -3.0, -3.0, -0.0005, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1519, -0.0005, -3.0, -3.0, -3.0],
+            "('price', 42)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.255, 0.1213, 0.1374, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -2.3163, -3.0, 0.223, -3.0, -3.0, -3.0, -3.0, -3.0, -0.5229, -3.0, -3.0, -3.0, -3.0, -3.0, -0.5229, -3.0],
+            "('high', 46)": [-0.0795, 1.1724, -1.1717, 0.8597, -1.2014, -1.0886, -1.2184, -1.1825, -1.367, -1.3299, 0.4711, 1.0358, 0.8963, 0.966, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('investors', 48)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2599, -1.0488, -1.0517, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.5801, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('make', 50)": [-0.0494, 1.1729, -0.0494, 0.6172, 0.4518, 0.0682, 0.3988, -1.3229, -1.5069, -1.7811, -1.4629, 0.3944, 0.2398, 0.607, -1.2119, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('profit', 53)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1018, 0.0131, 0.091, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4359, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4999, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-42": {
+        "sample": "We 've moved on .",
+        "word_labels": {
+            "('moved', 2)": [0.019, -1.2329, 1.1058, 0.6461, -1.303, 0.9312, -1.0784, -1.1133, -1.4276, -1.0343, 0.4038, 0.943, 1.0062, -1.2258, 1.0835, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-43": {
+        "sample": "We 've grown up .",
+        "word_labels": {
+            "('grown', 2)": [1.1363, -0.0337, -0.0661, -1.3094, -1.2267, -1.1751, -1.1494, -1.1282, -1.279, -1.4274, 0.1308, 1.1154, -1.0064, -1.1961, 1.0834, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-44": {
+        "sample": "Now , people wonder if Google can even survive .",
+        "word_labels": {
+            "('people', 2)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2542, -1.0797, -1.0797, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.169, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('wonder', 3)": [0.0193, 0.019, -0.0337, 0.9221, -1.2007, -2.0978, -1.0057, -2.5946, -1.2666, -1.4771, -1.1014, 0.9868, 1.3986, -1.1045, 1.0834, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Google', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0883, -1.0883, 1.2387, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('survive', 8)": [1.1363, 0.0193, -0.162, -0.8549, 1.4481, -3.0272, -0.8839, -3.5044, 0.8452, -1.9598, -1.2164, 1.4695, -1.2822, 1.2907, -1.1893, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    },
+    "ewt-dev-45": {
+        "sample": "That 's overstating it , I know .",
+        "word_labels": {
+            "('overstating', 2)": [0.019, -0.0665, -1.2329, -1.4075, -1.4428, -1.2459, -1.1358, 0.9053, -1.3125, -2.9679, 0.4828, 0.6006, 1.2137, -1.3659, 1.0584, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('know', 6)": [-0.1617, 1.1363, -0.0337, 0.4761, -1.5298, -1.2449, -1.1302, 1.0374, -1.208, -1.3815, 0.9592, -1.3567, 1.2151, -1.4114, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((3, 'overstating'), (1, 'That'))": [null, null, null, null, -0.0842, -0.0, -0.0, -0.0514, -0.019, -0.0579, 0.0242, -0.019, -0.0, -0.14, -0.0, 1.3491, -0.0, -0.2027],
+            "((3, 'overstating'), (4, 'it'))": [null, null, null, null, -0.1282, -0.0, -0.0, -0.0, 0.0092, 0.0908, 1.3924, 0.0908, -0.1282, -0.1282, -0.0, 1.3925, 0.0092, 0.0092],
+            "((7, 'know'), (6, 'I'))": [null, null, null, null, 0.0356, 1.3435, 1.3454, 1.3446, -0.2467, 1.3465, 1.3448, 1.3454, -0.4953, 0.0356, -0.0533, 1.3465, 1.346, -0.1062]
+        }
+    },
+    "ewt-dev-46": {
+        "sample": "What they wonder is whether Google can be anything more than what it 's always been -- a great search engine with some real grass - roots support , successful by the grace of simplicity .",
+        "word_labels": {
+            "('they', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2611, -1.0797, -1.0797, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('wonder', 2)": [-0.0665, 0.0193, -0.0337, 0.9084, -1.1635, 0.8615, -1.0481, 0.7227, -1.6846, -1.4954, -1.6292, -1.1231, 1.181, 0.6986, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('is', 3)": [-0.1418, 1.0809, -0.1414, 0.6525, -3.2319, 0.8762, 0.7559, -1.0266, 0.7361, -2.8663, -1.3206, 0.8196, 1.0382, -1.1911, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('Google', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0883, -1.0883, 1.2387, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('anything', 8)": [-0.3208, 1.1363, -0.1478, 0.766, -3.2524, -1.1387, 0.9093, -1.0402, 1.0315, -1.5048, 1.0456, 1.1434, -0.8998, 0.8264, null, 0.1864, 0.1068, -1.0895, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {
+            "((3, 'wonder'), (2, 'they'))": [null, null, null, null, 1.3637, 1.3647, 1.3637, 1.3639, -0.0525, 1.3664, 1.3662, 1.3647, -1.2225, -0.0246, -0.0246, -0.0246, -0.0044, -0.0922],
+            "((4, 'is'), (1, 'What'))": [null, null, null, null, -0.0947, -0.0416, -0.0416, -0.0416, -0.0896, -0.0416, 1.259, 1.2598, -0.0, -0.1151, -0.073, 1.2595, -0.0416, -0.073]
+        }
+    },
+    "ewt-dev-47": {
+        "sample": "Simplicity gave it that blessed , laudatory lack of clutter , the efficient and effective text - based ads , and the support of anyone with a dial - up connection .",
+        "word_labels": {
+            "('Simplicity', 0)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0896, 0.1334, 0.0986, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2051, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('gave', 1)": [1.1059, -0.1617, -0.162, 0.5639, -1.341, -1.1625, 0.7462, 0.8709, -1.6856, -1.2166, 0.5465, 0.9066, 0.9264, 0.7951, 1.0583, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('lack', 7)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1864, 0.0564, -1.0896, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.1632, -3.0, -3.0]
+        },
+        "edge_labels": {
+            "((2, 'gave'), (1, 'Simplicity'))": [null, null, null, null, 0.0074, -0.0001, -0.0001, -0.0001, -0.0001, 1.3938, 1.3934, 1.3936, -0.0001, -0.0001, -0.0001, 1.3936, -0.0001, -0.0],
+            "((2, 'gave'), (3, 'it'))": [null, null, null, null, 0.093, -0.0872, -0.0, -0.0, 0.0153, 0.0153, 1.4219, 0.0957, 0.0153, 0.0153, -0.0, 1.4224, 0.201, 0.0153],
+            "((2, 'gave'), (8, 'lack'))": [null, null, null, null, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0282, 1.3515, -0.0282, -0.0, -0.0899, -0.0, -0.0013, -0.0, -0.0]
+        }
+    },
+    "ewt-dev-48": {
+        "sample": "The problem is that customers attracted by a simple interface are among the least loyal you can find -- witness the fight - for - fewest - features between low - end camera companies .",
+        "word_labels": {
+            "('problem', 1)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.2517, 0.1206, -1.0907, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2207, -3.0, 0.2207, 0.0919, -3.0],
+            "('is', 2)": [-0.1595, -0.0588, 0.0809, -0.0504, -1.4086, -1.4163, 0.2902, 0.4494, 0.0719, -1.2033, 0.2351, 0.692, 0.6224, 0.6284, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('customers', 4)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1692, -1.0797, 0.102, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.4998, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('attracted', 5)": [0.0173, 0.113, 0.1472, 0.1229, -1.4481, 0.3568, 0.4122, 0.5305, -1.4258, -1.3073, 0.4125, 0.4159, 0.6736, 0.4463, -0.0107, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('interface', 9)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0709, -1.0709, 1.236, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('loyal', 14)": [0.0173, -0.0588, 0.0075, -1.5251, 0.4152, 0.5003, -1.356, -1.3315, 0.7157, -1.2387, 0.2692, 0.7747, 0.6954, 0.4746, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('you', 15)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.071, -1.0709, 1.236, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('find', 17)": [0.0075, -0.0588, 0.1472, 0.3124, -1.5174, 0.3545, -1.3236, 0.566, -1.6814, -1.2908, 0.0743, 0.4635, 0.9932, -1.4916, 0.0912, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('witness', 19)": [0.1472, 0.113, -1.1065, -1.5938, 0.3455, 0.2881, 0.5365, 0.4492, -1.8274, -1.2649, -0.0537, 0.6899, 0.7251, 0.4207, 0.0912, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('fight', 21)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0709, -1.0709, 1.236, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0881, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.0881, -3.0, -1.4077, -3.0]
+        },
+        "edge_labels": {
+            "((3, 'is'), (2, 'problem'))": [null, null, null, null, -0.0862, -0.0, -0.0, -0.9343, -0.0, -1.395, 1.3419, -0.0762, -0.0941, -0.0834, -0.0, 1.3424, -0.0, -1.3963],
+            "((20, 'witness'), (22, 'fight'))": [null, null, null, null, 0.1629, -0.18, -0.18, -0.18, -0.0682, 0.0286, 0.0286, 0.0286, -0.18, -0.1019, -0.0, -0.1019, -0.2691, -0.0407]
+        }
+    },
+    "ewt-dev-49": {
+        "sample": "The other problem ?",
+        "word_labels": {},
+        "edge_labels": {}
+    },
+    "ewt-dev-50": {
+        "sample": "It 's tough to make money branching out when your appeal is in your focus .",
+        "word_labels": {
+            "('tough', 2)": [0.0173, 0.1472, 0.0644, -0.878, -0.6415, -0.996, -1.1119, 0.7151, 0.6042, -0.9189, 0.5278, -0.7717, -0.9983, 0.953, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('make', 4)": [0.0075, -1.1065, 1.2491, 0.6462, -1.4159, -1.1015, 0.8973, 0.7194, 0.301, -3.6155, -1.5383, 0.945, 1.0174, 0.6773, -1.1893, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('money', 5)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.1111, -1.069, 0.1105, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 0.2594, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0],
+            "('branching', 6)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0446, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            "('appeal', 10)": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0482, 0.0508, 0.0502, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, 1.428, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -3.0, -1.4904, -3.0, -1.4903, -3.0],
+            "('focus', 14)": [0.0173, -1.1064, 1.2491, -1.1005, 0.8599, -1.0585, 1.0398, -1.178, 0.1521, -1.4183, -1.7387, 0.7679, -0.972, 0.7782, null, -1.0709, 0.0508, 0.1687, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        },
+        "edge_labels": {}
+    }
+}

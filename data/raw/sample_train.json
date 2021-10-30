@@ -1,7 +1,6 @@
 {
     "ewt-dev-1": {
         "ewt-dev-1-semantics-pred-4": {
-            "sample": "From the AP comes this story",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -312,11 +311,11 @@
                 }
             },
             "head_token": [4, ["comes"]]
-        }
+        },
+        "sample": "From the AP comes this story :"
     },
     "ewt-dev-2": {
         "ewt-dev-2-semantics-pred-5": {
-            "sample": "President Bush on Tuesday nominated two individuals",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -614,7 +613,6 @@
             "head_token": [5, ["nominated"]]
         },
         "ewt-dev-2-semantics-pred-9": {
-            "sample": "President Bush on Tuesday nominated two individuals to replace retiring jurists on federal courts in the Washington area",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -871,11 +869,11 @@
                 }
             },
             "head_token": [9, ["replace"]]
-        }
+        },
+        "sample": "President Bush on Tuesday nominated two individuals to replace retiring jurists on federal courts in the Washington area ."
     },
     "ewt-dev-3": {
         "ewt-dev-3-semantics-pred-2": {
-            "sample": "Bush nominated Jennifer M. Anderson for a 15 - year term as associate judge of the Superior Court of the District of Columbia",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -1173,7 +1171,6 @@
             "head_token": [2, ["nominated"]]
         },
         "ewt-dev-3-semantics-pred-25": {
-            "sample": "Bush nominated Jennifer M. Anderson for a 15 - year term as associate judge of the Superior Court of the District of Columbia , replacing Steffen W. Graae",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -1325,12 +1322,14 @@
                 }
             },
             "head_token": [25, ["replacing"]]
-        }
+        },
+        "sample": "Bush nominated Jennifer M. Anderson for a 15 - year term as associate judge of the Superior Court of the District of Columbia , replacing Steffen W. Graae ."
     },
-    "ewt-dev-4": {},
+    "ewt-dev-4": {
+        "sample": "***"
+    },
     "ewt-dev-5": {
         "ewt-dev-5-semantics-pred-3": {
-            "sample": "Bush also nominated A. Noel Anketell Kramer for a 15 - year term as associate judge of the District of Columbia Court of Appeals",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -1583,7 +1582,6 @@
             "head_token": [3, ["nominated"]]
         },
         "ewt-dev-5-semantics-pred-26": {
-            "sample": "Bush also nominated A. Noel Anketell Kramer for a 15 - year term as associate judge of the District of Columbia Court of Appeals , replacing John Montague Steadman",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -1690,11 +1688,11 @@
                 }
             },
             "head_token": [26, ["replacing"]]
-        }
+        },
+        "sample": "Bush also nominated A. Noel Anketell Kramer for a 15 - year term as associate judge of the District of Columbia Court of Appeals , replacing John Montague Steadman ."
     },
     "ewt-dev-6": {
         "ewt-dev-6-semantics-pred-9": {
-            "sample": "The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -2058,7 +2056,6 @@
             "head_token": [9, ["attacked"]]
         },
         "ewt-dev-6-semantics-pred-16": {
-            "sample": "The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -2276,11 +2273,11 @@
                 }
             },
             "head_token": [16, ["launched"]]
-        }
+        },
+        "sample": "The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb ."
     },
     "ewt-dev-7": {
         "ewt-dev-7-semantics-pred-4": {
-            "sample": "He could be killed years",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -2421,7 +2418,6 @@
             "head_token": [4, ["killed"]]
         },
         "ewt-dev-7-semantics-pred-10": {
-            "sample": "He could be killed years ago and the israelians have all the reasons",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -2680,7 +2676,6 @@
             "head_token": [10, ["have"]]
         },
         "ewt-dev-7-semantics-pred-17": {
-            "sample": "He could be killed years ago and the israelians have all the reasons , since he",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -2782,7 +2777,6 @@
             "head_token": [17, ["founded"]]
         },
         "ewt-dev-7-semantics-pred-23": {
-            "sample": "He could be killed years ago and the israelians have all the reasons , since he founded and he is the spiritual leader of Hamas",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -2936,7 +2930,6 @@
             "head_token": [23, ["leader"]]
         },
         "ewt-dev-7-semantics-pred-29": {
-            "sample": "He could be killed years ago and the israelians have all the reasons , since he founded and he is the spiritual leader of Hamas , but they",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -3051,7 +3044,6 @@
             "head_token": [29, ["did"]]
         },
         "ewt-dev-7-semantics-predhead-23": {
-            "sample": "the spiritual leader of",
             "predicate_label": {
                 "genericity": {
                     "arg-kind": {
@@ -3092,11 +3084,11 @@
             },
             "edge": {},
             "head_token": [23, ["leader"]]
-        }
+        },
+        "sample": "He could be killed years ago and the israelians have all the reasons , since he founded and he is the spiritual leader of Hamas , but they did n't ."
     },
     "ewt-dev-8": {
         "ewt-dev-8-semantics-pred-4": {
-            "sample": "Today 's incident proves that Sharon has lost his patience and his hope in peace",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -3384,7 +3376,6 @@
             "head_token": [4, ["proves"]]
         },
         "ewt-dev-8-semantics-pred-8": {
-            "sample": "has lost his patience and his hope in peace",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -3769,11 +3760,11 @@
                 }
             },
             "head_token": [8, ["lost"]]
-        }
+        },
+        "sample": "Today 's incident proves that Sharon has lost his patience and his hope in peace ."
     },
     "ewt-dev-9": {
         "ewt-dev-9-semantics-pred-3": {
-            "sample": "Nervous people make mistakes , so I suppose there will be a wave of succesfull arab attacks",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -4247,7 +4238,6 @@
             "head_token": [3, ["make"]]
         },
         "ewt-dev-9-semantics-pred-8": {
-            "sample": "I suppose there will be a wave of succesfull arab attacks",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -4461,7 +4451,6 @@
             "head_token": [8, ["suppose"]]
         },
         "ewt-dev-9-semantics-pred-11": {
-            "sample": "will be a wave of succesfull arab attacks",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -4718,12 +4707,14 @@
                 }
             },
             "head_token": [11, ["be"]]
-        }
+        },
+        "sample": "Nervous people make mistakes , so I suppose there will be a wave of succesfull arab attacks ."
     },
-    "ewt-dev-10": {},
+    "ewt-dev-10": {
+        "sample": "A la guerre c'est comme a la guerre !"
+    },
     "ewt-dev-11": {
         "ewt-dev-11-semantics-pred-9": {
-            "sample": "In the eastern city of Baqubah , guerrillas detonated a car bomb outside a police station",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -5375,7 +5366,6 @@
             "head_token": [9, ["detonated"]]
         },
         "ewt-dev-11-semantics-pred-18": {
-            "sample": "In the eastern city of Baqubah , guerrillas detonated a car bomb outside a police station , killing several people",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -5737,11 +5727,11 @@
                 }
             },
             "head_token": [18, ["killing"]]
-        }
+        },
+        "sample": "In the eastern city of Baqubah , guerrillas detonated a car bomb outside a police station , killing several people ."
     },
     "ewt-dev-12": {
         "ewt-dev-12-semantics-pred-3": {
-            "sample": "The US lost yet another helicopter to hostile fire near Habbaniyah in the Sunni heartland",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -6240,7 +6230,6 @@
             "head_token": [3, ["lost"]]
         },
         "ewt-dev-12-semantics-pred-23": {
-            "sample": "The US lost yet another helicopter to hostile fire near Habbaniyah in the Sunni heartland , but this time the crew",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -6492,11 +6481,11 @@
                 }
             },
             "head_token": [23, ["safe"]]
-        }
+        },
+        "sample": "The US lost yet another helicopter to hostile fire near Habbaniyah in the Sunni heartland , but this time the crew was safe ."
     },
     "ewt-dev-13": {
         "ewt-dev-13-semantics-pred-7": {
-            "sample": "In Fallujah , hundreds of demonstrators came out against US troops",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -6899,7 +6888,6 @@
             "head_token": [7, ["came"]]
         },
         "ewt-dev-13-semantics-pred-15": {
-            "sample": "In Fallujah , hundreds of demonstrators came out against US troops when they briefly arrested a yound newlywed bride",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -7156,11 +7144,11 @@
                 }
             },
             "head_token": [15, ["arrested"]]
-        }
+        },
+        "sample": "In Fallujah , hundreds of demonstrators came out against US troops when they briefly arrested a yound newlywed bride ."
     },
     "ewt-dev-14": {
         "ewt-dev-14-semantics-pred-3": {
-            "sample": "( I hope that the US army got an enormous amount of information from her relatives",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -7288,7 +7276,6 @@
             "head_token": [3, ["hope"]]
         },
         "ewt-dev-14-semantics-pred-8": {
-            "sample": "US army got an enormous amount of information from her relatives",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -7840,7 +7827,6 @@
             "head_token": [8, ["got"]]
         },
         "ewt-dev-14-semantics-pred-27": {
-            "sample": "( I hope that the US army got an enormous amount of information from her relatives , because otherwise this move was a bad , bad tradeoff",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -8073,7 +8059,6 @@
             "head_token": [27, ["tradeoff"]]
         },
         "ewt-dev-14-semantics-predhead-27": {
-            "sample": "this move was a bad , bad tradeoff",
             "predicate_label": {
                 "genericity": {
                     "arg-kind": {
@@ -8114,11 +8099,11 @@
             },
             "edge": {},
             "head_token": [27, ["tradeoff"]]
-        }
+        },
+        "sample": "( I hope that the US army got an enormous amount of information from her relatives , because otherwise this move was a bad , bad tradeoff ) ."
     },
     "ewt-dev-15": {
         "ewt-dev-15-semantics-pred-4": {
-            "sample": "The US troops fired into the hostile crowd",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -8482,7 +8467,6 @@
             "head_token": [4, ["fired"]]
         },
         "ewt-dev-15-semantics-pred-10": {
-            "sample": "The US troops fired into the hostile crowd , killing 4",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -8739,11 +8723,11 @@
                 }
             },
             "head_token": [10, ["killing"]]
-        }
+        },
+        "sample": "The US troops fired into the hostile crowd , killing 4 ."
     },
     "ewt-dev-16": {
         "ewt-dev-16-semantics-pred-2": {
-            "sample": "It seems clear to me that the manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -8897,7 +8881,6 @@
             "head_token": [2, ["seems"]]
         },
         "ewt-dev-16-semantics-pred-3": {
-            "sample": "to me that the manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -9038,7 +9021,6 @@
             "head_token": [3, ["clear"]]
         },
         "ewt-dev-16-semantics-pred-19": {
-            "sample": "manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -9328,7 +9310,6 @@
             "head_token": [19, ["done"]]
         },
         "ewt-dev-16-semantics-pred-20": {
-            "sample": "manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -9516,7 +9497,6 @@
             "head_token": [20, ["wrong"]]
         },
         "ewt-dev-16-semantics-pred-26": {
-            "sample": "manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -9717,7 +9697,6 @@
             "head_token": [26, ["ways"]]
         },
         "ewt-dev-16-semantics-pred-29": {
-            "sample": "It seems clear to me that the manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -9969,11 +9948,11 @@
                 }
             },
             "head_token": [29, ["bad"]]
-        }
+        },
+        "sample": "It seems clear to me that the manhunt for high Baath officials in the Sunni heartland is being done wrong , or at least in ways that are bad for US standing with local Iraqis ."
     },
     "ewt-dev-17": {
         "ewt-dev-17-semantics-pred-4": {
-            "sample": "Google has finally had an analyst day -- a chance to present the company 's story to the ( miniscule number of ) people who have n't heard it",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -10232,7 +10211,6 @@
             "head_token": [4, ["had"]]
         },
         "ewt-dev-17-semantics-pred-12": {
-            "sample": "Google has finally had an analyst day -- a chance to present the company 's story to the ( miniscule number of ) people who have n't heard it",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -10635,7 +10613,6 @@
             "head_token": [12, ["present"]]
         },
         "ewt-dev-17-semantics-pred-28": {
-            "sample": "Google has finally had an analyst day -- a chance to present the company 's story to the ( miniscule number of ) people who have n't heard it",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -10774,11 +10751,11 @@
                 }
             },
             "head_token": [28, ["heard"]]
-        }
+        },
+        "sample": "Google has finally had an analyst day -- a chance to present the company 's story to the ( miniscule number of ) people who have n't heard it ."
     },
     "ewt-dev-18": {
         "ewt-dev-18-semantics-pred-7": {
-            "sample": ", these are just a chance for the suckups to suck up , but this time people are actually concerned about the company 's plans",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -10932,7 +10909,6 @@
             "head_token": [7, ["chance"]]
         },
         "ewt-dev-18-semantics-pred-12": {
-            "sample": "Usually , these are just a chance for the suckups to suck up , but this time people are actually concerned about the company 's plans",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -11086,7 +11062,6 @@
             "head_token": [12, ["suck"]]
         },
         "ewt-dev-18-semantics-pred-21": {
-            "sample": "Usually , these are just a chance for the suckups to suck up , but this time people are actually concerned about the company 's plans",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -11482,11 +11457,11 @@
                 }
             },
             "head_token": [21, ["concerned"]]
-        }
+        },
+        "sample": "Usually , these are just a chance for the suckups to suck up , but this time people are actually concerned about the company 's plans ."
     },
     "ewt-dev-19": {
         "ewt-dev-19-semantics-pred-2": {
-            "sample": "They work on Wall Street , after all",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -11732,7 +11707,6 @@
             "head_token": [2, ["work"]]
         },
         "ewt-dev-19-semantics-pred-13": {
-            "sample": "They work on Wall Street , after all , so when they hear a company who's stated goals include \" Do n't be evil",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -12075,7 +12049,6 @@
             "head_token": [13, ["hear"]]
         },
         "ewt-dev-19-semantics-pred-19": {
-            "sample": "They work on Wall Street , after all , so when they hear a company who's stated goals include \" Do n't be evil",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -12507,7 +12480,6 @@
             "head_token": [19, ["include"]]
         },
         "ewt-dev-19-semantics-pred-24": {
-            "sample": "stated goals include \" Do n't be evil",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -12766,7 +12738,6 @@
             "head_token": [24, ["evil"]]
         },
         "ewt-dev-19-semantics-pred-28": {
-            "sample": "They work on Wall Street , after all , so when they hear a company who's stated goals include \" Do n't be evil , \" they imagine a company who's eventually history will be \" Do n't be profitable",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -13109,7 +13080,6 @@
             "head_token": [28, ["imagine"]]
         },
         "ewt-dev-19-semantics-pred-35": {
-            "sample": "They work on Wall Street , after all , so when they hear a company who's stated goals include \" Do n't be evil , \" they imagine a company who's eventually history will be \" Do n't be profitable",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -13494,7 +13464,6 @@
             "head_token": [35, ["be"]]
         },
         "ewt-dev-19-semantics-pred-40": {
-            "sample": "eventually history will be \" Do n't be profitable",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -13751,11 +13720,11 @@
                 }
             },
             "head_token": [40, ["profitable"]]
-        }
+        },
+        "sample": "They work on Wall Street , after all , so when they hear a company who's stated goals include \" Do n't be evil , \" they imagine a company who's eventually history will be \" Do n't be profitable . \""
     },
     "ewt-dev-20": {
         "ewt-dev-20-semantics-pred-5": {
-            "sample": "",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -13766,7 +13735,6 @@
             "head_token": [5, ["as"]]
         },
         "ewt-dev-20-semantics-pred-8": {
-            "sample": "It 's not quite as freewheeling an environment",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -13881,7 +13849,6 @@
             "head_token": [8, ["environment"]]
         },
         "ewt-dev-20-semantics-pred-12": {
-            "sample": "It 's not quite as freewheeling an environment as you",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -13996,7 +13963,6 @@
             "head_token": [12, ["imagine"]]
         },
         "ewt-dev-20-semantics-pred-18": {
-            "sample": "It 's not quite as freewheeling an environment as you 'd imagine : Sergey Brin has actually created a mathematical ' proof ' that the company 's self - driven research strategy , which gives employees one day a week to do research projects on their own , is a good , respectable idea",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -14255,7 +14221,6 @@
             "head_token": [18, ["created"]]
         },
         "ewt-dev-20-semantics-pred-35": {
-            "sample": "It 's not quite as freewheeling an environment as you 'd imagine : Sergey Brin has actually created a mathematical ' proof ' that the company 's self - driven research strategy , which gives employees one day a week to do research projects on their own",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -14763,7 +14728,6 @@
             "head_token": [35, ["gives"]]
         },
         "ewt-dev-20-semantics-pred-42": {
-            "sample": "It 's not quite as freewheeling an environment as you 'd imagine : Sergey Brin has actually created a mathematical ' proof ' that the company 's self - driven research strategy , which gives employees one day a week to do research projects on their own",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -15153,7 +15117,6 @@
             "head_token": [42, ["do"]]
         },
         "ewt-dev-20-semantics-pred-54": {
-            "sample": "It 's not quite as freewheeling an environment as you 'd imagine : Sergey Brin has actually created a mathematical ' proof ' that the company 's self - driven research strategy , which gives employees one day a week to do research projects on their own , is a good , respectable idea",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -15530,7 +15493,6 @@
             "head_token": [54, ["idea"]]
         },
         "ewt-dev-20-semantics-predhead-8": {
-            "sample": "not quite as freewheeling an environment",
             "predicate_label": {
                 "genericity": {
                     "arg-kind": {
@@ -15573,7 +15535,6 @@
             "head_token": [8, ["environment"]]
         },
         "ewt-dev-20-semantics-predhead-54": {
-            "sample": "a good , respectable idea",
             "predicate_label": {
                 "genericity": {
                     "arg-kind": {
@@ -15614,11 +15575,11 @@
             },
             "edge": {},
             "head_token": [54, ["idea"]]
-        }
+        },
+        "sample": "It 's not quite as freewheeling an environment as you 'd imagine : Sergey Brin has actually created a mathematical ' proof ' that the company 's self - driven research strategy , which gives employees one day a week to do research projects on their own , is a good , respectable idea ."
     },
     "ewt-dev-21": {
         "ewt-dev-21-semantics-pred-1": {
-            "sample": "Read the entire article",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -15838,7 +15799,6 @@
             "head_token": [1, ["Read"]]
         },
         "ewt-dev-21-semantics-pred-7": {
-            "sample": "Read the entire article ; there 's a punchline",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -15946,11 +15906,11 @@
                 }
             },
             "head_token": [7, ["'s"]]
-        }
+        },
+        "sample": "Read the entire article ; there 's a punchline , too ."
     },
     "ewt-dev-22": {
         "ewt-dev-22-semantics-pred-16": {
-            "sample": "My opinion piece on the implications of Arafat 's passing for al - Qaeda has appeared at Newsday",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -16162,12 +16122,14 @@
                 }
             },
             "head_token": [16, ["appeared"]]
-        }
+        },
+        "sample": "My opinion piece on the implications of Arafat 's passing for al - Qaeda has appeared at Newsday ."
     },
-    "ewt-dev-23": {},
+    "ewt-dev-23": {
+        "sample": "Excerpt :"
+    },
     "ewt-dev-24": {
         "ewt-dev-24-semantics-pred-8": {
-            "sample": "\" Arafat 's secular nationalism",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -16382,7 +16344,6 @@
             "head_token": [8, ["enough"]]
         },
         "ewt-dev-24-semantics-pred-10": {
-            "sample": "\" Arafat 's secular nationalism was supple enough to compromise with Israel",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -16497,7 +16458,6 @@
             "head_token": [10, ["compromise"]]
         },
         "ewt-dev-24-semantics-pred-15": {
-            "sample": "\" Arafat 's secular nationalism was supple enough to compromise with Israel and to imagine a two - state solution",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -16717,7 +16677,6 @@
             "head_token": [15, ["imagine"]]
         },
         "ewt-dev-24-semantics-pred-28": {
-            "sample": "\" Arafat 's secular nationalism was supple enough to compromise with Israel and to imagine a two - state solution , even if the road of negotiations remained rocky",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -16963,7 +16922,6 @@
             "head_token": [28, ["remained"]]
         },
         "ewt-dev-24-semantics-pred-29": {
-            "sample": "road of negotiations remained rocky",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -17220,11 +17178,11 @@
                 }
             },
             "head_token": [29, ["rocky"]]
-        }
+        },
+        "sample": "\" Arafat 's secular nationalism was supple enough to compromise with Israel and to imagine a two - state solution , even if the road of negotiations remained rocky ."
     },
     "ewt-dev-25": {
         "ewt-dev-25-semantics-pred-13": {
-            "sample": "The continued Israeli colonization of the occupied Palestinian territories during the 1990s helped , along with terrorist attacks by radical groups such as Hamas , to derail the peace process , which Sharon had always opposed",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -17668,7 +17626,6 @@
             "head_token": [13, ["helped"]]
         },
         "ewt-dev-25-semantics-pred-27": {
-            "sample": "continued Israeli colonization of the occupied Palestinian territories during the 1990s helped , along with terrorist attacks by radical groups such as Hamas , to derail the peace process , which Sharon had always opposed",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -18118,7 +18075,6 @@
             "head_token": [27, ["derail"]]
         },
         "ewt-dev-25-semantics-pred-36": {
-            "sample": "The continued Israeli colonization of the occupied Palestinian territories during the 1990s helped , along with terrorist attacks by radical groups such as Hamas , to derail the peace process , which Sharon had always opposed",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -18459,11 +18415,11 @@
                 }
             },
             "head_token": [36, ["opposed"]]
-        }
+        },
+        "sample": "The continued Israeli colonization of the occupied Palestinian territories during the 1990s helped , along with terrorist attacks by radical groups such as Hamas , to derail the peace process , which Sharon had always opposed ."
     },
     "ewt-dev-26": {
         "ewt-dev-26-semantics-pred-4": {
-            "sample": "Arafat 's death creates a vacuum in Palestinian leadership that will not soon be filled",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -18911,7 +18867,6 @@
             "head_token": [4, ["creates"]]
         },
         "ewt-dev-26-semantics-pred-15": {
-            "sample": "Arafat 's death creates a vacuum in Palestinian leadership that will not soon be filled",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -19171,11 +19126,11 @@
                 }
             },
             "head_token": [15, ["filled"]]
-        }
+        },
+        "sample": "Arafat 's death creates a vacuum in Palestinian leadership that will not soon be filled ."
     },
     "ewt-dev-27": {
         "ewt-dev-27-semantics-pred-10": {
-            "sample": "Sharon 's assassination of major Hamas leaders has also weakened authority structures in that party",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -19537,11 +19492,11 @@
                 }
             },
             "head_token": [10, ["weakened"]]
-        }
+        },
+        "sample": "Sharon 's assassination of major Hamas leaders has also weakened authority structures in that party ."
     },
     "ewt-dev-28": {
         "ewt-dev-28-semantics-pred-10": {
-            "sample": "If the Israelis and the Palestinian leadership can not find a way to reinvigorate the peace process",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -19800,7 +19755,6 @@
             "head_token": [10, ["find"]]
         },
         "ewt-dev-28-semantics-pred-14": {
-            "sample": "If the Israelis and the Palestinian leadership can not find a way to reinvigorate the peace process",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -20164,7 +20118,6 @@
             "head_token": [14, ["reinvigorate"]]
         },
         "ewt-dev-28-semantics-pred-25": {
-            "sample": "If the Israelis and the Palestinian leadership can not find a way to reinvigorate the peace process , cells of radical young Palestinians may grow up that look to bin Laden for their cues",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -20384,7 +20337,6 @@
             "head_token": [25, ["grow"]]
         },
         "ewt-dev-28-semantics-pred-28": {
-            "sample": "If the Israelis and the Palestinian leadership can not find a way to reinvigorate the peace process , cells of radical young Palestinians may grow up that look to bin Laden for their cues",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -20680,11 +20632,11 @@
                 }
             },
             "head_token": [28, ["look"]]
-        }
+        },
+        "sample": "If the Israelis and the Palestinian leadership can not find a way to reinvigorate the peace process , cells of radical young Palestinians may grow up that look to bin Laden for their cues ."
     },
     "ewt-dev-29": {
         "ewt-dev-29-semantics-pred-6": {
-            "sample": "Even if local Palestinian leaders remain strong enough to keep al - Qaida out",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -20930,7 +20882,6 @@
             "head_token": [6, ["remain"]]
         },
         "ewt-dev-29-semantics-pred-8": {
-            "sample": "Palestinian leaders remain strong enough to keep al - Qaida out",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -21189,7 +21140,6 @@
             "head_token": [8, ["enough"]]
         },
         "ewt-dev-29-semantics-pred-10": {
-            "sample": "Even if local Palestinian leaders remain strong enough to keep al - Qaida out",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -21330,7 +21280,6 @@
             "head_token": [10, ["keep"]]
         },
         "ewt-dev-29-semantics-pred-14": {
-            "sample": "- Qaida out",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -21413,7 +21362,6 @@
             "head_token": [14, ["out"]]
         },
         "ewt-dev-29-semantics-pred-22": {
-            "sample": "Even if local Palestinian leaders remain strong enough to keep al - Qaida out , the festering Israeli - Palestinian struggle remains among the best recruiting posters for al - Qaida with young Muslim men",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -21919,11 +21867,11 @@
                 }
             },
             "head_token": [22, ["remains"]]
-        }
+        },
+        "sample": "Even if local Palestinian leaders remain strong enough to keep al - Qaida out , the festering Israeli - Palestinian struggle remains among the best recruiting posters for al - Qaida with young Muslim men ."
     },
     "ewt-dev-30": {
         "ewt-dev-30-semantics-pred-1": {
-            "sample": "this conflict",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -22187,7 +22135,6 @@
             "head_token": [1, ["Resolving"]]
         },
         "ewt-dev-30-semantics-pred-9": {
-            "sample": "this conflict would be the most effective weapon",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -22341,7 +22288,6 @@
             "head_token": [9, ["weapon"]]
         },
         "ewt-dev-30-semantics-pred-14": {
-            "sample": "Resolving this conflict would be the most effective weapon the United States could deploy in its war on terror",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -22637,11 +22583,11 @@
                 }
             },
             "head_token": [14, ["deploy"]]
-        }
+        },
+        "sample": "Resolving this conflict would be the most effective weapon the United States could deploy in its war on terror . \""
     },
     "ewt-dev-31": {
         "ewt-dev-31-semantics-pred-2": {
-            "sample": "Xinhua reports that a wide range of Iraqi political forces on Tuesday condemned Sharon 's murder of Sheikh Ahmed Yassin , a religious leader of Hamas , the day before",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -22824,7 +22770,6 @@
             "head_token": [2, ["reports"]]
         },
         "ewt-dev-31-semantics-pred-13": {
-            "sample": "wide range of Iraqi political forces on Tuesday condemned Sharon 's murder of Sheikh Ahmed Yassin , a religious leader of Hamas , the day before",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -23353,11 +23298,11 @@
                 }
             },
             "head_token": [13, ["condemned"]]
-        }
+        },
+        "sample": "Xinhua reports that a wide range of Iraqi political forces on Tuesday condemned Sharon 's murder of Sheikh Ahmed Yassin , a religious leader of Hamas , the day before ."
     },
     "ewt-dev-32": {
         "ewt-dev-32-semantics-pred-16": {
-            "sample": "The Board of Muslim clerics in Fallujah , 50 km west of Baghdad , \" condemned the assassination",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -23805,7 +23750,6 @@
             "head_token": [16, ["condemned"]]
         },
         "ewt-dev-32-semantics-pred-20": {
-            "sample": "The Board of Muslim clerics in Fallujah , 50 km west of Baghdad , \" condemned the assassination and promised immediate revenge against the coalition soldiers in Iraq",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -24209,11 +24153,11 @@
                 }
             },
             "head_token": [20, ["promised"]]
-        }
+        },
+        "sample": "The Board of Muslim clerics in Fallujah , 50 km west of Baghdad , \" condemned the assassination and promised immediate revenge against the coalition soldiers in Iraq . \""
     },
     "ewt-dev-33": {
         "ewt-dev-33-semantics-pred-7": {
-            "sample": "Ash - Sharq al - Awsat reports that Fallujah was closed Tuesday in a general strike",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -24396,7 +24340,6 @@
             "head_token": [7, ["reports"]]
         },
         "ewt-dev-33-semantics-pred-11": {
-            "sample": "was closed Tuesday in a general strike",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -24778,11 +24721,11 @@
                 }
             },
             "head_token": [11, ["closed"]]
-        }
+        },
+        "sample": "Ash - Sharq al - Awsat reports that Fallujah was closed Tuesday in a general strike ."
     },
     "ewt-dev-34": {
         "ewt-dev-34-semantics-pred-4": {
-            "sample": "US troops there clashed with guerrillas in a fight that left one Iraqi dead",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -25356,7 +25299,6 @@
             "head_token": [4, ["clashed"]]
         },
         "ewt-dev-34-semantics-pred-11": {
-            "sample": "US troops there clashed with guerrillas in a fight that left one Iraqi dead",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -25641,7 +25583,6 @@
             "head_token": [11, ["left"]]
         },
         "ewt-dev-34-semantics-pred-14": {
-            "sample": "Iraqi dead",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -25793,11 +25734,11 @@
                 }
             },
             "head_token": [14, ["dead"]]
-        }
+        },
+        "sample": "US troops there clashed with guerrillas in a fight that left one Iraqi dead ."
     },
     "ewt-dev-35": {
         "ewt-dev-35-semantics-pred-5": {
-            "sample": "In Ramadi , there was a big demonstration",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -26103,11 +26044,11 @@
                 }
             },
             "head_token": [5, ["was"]]
-        }
+        },
+        "sample": "In Ramadi , there was a big demonstration ."
     },
     "ewt-dev-36": {
         "ewt-dev-36-semantics-pred-8": {
-            "sample": "Radical Shiite cleric Muqtada al - Sadr said the attack was \" criminal \" and that \" the Zionists have left only one choice for the Arabs , that of fighting and jihad",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -26290,7 +26231,6 @@
             "head_token": [8, ["said"]]
         },
         "ewt-dev-36-semantics-pred-13": {
-            "sample": "attack was \" criminal \" and that \" the Zionists have left only one choice for the Arabs , that of fighting and jihad",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -26549,7 +26489,6 @@
             "head_token": [13, ["criminal"]]
         },
         "ewt-dev-36-semantics-pred-21": {
-            "sample": "Radical Shiite cleric Muqtada al - Sadr said the attack was \" criminal \" and that \" the Zionists have left only one choice for the Arabs , that of fighting and jihad",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -26806,11 +26745,11 @@
                 }
             },
             "head_token": [21, ["left"]]
-        }
+        },
+        "sample": "Radical Shiite cleric Muqtada al - Sadr said the attack was \" criminal \" and that \" the Zionists have left only one choice for the Arabs , that of fighting and jihad \" ."
     },
     "ewt-dev-37": {
         "ewt-dev-37-semantics-pred-5": {
-            "sample": "The interim Governing Council issued a communique saying , \" It is a proof of the emptiness of the Israeli authority and a destruction of the peace endeavors in the region",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -27153,7 +27092,6 @@
             "head_token": [5, ["issued"]]
         },
         "ewt-dev-37-semantics-pred-8": {
-            "sample": "The interim Governing Council issued a communique saying , \" It is a proof of the emptiness of the Israeli authority and a destruction of the peace endeavors in the region",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -27412,7 +27350,6 @@
             "head_token": [8, ["saying"]]
         },
         "ewt-dev-37-semantics-pred-14": {
-            "sample": "is a proof of the emptiness of the Israeli authority and a destruction of the peace endeavors in the region",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -27708,11 +27645,11 @@
                 }
             },
             "head_token": [14, ["proof"]]
-        }
+        },
+        "sample": "The interim Governing Council issued a communique saying , \" It is a proof of the emptiness of the Israeli authority and a destruction of the peace endeavors in the region . . ."
     },
     "ewt-dev-38": {
         "ewt-dev-38-semantics-pred-5": {
-            "sample": "operation would only consolidate the terrorist acts in the world and would not bring peace to the region",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -28204,7 +28141,6 @@
             "head_token": [5, ["consolidate"]]
         },
         "ewt-dev-38-semantics-pred-15": {
-            "sample": "This operation would only consolidate the terrorist acts in the world and would not bring peace to the region",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -28754,7 +28690,6 @@
             "head_token": [15, ["bring"]]
         },
         "ewt-dev-38-semantics-pred-24": {
-            "sample": "This operation would only consolidate the terrorist acts in the world and would not bring peace to the region , \" the message",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -29040,11 +28975,11 @@
                 }
             },
             "head_token": [24, ["claimed"]]
-        }
+        },
+        "sample": "This operation would only consolidate the terrorist acts in the world and would not bring peace to the region , \" the message claimed ."
     },
     "ewt-dev-39": {
         "ewt-dev-39-semantics-pred-2": {
-            "sample": "Xinhua alleged that \" Many of the Iraqis , who suffer the American occupation of Iraq , relate their case with that of the Palestinian people , under the Israeli occupation",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -29227,7 +29162,6 @@
             "head_token": [2, ["alleged"]]
         },
         "ewt-dev-39-semantics-pred-11": {
-            "sample": "Xinhua alleged that \" Many of the Iraqis , who suffer the American occupation of Iraq",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -29570,7 +29504,6 @@
             "head_token": [11, ["suffer"]]
         },
         "ewt-dev-39-semantics-pred-18": {
-            "sample": "of the Iraqis , who suffer the American occupation of Iraq , relate their case with that of the Palestinian people , under the Israeli occupation",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -29968,11 +29901,11 @@
                 }
             },
             "head_token": [18, ["relate"]]
-        }
+        },
+        "sample": "Xinhua alleged that \" Many of the Iraqis , who suffer the American occupation of Iraq , relate their case with that of the Palestinian people , under the Israeli occupation . \""
     },
     "ewt-dev-40": {
         "ewt-dev-40-semantics-pred-11": {
-            "sample": "In an apparently unrelated incidents , some eleven Iraqis were killed by snipers on Tuesday , including a group of police trainees in a bus near Hilla and two police in Kirkuk",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -30646,11 +30579,11 @@
                 }
             },
             "head_token": [11, ["killed"]]
-        }
+        },
+        "sample": "In an apparently unrelated incidents , some eleven Iraqis were killed by snipers on Tuesday , including a group of police trainees in a bus near Hilla and two police in Kirkuk ."
     },
     "ewt-dev-41": {
         "ewt-dev-41-semantics-pred-14": {
-            "sample": "Ever since the first whispers about Google 's IPO , most investors have feared that the stock would come public at such a ridiculously high price that , even with a spectacularly profitable business model and some nearly flawless execution , the price would be too high for investors to make a real profit",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -31040,7 +30973,6 @@
             "head_token": [14, ["feared"]]
         },
         "ewt-dev-41-semantics-pred-19": {
-            "sample": "stock would come public at such a ridiculously high price that , even with a spectacularly profitable business model and some nearly flawless execution , the price would be too high for investors to make a real profit",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -31474,7 +31406,6 @@
             "head_token": [19, ["come"]]
         },
         "ewt-dev-41-semantics-pred-20": {
-            "sample": "stock would come public",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -31733,7 +31664,6 @@
             "head_token": [20, ["public"]]
         },
         "ewt-dev-41-semantics-pred-22": {
-            "sample": "",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -31744,7 +31674,6 @@
             "head_token": [22, ["such"]]
         },
         "ewt-dev-41-semantics-pred-47": {
-            "sample": "Ever since the first whispers about Google 's IPO , most investors have feared that the stock would come public at such a ridiculously high price that , even with a spectacularly profitable business model and some nearly flawless execution , the price",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -32103,7 +32032,6 @@
             "head_token": [47, ["high"]]
         },
         "ewt-dev-41-semantics-pred-51": {
-            "sample": "Ever since the first whispers about Google 's IPO , most investors have feared that the stock would come public at such a ridiculously high price that , even with a spectacularly profitable business model and some nearly flawless execution , the price would be too high for investors to make a real profit",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -32465,11 +32393,11 @@
                 }
             },
             "head_token": [51, ["make"]]
-        }
+        },
+        "sample": "Ever since the first whispers about Google 's IPO , most investors have feared that the stock would come public at such a ridiculously high price that , even with a spectacularly profitable business model and some nearly flawless execution , the price would be too high for investors to make a real profit ."
     },
     "ewt-dev-42": {
         "ewt-dev-42-semantics-pred-3": {
-            "sample": "We",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -32569,11 +32497,11 @@
                 }
             },
             "head_token": [3, ["moved"]]
-        }
+        },
+        "sample": "We 've moved on ."
     },
     "ewt-dev-43": {
         "ewt-dev-43-semantics-pred-3": {
-            "sample": "We",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -32673,11 +32601,11 @@
                 }
             },
             "head_token": [3, ["grown"]]
-        }
+        },
+        "sample": "We 've grown up ."
     },
     "ewt-dev-44": {
         "ewt-dev-44-semantics-pred-4": {
-            "sample": "Now , people wonder if Google can even survive",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -32923,7 +32851,6 @@
             "head_token": [4, ["wonder"]]
         },
         "ewt-dev-44-semantics-pred-9": {
-            "sample": "can even survive",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -33080,11 +33007,11 @@
                 }
             },
             "head_token": [9, ["survive"]]
-        }
+        },
+        "sample": "Now , people wonder if Google can even survive ."
     },
     "ewt-dev-45": {
         "ewt-dev-45-semantics-pred-3": {
-            "sample": "'s overstating it",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -33340,7 +33267,6 @@
             "head_token": [3, ["overstating"]]
         },
         "ewt-dev-45-semantics-pred-7": {
-            "sample": "That 's overstating it , I",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -33508,11 +33434,11 @@
                 }
             },
             "head_token": [7, ["know"]]
-        }
+        },
+        "sample": "That 's overstating it , I know ."
     },
     "ewt-dev-46": {
         "ewt-dev-46-semantics-pred-3": {
-            "sample": "What they wonder",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -33695,7 +33621,6 @@
             "head_token": [3, ["wonder"]]
         },
         "ewt-dev-46-semantics-pred-4": {
-            "sample": "What they wonder is whether Google can be anything more than what it 's always been -- a great search engine with some real grass - roots support , successful by the grace of simplicity",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -33873,7 +33798,6 @@
             "head_token": [4, ["is"]]
         },
         "ewt-dev-46-semantics-pred-9": {
-            "sample": "can be anything more than what it 's always been -- a great search engine with some real grass - roots support , successful by the grace of simplicity",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -34040,7 +33964,6 @@
             "head_token": [9, ["anything"]]
         },
         "ewt-dev-46-semantics-pred-15": {
-            "sample": "What they wonder is whether Google can be anything more than what it 's always been -- a great search engine with some real grass - roots support , successful by the grace of simplicity",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -34103,11 +34026,11 @@
                 }
             },
             "head_token": [15, ["always"]]
-        }
+        },
+        "sample": "What they wonder is whether Google can be anything more than what it 's always been -- a great search engine with some real grass - roots support , successful by the grace of simplicity ."
     },
     "ewt-dev-47": {
         "ewt-dev-47-semantics-pred-2": {
-            "sample": "Simplicity gave it that blessed , laudatory lack of clutter , the efficient and effective text - based ads , and the support of anyone with a dial - up connection",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -34621,11 +34544,11 @@
                 }
             },
             "head_token": [2, ["gave"]]
-        }
+        },
+        "sample": "Simplicity gave it that blessed , laudatory lack of clutter , the efficient and effective text - based ads , and the support of anyone with a dial - up connection ."
     },
     "ewt-dev-48": {
         "ewt-dev-48-semantics-pred-3": {
-            "sample": "The problem is that customers attracted by a simple interface are among the least loyal you can find",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -34908,7 +34831,6 @@
             "head_token": [3, ["is"]]
         },
         "ewt-dev-48-semantics-pred-6": {
-            "sample": "The problem is that customers attracted by a simple interface",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -35167,7 +35089,6 @@
             "head_token": [6, ["attracted"]]
         },
         "ewt-dev-48-semantics-pred-15": {
-            "sample": "attracted by a simple interface are among the least loyal you can find",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -35426,7 +35347,6 @@
             "head_token": [15, ["loyal"]]
         },
         "ewt-dev-48-semantics-pred-18": {
-            "sample": "The problem is that customers attracted by a simple interface are among the least loyal you can find",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -35567,7 +35487,6 @@
             "head_token": [18, ["find"]]
         },
         "ewt-dev-48-semantics-pred-20": {
-            "sample": "The problem is that customers attracted by a simple interface are among the least loyal you can find -- witness the fight - for - fewest - features between low - end camera companies",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -35971,12 +35890,14 @@
                 }
             },
             "head_token": [20, ["witness"]]
-        }
+        },
+        "sample": "The problem is that customers attracted by a simple interface are among the least loyal you can find -- witness the fight - for - fewest - features between low - end camera companies ."
     },
-    "ewt-dev-49": {},
+    "ewt-dev-49": {
+        "sample": "The other problem ?"
+    },
     "ewt-dev-50": {
         "ewt-dev-50-semantics-pred-3": {
-            "sample": "It 's tough to make money branching out",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -36073,7 +35994,6 @@
             "head_token": [3, ["tough"]]
         },
         "ewt-dev-50-semantics-pred-5": {
-            "sample": "make money branching out",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -36337,7 +36257,6 @@
             "head_token": [5, ["make"]]
         },
         "ewt-dev-50-semantics-pred-7": {
-            "sample": "",
             "predicate_label": {
                 "genericity": "None",
                 "time": "None",
@@ -36353,7 +36272,6 @@
             "head_token": [7, ["branching"]]
         },
         "ewt-dev-50-semantics-pred-15": {
-            "sample": "It 's tough to make money branching out when your appeal is in your focus",
             "predicate_label": {
                 "genericity": {
                     "pred-dynamic": {
@@ -36612,7 +36530,6 @@
             "head_token": [15, ["focus"]]
         },
         "ewt-dev-50-semantics-predhead-15": {
-            "sample": "in your focus",
             "predicate_label": {
                 "genericity": {
                     "arg-kind": {
@@ -36653,6 +36570,7 @@
             },
             "edge": {},
             "head_token": [15, ["focus"]]
-        }
+        },
+        "sample": "It 's tough to make money branching out when your appeal is in your focus ."
     }
 }

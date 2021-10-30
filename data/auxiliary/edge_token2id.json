@@ -1,0 +1,20 @@
+{
+    "manner": 0,
+    "purpose": 1,
+    "location": 2,
+    "time": 3,
+    "instigation": 4,
+    "volition": 5,
+    "awareness": 6,
+    "sentient": 7,
+    "change_of_location": 8,
+    "existed_before": 9,
+    "existed_during": 10,
+    "existed_after": 11,
+    "change_of_possession": 12,
+    "change_of_state": 13,
+    "change_of_state_continuous": 14,
+    "was_used": 15,
+    "was_for_benefit": 16,
+    "partitive": 17
+}
