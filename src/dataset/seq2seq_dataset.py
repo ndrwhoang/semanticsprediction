@@ -7,7 +7,8 @@ import os
 from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
 
-from src.tokenizer.base_tokenizer import Tokenizer
+# from src.tokenizer.base_tokenizer import Tokenizer
+from transformers import AutoTokenizer, RobertaTokenizer
 
 # node_prefix = 'What is the value of nodes <sep> '.split()
 # edge_prefix = 'What is the value of edge <sep> '.split()
@@ -19,8 +20,7 @@ class CustomDataset(Dataset):
         self.tokenizer = tokenizer
         self.exclude = ['edge']
         data_path = self.get_data_path(mode)
-        self.samples = self.make_node_samples(data_path)
-        # self.input_ids, self.node_ids, self.edge_ids = self.convert_sample_to_input(self.samples)
+        self.samples = self.make_samples(data_path)
         
         # self.n_sample = len(self.input_ids)
         
@@ -75,58 +75,121 @@ class CustomDataset(Dataset):
 
         return sent_label
         
-    def make_node_samples(self, data_path):
+    def make_samples(self, data_path):
         print(f'Start procesing sample from raw data {data_path}')
         with open(data_path, 'r') as f:
-            data = json.load(f)
+            samples = json.load(f)
         f.close()
-        
-        samples = []
-        
-        # for i_sent, (sent_id, sent) in enumerate(tqdm(data.items())):
                         
-        # return samples
+        return samples
     
     def convert_sample_to_input(self, samples):
+        # TODO: add edge labels
         print('Start processing sample to input ids')
-        input_ids, label_ids = [], []
-        for i_sample, sample in enumerate(tqdm(samples)):
-            input_id = [self.tokenizer.s_token2id.get(word, 1) for word in sample['text']]
-            assert len(input_id) == len(sample['label'])
-            input_ids.append(torch.tensor(input_id, dtype=torch.long))
-            label_seq = [torch.tensor(label) for label in sample['label']]
-            label_ids.append(torch.stack(label_seq, 0))
-
-        assert len(input_ids) == len(label_ids)
+        input_ids = []
+        node_ids, node_labels = [], []
+        edge_ids, edge_labels = [], []
         
-        return input_ids, label_ids
+        for i_sample, sample in enumerate(samples):
+            if len(sample['word_labels']) == 0:
+                continue
+                    
+            input_id = [0]      # 2 is end token
+            node_id, node_label = [], []   
             
+            tokens = sample['sample'].split(' ')
+            word_labels = {eval(k):v for k,v in sample['word_labels'].items()}
+            
+            subword_offset = 1
+            for i_token, token in enumerate(tokens):
+                token_id = self.tokenizer.encode(token, add_special_tokens=False, add_prefix_space=True)
+                input_id.extend(token_id)
+                
+                if len(token_id) > 1 or subword_offset != 1:
+                    if (token, i_token) in word_labels:
+                        node_id.append([i_token+subword_offset, i_token+len(token_id)+subword_offset])
+                        node_label.append(word_labels[(token, i_token)])
+                    subword_offset += len(token_id) - 1
+                else:
+                    if (token, i_token) in word_labels:
+                        node_id.append([i_token+subword_offset])
+                        node_label.append(word_labels[(token, i_token)])
+                    
+            input_id.append(2)
+            
+            input_ids.append(input_id)
+            node_ids.append(node_id)
+            node_labels.append(node_label)
+            
+        return input_ids, node_ids, node_labels
+                    
+                    
     def __len__(self):
         return len(self.input_ids)
     
     def __getitem__(self, item):
         return self.input_ids[item], self.node_labels[item], self.edge_labels[item]
 
-def collate_fn(batch):
-    input_ids, label_ids = zip(*batch)
-    
-    label_padding = torch.zeros(label_ids[0].size(1), dtype=torch.float)
-    input_ids = pad_sequence(input_ids, batch_first=True)
-    label_ids = pad_sequence(label_ids, batch_first=True, padding_value=label_padding)
-    
-    input_ids = torch.stack(input_ids, dim=0)
-    label_ids = torch.stack(label_ids, dim=0)
-    
-    return input_ids, label_ids
 
 if __name__ == '__main__':
     config_path = os.path.join('configs', 'config.cfg')
     config = configparser.ConfigParser()
     config.read(config_path)
     
-    tokenizer = Tokenizer(config)
-    tokenizer.build_token2id_dict()
+    tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+    # a = tokenizer.encode('From the AP comes this story :', add_special_tokens=False, add_prefix_space=True)
     
-    dataset = CustomDataset(config, 'train', tokenizer)
+    input_id = [0]      # 2 is end token
+    node_id = []
+    node_label = []
+    word_labels = {
+        ('AP', 2): [33], 
+        ('comes', 3): [44], 
+        ('story', 5): [55]
+    }
+    edge_labels = {
+        (('comes', 3), ('AP', 2)): [55],
+        (('comes', 3), ('story', 5)): [66]
+    }
+    edge_id = []
+    edge_ls = []
+    for edge, attributes in edge_labels.items():
+        edge_tuples = edge
+        for edge_tup in edge_tuples:
+            edge_ls.append(edge_tup)
+    print(edge_ls)
+    
+    sentence = 'From the AP comes this story :'
+    tokens = sentence.split(' ')
+    subword_offset = 1
+    for i_token, token in enumerate(tokens):
+        token_id = tokenizer.encode(token, add_special_tokens=False, add_prefix_space=True)
+        input_id.extend(token_id)
+        
+        if len(token_id) > 1 or subword_offset != 1:
+            if (token, i_token) in edge_ls:
+                edge_id.append([i_token+subword_offset, i_token+len(token_id)+subword_offset])
+            if (token, i_token) in word_labels:
+                node_id.append([i_token+subword_offset, i_token+len(token_id)+subword_offset])
+                node_label.append(word_labels[(token, i_token)])
+            subword_offset += len(token_id) - 1
+        else:
+            if (token, i_token) in edge_ls:
+                edge_id.append([i_token+subword_offset])
+            if (token, i_token) in word_labels:
+                node_id.append([i_token+subword_offset])
+                node_label.append(word_labels[(token, i_token)])
+    
+    print(edge_id)
+    # print(input_id)
+    # for i in node_id:
+    #     print('=========')
+    #     print(i)
+    #     if len(i) == 1:
+    #         print(tokenizer.decode(input_id[i[0]]))
+    #     else:
+    #         print(tokenizer.decode(input_id[i[0]: i[-1]]))
+    
+    # dataset = CustomDataset(config, 'train', tokenizer)
     # print(dataset.input_ids[3])
     # print(dataset.label_ids[3])
