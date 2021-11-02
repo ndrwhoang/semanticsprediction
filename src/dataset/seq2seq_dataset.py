@@ -1,6 +1,7 @@
 import configparser
 import json
 from tqdm import tqdm
+import numpy as np
 import torch
 import os
 
@@ -14,17 +15,17 @@ from transformers import AutoTokenizer, RobertaTokenizer
 # edge_prefix = 'What is the value of edge <sep> '.split()
 
 
-class CustomDataset(Dataset):    
+class UDSDataset(Dataset):    
     def __init__(self, config, mode, tokenizer):
         self.config = config
         self.tokenizer = tokenizer
         self.exclude = ['edge']
         data_path = self.get_data_path(mode)
         self.samples = self.make_samples(data_path)
+        self.input_ids, self.node_ids, self.node_labels, self.edge_ids, self.edge_labels = self.convert_sample_to_input(self.samples)
         
-        # self.n_sample = len(self.input_ids)
-        
-        # print(f'Finished processing data, n_sample: {self.n_sample}')
+        self.n_sample = len(self.input_ids)
+        print(f'Finished processing data, n_sample: {self.n_sample}')
         
     # def filter_label_set(self, label_ids):
         # TODO: filter the labels to a subset of semantics features using dictionary values
@@ -90,55 +91,71 @@ class CustomDataset(Dataset):
         node_ids, node_labels = [], []
         edge_ids, edge_labels = [], []
         
-        for i_sample, sample in enumerate(samples):
+        for i_sample, (sample_id, sample) in enumerate(samples.items()):
             if len(sample['word_labels']) == 0:
                 continue
-                    
-            input_id = [0]      # 2 is end token
+            
+            # Tokenizing word by word to offset the label indices
+            input_id = [0]      # 0 if roberta's sos id, 2 is eos
             node_id, node_label = [], []   
             
             tokens = sample['sample'].split(' ')
             word_labels = {eval(k):v for k,v in sample['word_labels'].items()}
             
-            subword_offset = 1
+            
+            # Hack: Convert None to a number to create tensor
+            # TODO: how to predict presence, would masking bias the model to not learning null prediction
+            for word, label_vec in word_labels.items():
+                word_labels[word] = [value if value is not None else 10 for value in label_vec]
+            
+            subword_offset = 1          # offset for sos
             for i_token, token in enumerate(tokens):
+                # tokenize word with roberta tokenizer
+                # not add special tokens and not tokenize as begin of sentence
                 token_id = self.tokenizer.encode(token, add_special_tokens=False, add_prefix_space=True)
                 input_id.extend(token_id)
                 
+                # if split into subwords
                 if len(token_id) > 1 or subword_offset != 1:
                     if (token, i_token) in word_labels:
                         node_id.append([i_token+subword_offset, i_token+len(token_id)+subword_offset])
                         node_label.append(word_labels[(token, i_token)])
                     subword_offset += len(token_id) - 1
-                else:
+                else:           # if the word is intact
                     if (token, i_token) in word_labels:
                         node_id.append([i_token+subword_offset])
                         node_label.append(word_labels[(token, i_token)])
-                    
-            input_id.append(2)
             
+            input_id.append(2)          # roberta eos id
+            
+            # add sample to dataset
             input_ids.append(input_id)
             node_ids.append(node_id)
             node_labels.append(node_label)
             
-        return input_ids, node_ids, node_labels
+        return input_ids, node_ids, node_labels, edge_ids, edge_labels
                     
                     
     def __len__(self):
         return len(self.input_ids)
     
     def __getitem__(self, item):
-        return self.input_ids[item], self.node_labels[item], self.edge_labels[item]
+        return self.input_ids[item], self.node_ids[item], self.node_labels[item]
+
+def collate_fn(batch):
+    input_ids, node_ids, node_labels = zip(*batch)
+    
+    input_ids = [torch.tensor(input_id) for input_id in input_ids]
+    node_labels = [torch.tensor(node_label) for node_label in node_labels]
+    
+    label_padding = torch.zeros(len(node_labels[0]), dtype=torch.float)
+    input_ids = pad_sequence(input_ids, batch_first=True)
+    node_labels = pad_sequence(node_labels, batch_first=True, padding_value=10)
+    
+    return input_ids, node_ids, node_labels
 
 
-if __name__ == '__main__':
-    config_path = os.path.join('configs', 'config.cfg')
-    config = configparser.ConfigParser()
-    config.read(config_path)
-    
-    tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-    # a = tokenizer.encode('From the AP comes this story :', add_special_tokens=False, add_prefix_space=True)
-    
+def index_offset_test(tokenizer):
     input_id = [0]      # 2 is end token
     node_id = []
     node_label = []
@@ -189,7 +206,32 @@ if __name__ == '__main__':
     #         print(tokenizer.decode(input_id[i[0]]))
     #     else:
     #         print(tokenizer.decode(input_id[i[0]: i[-1]]))
+
+def dataloader_test(dataset):
+    print('dataloader test')
+    dataloader = DataLoader(dataset, batch_size=4, collate_fn=collate_fn)
+    for i, batch in enumerate(dataloader):
+        if i == 5: break
+        print('===========')
+        input_ids, node_ids, node_labels = batch
+        
+        print(input_ids.size())
+        print(len(node_ids))
+        print(node_labels.size())
+        
+
+if __name__ == '__main__':
+    config_path = os.path.join('configs', 'config.cfg')
+    config = configparser.ConfigParser()
+    config.read(config_path)
     
-    # dataset = CustomDataset(config, 'train', tokenizer)
+    tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+    # a = tokenizer.encode('From the AP comes this story :', add_special_tokens=False, add_prefix_space=True)
+    
+    dataset = UDSDataset(config, 'train', tokenizer)
     # print(dataset.input_ids[3])
-    # print(dataset.label_ids[3])
+    # print(dataset.node_ids[3])
+    # print(dataset.node_labels[3])
+    
+    dataloader_test(dataset)
+    
