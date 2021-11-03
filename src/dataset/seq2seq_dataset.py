@@ -1,15 +1,9 @@
-import configparser
 import json
 from tqdm import tqdm
 import numpy as np
 import torch
-import os
-
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
-
-# from src.tokenizer.base_tokenizer import Tokenizer
-from transformers import AutoTokenizer, RobertaTokenizer
 
 # node_prefix = 'What is the value of nodes <sep> '.split()
 # edge_prefix = 'What is the value of edge <sep> '.split()
@@ -42,40 +36,6 @@ class UDSDataset(Dataset):
         
         return data_path
     
-    def _label2v(self, label_dict, out, edge_label):
-        if not edge_label:
-            exclude = ['edge']
-        else:
-            exclude = ['arguement_label', 'predicate_label']
-        
-        for attribute, values in label_dict.items():
-            if isinstance(values, list) or isinstance(values, str):
-                continue
-            if attribute in exclude:
-                continue
-            for sub_attr, value in values.items():
-                out[self.tokenizer.l_token2id[sub_attr]] = value['value']
-                
-        return out
-    
-    def _build_sent_label(self, pred_labels, empty_out):
-        sent_label = {}
-        
-        pred_value = pred_labels['head_token'][1][0] + self.config['dataloading']['offset_value']
-        pred_idx = pred_labels['head_token'][0]
-        pred_l_v = self._label2v(pred_labels['predicate_label'], empty_out, False)
-        
-        sent_label[(pred_idx, pred_value)] = pred_l_v
-        
-        for arg_head, arg_labels in pred_labels['arguement_label'].items():
-            arg_value = arg_labels['form'][1][0] + self.config['dataloading']['offset_value']
-            arg_idx = arg_labels['form'][0]
-            arg_l_v = self._label2v(arg_labels, empty_out, False)
-            
-            sent_label[(arg_idx, arg_value)] = arg_l_v
-
-        return sent_label
-        
     def make_samples(self, data_path):
         print(f'Start procesing sample from raw data {data_path}')
         with open(data_path, 'r') as f:
@@ -118,12 +78,12 @@ class UDSDataset(Dataset):
                 # if split into subwords
                 if len(token_id) > 1 or subword_offset != 1:
                     if (token, i_token) in word_labels:
-                        node_id.append([i_token+subword_offset, i_token+len(token_id)+subword_offset])
+                        node_id.append(torch.tensor([i_token+subword_offset, i_token+len(token_id)+subword_offset]))
                         node_label.append(word_labels[(token, i_token)])
                     subword_offset += len(token_id) - 1
                 else:           # if the word is intact
                     if (token, i_token) in word_labels:
-                        node_id.append([i_token+subword_offset])
+                        node_id.append(torch.tensor([i_token+subword_offset]))
                         node_label.append(word_labels[(token, i_token)])
             
             input_id.append(2)          # roberta eos id
@@ -134,8 +94,7 @@ class UDSDataset(Dataset):
             node_labels.append(node_label)
             
         return input_ids, node_ids, node_labels, edge_ids, edge_labels
-                    
-                    
+                                   
     def __len__(self):
         return len(self.input_ids)
     
@@ -146,13 +105,15 @@ def collate_fn(batch):
     input_ids, node_ids, node_labels = zip(*batch)
     
     input_ids = [torch.tensor(input_id) for input_id in input_ids]
+    # node_ids = [torch.tensor(node_id) for node_id in node_ids]
     node_labels = [torch.tensor(node_label) for node_label in node_labels]
     
     label_padding = torch.zeros(len(node_labels[0]), dtype=torch.float)
     input_ids = pad_sequence(input_ids, batch_first=True)
     node_labels = pad_sequence(node_labels, batch_first=True, padding_value=10)
+    node_masks = node_labels != 10
     
-    return input_ids, node_ids, node_labels
+    return input_ids, node_ids, node_labels, node_masks
 
 
 def index_offset_test(tokenizer):
@@ -211,16 +172,23 @@ def dataloader_test(dataset):
     print('dataloader test')
     dataloader = DataLoader(dataset, batch_size=4, collate_fn=collate_fn)
     for i, batch in enumerate(dataloader):
-        if i == 5: break
+        if i == 3: break
         print('===========')
-        input_ids, node_ids, node_labels = batch
+        input_ids, node_ids, node_labels, node_masks = batch
         
         print(input_ids.size())
         print(len(node_ids))
+        print(node_ids)
         print(node_labels.size())
         
 
 if __name__ == '__main__':
+    import os
+    import configparser
+    from torch.utils.data import DataLoader
+    # from src.tokenizer.base_tokenizer import Tokenizer
+    from transformers import RobertaTokenizer
+    
     config_path = os.path.join('configs', 'config.cfg')
     config = configparser.ConfigParser()
     config.read(config_path)
@@ -232,6 +200,7 @@ if __name__ == '__main__':
     # print(dataset.input_ids[3])
     # print(dataset.node_ids[3])
     # print(dataset.node_labels[3])
+    
     
     dataloader_test(dataset)
     

@@ -37,11 +37,12 @@ class BaseModel(nn.Module):
                                                             float(self.config['dropout']))
         self.encoder = nn.TransformerEncoder(self.transformer_layer,
                                              int(self.config['n_layer']))
-        
         self.node_out = nn.Linear(int(self.config['d_model']), int(self.config['n_node']))
-    
+
+        self.loss_fn = nn.MSELoss(reduction='none')
+        
     def forward(self, batch):
-        (input_ids, node_ids, node_labels) = batch
+        (input_ids, node_ids, node_labels, node_masks) = batch
         
         out = self.embedding(input_ids) * math.sqrt(input_ids.size(1))
         out = self.pos_embedding(out)
