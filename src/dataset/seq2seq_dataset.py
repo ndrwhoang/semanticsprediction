@@ -1,9 +1,11 @@
+import re
 import json
 from tqdm import tqdm
 import numpy as np
 import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
+from typing import List
 
 # node_prefix = 'What is the value of nodes <sep> '.split()
 # edge_prefix = 'What is the value of edge <sep> '.split()
@@ -16,7 +18,7 @@ class UDSDataset(Dataset):
         self.exclude = ['edge']
         data_path = self.get_data_path(mode)
         self.samples = self.make_samples(data_path)
-        self.input_ids, self.node_ids, self.node_labels, self.edge_ids, self.edge_labels = self.convert_sample_to_input(self.samples)
+        self.input_ids, self.node_labels, self.edge_labels = self.convert_sample_to_input(self.samples)
         
         self.n_sample = len(self.input_ids)
         print(f'Finished processing data, n_sample: {self.n_sample}')
@@ -44,7 +46,8 @@ class UDSDataset(Dataset):
                         
         return samples
     
-    def convert_sample_to_input(self, samples):
+    def ___convert_sample_to_input(self, samples):
+        # trash code, keep for posterity
         # TODO: add edge labels
         print('Start processing sample to input ids')
         input_ids = []
@@ -94,14 +97,87 @@ class UDSDataset(Dataset):
             node_labels.append(node_label)
             
         return input_ids, node_ids, node_labels, edge_ids, edge_labels
-                                   
+    
+    def convert_sample_to_input(self, samples):
+        print('Start processing sample to input ids')
+        input_ids, node_labels, edge_labels = [], [], []
+        
+        for i_sample, (sample_id, sample) in enumerate(samples.items()):
+            if len(sample['word_labels']) == 0:
+                continue
+            
+            # Add input_id (List[int]): word ids
+            tokenizer_out = self.tokenizer(sample['sample'], 
+                                      add_special_tokens=False, 
+                                      return_offsets_mapping=True)
+            input_id = tokenizer_out['input_ids']
+            input_ids.append(input_id)
+            
+            
+            offset_mapping = tokenizer_out['offset_mapping'] 
+            # https://stackoverflow.com/questions/13734451/string-split-with-indices-in-python
+            original_indices = [(m.start(), m.end()) for m in re.finditer(r'\S+', sample['sample'])]
+            # Add node_label (Dict{(tuple):List(int)}): dictionary of subwords to attribute value
+            node_label = {}  
+            word_labels = {eval(k):v for k,v in sample['word_labels'].items()}
+            for word, label in word_labels.items():
+                alignment = self._find_alignment_for_token(word, offset_mapping, original_indices)
+                node_label[alignment] = label
+            node_labels.append(node_label)
+            
+            # Add edge_label (Dict{tuple(tuple(int), tuple(int)): List(int)})
+            edge_label = {}
+            e_labels = {eval(k):v for k, v in sample['edge_labels'].items()}
+            if len(e_labels) == 0:
+                continue
+            for word_pair, label in e_labels.items():
+                first_alignment = self._find_alignment_for_token(word_pair[0], offset_mapping, original_indices)
+                sec_alignment = self._find_alignment_for_token(word_pair[1], offset_mapping, original_indices)
+                edge_label[(first_alignment, sec_alignment)] = label
+            edge_labels.append(edge_label)
+            
+        return input_ids, node_labels, edge_labels
+        
+    def _find_alignment_for_token(self, token, offset_mapping, original_indices):
+        label_id = original_indices[token[-1]]
+        try:
+            # aligned = {token[-1]: offset_mapping.index(label_id)}
+            aligned = (offset_mapping.index(label_id),)
+        except ValueError:
+            for tok_indices in offset_mapping:
+                if tok_indices[0] == label_id[0]:
+                    first_subword_id = offset_mapping.index(tok_indices)
+                    for tok_indices_rest in offset_mapping[first_subword_id:]:
+                        if tok_indices_rest[1] == label_id[1]:
+                            last_subword_id = offset_mapping.index(tok_indices_rest)
+                            break
+                    break
+            # aligned = {token[-1]: (first_subword_id, last_subword_id)}
+            try:
+                aligned = (first_subword_id, last_subword_id)
+            except UnboundLocalError:
+                print(original_indices)
+                print(offset_mapping)
+                print(label_id)
+        
+        return aligned
+                  
     def __len__(self):
         return len(self.input_ids)
     
     def __getitem__(self, item):
-        return self.input_ids[item], self.node_ids[item], self.node_labels[item]
+        return self.input_ids[item], self.node_labels[item], self.edge_labels
 
 def collate_fn(batch):
+    input_ids, node_labels, edge_labels = zip(*batch)
+    
+    input_ids = [torch.tensor(input_id) for input_id in input_ids]
+    input_ids = pad_sequence(input_ids, batch_first=True)
+    
+    return input_ids, node_labels, edge_labels
+
+def _collate_fn(batch):
+    # for old processing pipeline, keep for posterity
     input_ids, node_ids, node_labels = zip(*batch)
     
     input_ids = [torch.tensor(input_id) for input_id in input_ids]
@@ -181,26 +257,58 @@ def dataloader_test(dataset):
         print(node_ids)
         print(node_labels.size())
         
+def index_offset_test_2():
+    example_str = 'The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb .'
+    tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
+    a = tokenizer(example_str, add_special_tokens=False, return_offsets_mapping=True)
+    
+    
+    
+    
+    print(a['offset_mapping'])
+    # original_indices = [(m.group(0), (m.start(), m.end())) for m in re.finditer(r'\S+', example_str)]
+    original_indices = [(m.start(), m.end()) for m in re.finditer(r'\S+', example_str)]
+    print(original_indices)    
+        
+    label_id = original_indices[1]
+    print(label_id)
+    try:
+        aligned = (a['offset_mapping'].index(label_id))
+    except ValueError:
+        for tok_indices in a['offset_mapping']:
+            if tok_indices[0] == label_id[0]:
+                first_subword_id = a['offset_mapping'].index(tok_indices)
+                for tok_indices_rest in a['offset_mapping'][first_subword_id:]:
+                    if tok_indices_rest[1] == label_id[1]:
+                        last_subword_id = a['offset_mapping'].index(tok_indices_rest)
+                        break
+                break
+        aligned = (first_subword_id, last_subword_id)
+    
+    print(aligned)
 
 if __name__ == '__main__':
     import os
     import configparser
     from torch.utils.data import DataLoader
     # from src.tokenizer.base_tokenizer import Tokenizer
-    from transformers import RobertaTokenizer
+    from transformers import RobertaTokenizerFast
     
     config_path = os.path.join('configs', 'config.cfg')
     config = configparser.ConfigParser()
     config.read(config_path)
     
-    tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
-    # a = tokenizer.encode('From the AP comes this story :', add_special_tokens=False, add_prefix_space=True)
+    example_str = 'The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb .'
+    tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
+    a = tokenizer(example_str, add_special_tokens=False, return_offsets_mapping=True)
+    
+    
     
     dataset = UDSDataset(config, 'train', tokenizer)
-    # print(dataset.input_ids[3])
-    # print(dataset.node_ids[3])
-    # print(dataset.node_labels[3])
+    print(dataset.input_ids[3])
+    print(dataset.node_labels[3])
+    print(dataset.edge_labels[3])
     
     
-    dataloader_test(dataset)
+    # dataloader_test(dataset)
     
