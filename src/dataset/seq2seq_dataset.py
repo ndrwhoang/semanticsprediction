@@ -166,20 +166,36 @@ def _collate_fn(batch):
 
 def dataloader_test(dataset):
     print('dataloader test')
-    dataloader = DataLoader(dataset, batch_size=4, collate_fn=collate_fn)
+    dataloader = DataLoader(dataset, batch_size=1, collate_fn=collate_fn)
     for i, batch in enumerate(dataloader):
-        if i == 3: break
+        # if i == 3: break
         print('===========')
+        print('*')
+        print('*')
+        print('*')
         input_ids, node_ids, node_labels, edge_ids, edge_labels = batch
         
-        print(input_ids.size())
-        print([len(node_id) for node_id in node_ids])
-        print(node_labels.size())
-        print([len(edge_id) for edge_id in edge_ids])
-        print(edge_labels.size())
+        a = tokenizer.convert_ids_to_tokens(input_ids[0].tolist())
+        print(a)
+        print(node_ids[0])
+        b = [a[i[0]:i[-1]+1] for i in node_ids[0]]
+        print(b)
+        # print(node_labels[0].tolist())
+        # for label in node_labels[0].tolist():
+        #     print(label)
+        assert len(b) == node_labels.size(1)
+        # print(edge_ids[0])
+        # print(edge_labels[0].tolist())
+        # print(edge_labels.size())
         
-        print(node_ids)
-        print(edge_ids)
+        # print(input_ids.size())
+        # print([len(node_id) for node_id in node_ids])
+        # print(node_labels.size())
+        # print([len(edge_id) for edge_id in edge_ids])
+        # print(edge_labels.size())
+        
+        # print(node_ids)
+        # print(edge_ids)
         
         
 def index_offset_test_2():
@@ -223,19 +239,19 @@ if __name__ == '__main__':
     example_str = 'The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb .'
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
     a = tokenizer(example_str, add_special_tokens=False, return_offsets_mapping=True)
-    
+    # print(tokenizer.convert_ids_to_tokens(a['input_ids']))
     
     
     dataset = UDSDataset(config, 'train', tokenizer)
     # print(dataset.input_ids[0])
-    print(dataset.node_labels[0])
+    # print(dataset.node_labels[0])
     # print(dataset.edge_labels[0])
-    mask = (dataset.node_labels[0] == dataset.node_labels[0]).int().float()
-    print(mask)
-    mask[:, [1, 3, 4, 5]] = 0
-    print(mask)
-    print(torch.nan_to_num(dataset.node_labels[0])*mask)
+    # mask = (dataset.node_labels[0] == dataset.node_labels[0]).int().float()
+    # print(mask)
+    # mask[:, [1, 3, 4, 5]] = 0
+    # print(mask)
+    # print(torch.nan_to_num(dataset.node_labels[0])*mask)
     # print(torch.nan_to_num(dataset.node_labels[0]))
     
-    # dataloader_test(dataset)
+    dataloader_test(dataset)
     

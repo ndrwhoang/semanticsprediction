@@ -74,13 +74,13 @@ class Trainer:
         train_dataloader = DataLoader(self.train_dataset,
                                       batch_size=int(config['training']['bsz_train']),
                                       collate_fn=collate_fn,
-                                      shuffle=True,
-                                      drop_last=True)
+                                      shuffle=False,
+                                      drop_last=False)
         val_dataloader = DataLoader(self.val_dataset,
                                     batch_size=int(config['training']['bsz_val']),
                                     collate_fn=collate_fn,
-                                    shuffle=True,
-                                    drop_last=True)
+                                    shuffle=False,
+                                    drop_last=False)
         
         return train_dataloader, val_dataloader
     
@@ -170,6 +170,10 @@ class Trainer:
                 
                 # forward
                 node_output, edge_output = self.model(batch)
+                assert node_output.size() == node_labels.size()
+                assert edge_output.size() == edge_labels.size()
+                # print(node_output[0])
+                # print(node_labels[0])
                 
                 node_mask = self._extract_masks(node_labels, subspace='nodes')
                 edge_mask = self._extract_masks(edge_labels, subspace='edges')
@@ -177,9 +181,7 @@ class Trainer:
                 node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
                 edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
                 loss = node_loss + edge_loss
-                
-                # loss = node_loss
-                
+
                 # step
                 self.optimizer.zero_grad()
                 loss.backward()
@@ -190,10 +192,10 @@ class Trainer:
                 total_train_step += 1
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
 
-            val_loss = self.run_validation()
-            if val_loss < best_loss:
-                best_loss = val_loss
-                self._save_model(self.model, self.config['model_path']['base_model'] + run_name)
+            # val_loss = self.run_validation()
+            # if val_loss < best_loss:
+            #     best_loss = val_loss
+            #     self._save_model(self.model, self.config['model_path']['base_model'] + run_name)
             
     def run_validation(self):
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))

@@ -59,8 +59,8 @@ class BaseModel(nn.Module):
         node_logits = self.node_out(node_out)
         edge_logits = self.edge_out(edge_out)
         
-        node_output = self.activation(node_logits)
-        edge_output = self.activation(edge_logits)
+        node_output = self.activation(node_logits)*5
+        edge_output = self.activation(edge_logits)*5
         
         return node_output, edge_output
     
