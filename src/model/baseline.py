@@ -4,9 +4,9 @@ import torch.nn as nn
 from typing import Dict, List
 from torch.nn.utils.rnn import pad_sequence
 
-# Shamelessly stolen implementation
-# https://nlp.seas.harvard.edu/2018/04/03/attention.html
 class PositionalEncoding(nn.Module):
+    # Shamelessly stolen implementation
+    # https://nlp.seas.harvard.edu/2018/04/03/attention.html
     def __init__(self, d_model, dropout=0.1, max_len=256):
         super(PositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(dropout)
@@ -25,6 +25,8 @@ class PositionalEncoding(nn.Module):
 
 class BaseModel(nn.Module):
     def __init__(self, config):
+        # Base mode of 2 transformer encoder layers + 2 linear prediction heads
+        # Output is Tanh*5
         super(BaseModel, self).__init__()
         self.config = config['model']  
 
@@ -47,7 +49,7 @@ class BaseModel(nn.Module):
         self.loss_fn = nn.MSELoss(reduction='none')
         
     def forward(self, batch):
-        (input_ids, node_ids, node_labels, edge_ids, edge_labels) = batch
+        (input_ids, node_ids, _, edge_ids, _) = batch
         
         out = self.embedding(input_ids) * math.sqrt(input_ids.size(1))
         out = self.pos_embedding(out)
@@ -65,6 +67,8 @@ class BaseModel(nn.Module):
         return node_output, edge_output
     
     def _index_node_logits(self, raw_logits, node_ids):
+        # Indexing relevant words
+        # in case of subwords, takes the mean
         node_outputs = []
         for i_sample, node_id in enumerate(node_ids):
             node_output = [torch.mean(raw_logits[i_sample, idx, :], dim=0) for idx in node_id]
@@ -74,9 +78,11 @@ class BaseModel(nn.Module):
         
         return node_outputs
     
-    def _index_edge_logits(self, raw_logits, edge_labels):
+    def _index_edge_logits(self, raw_logits, edge_ids):
+        # Index relevant word pairs and concat
+        # in case of subwords, takes the mean
         edge_outputs = []
-        for i_sample, edge_id_pair in enumerate(edge_labels):
+        for i_sample, edge_id_pair in enumerate(edge_ids):
             edge_output = [torch.cat((torch.mean(raw_logits[i_sample, idx[0], :], dim=0), torch.mean(raw_logits[i_sample, idx[1], :], dim=0))) for idx in edge_id_pair]
             edge_output = torch.stack(edge_output, dim=0)
             edge_outputs.append(edge_output)
@@ -85,6 +91,7 @@ class BaseModel(nn.Module):
         return edge_outputs
 
 def model_output_test(config):
+    # Test function
     print('starts model output test')
     from torch.utils.data import DataLoader
     from src.dataset.seq2seq_dataset import UDSDataset, collate_fn
@@ -110,10 +117,10 @@ if __name__ == '__main__':
     import os
     import configparser
     
-    config = configparser.ConfigParser()
-    config.read(os.path.join('configs', 'config.cfg'))
+    # config = configparser.ConfigParser()
+    # config.read(os.path.join('configs', 'config.cfg'))
     
-    model_output_test(config)
+    # model_output_test(config)
     
         
         

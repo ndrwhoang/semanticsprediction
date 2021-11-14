@@ -18,6 +18,9 @@ from src.dataset.seq2seq_dataset import collate_fn
 
 class Trainer:
     def __init__(self, config, model, train_dataset, val_dataset=None, test_dataset=None):
+        # Base class for training, will also handle inference if inference is simple enough
+        # TODO: inference
+        # TODO: result tracking
         self.config = config
         self.model = model
         self.train_dataset = train_dataset
@@ -48,6 +51,11 @@ class Trainer:
         np.random.seed(self.seed)
     
     def _get_optimizer(self, config):
+        # AdamW + OneCycleLR
+        # Currently using maximum learning rate from old experiment
+        # TODO: rerun find maximum learning rate
+        # Note: onecycle requires running the full number of epochs, do not use early stopping
+        # change to something else depeding on full training run time
         total_steps = len(self.train_dataloader) * int(self.config['training']['n_epoch'])
         model_params = list(self.model.named_parameters())
         no_decay = ['bias']
@@ -85,6 +93,7 @@ class Trainer:
         return train_dataloader, val_dataloader
     
     def _load_label_dict(self, config):
+        # Get the semantic subspace id to produce mask
         node_dict_path = os.path.join(*config['data_path']['node_dict'].split('\\'))
         edge_dict_path = os.path.join(*config['data_path']['edge_dict'].split('\\'))
         
@@ -98,6 +107,8 @@ class Trainer:
         return node_label2id, edge_label2id
         
     def _get_mask(self, config):
+        # Produce mask to exclude semantic subspaces, 
+        # change in config 'training' section
         masked_node_subspace = config['training']['node_subspace'].split(' ')
         masked_edge_subspace = config['training']['edge_subspace'].split(' ')
         if masked_node_subspace == ['none'] and masked_edge_subspace == ['none']:
@@ -125,11 +136,13 @@ class Trainer:
         return out
     
     def _calculate_masked_loss(self, pred, true, mask):
+        # note: nan * False = nan, not 0
         loss = torch.sum((torch.nan_to_num(pred-true)*mask)**2.0) / torch.sum(mask)
         
         return loss
     
     def ______process_labels(self, labels):
+        # For old data pipeline, keep for posterity
         label_out = []
         for i_sample, label in enumerate(labels):
             label_tensor = [torch.tensor(label_vec, dtype=torch.float) for label_vec in label.values()]
@@ -156,6 +169,10 @@ class Trainer:
         return mask
     
     def run_train(self, run_name: str):
+        # Take run_name to be used in saved checkpoint
+        # Save checkpoint everytime val_loss decreases
+        # Note: tqdm(enumerate) cause memory leakage?
+        # TODO: set up proper experiment tracking
         total_train_step = 0
         
         for epoch in range(int(self.config['training']['n_epoch'])):
@@ -192,10 +209,10 @@ class Trainer:
                 total_train_step += 1
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
 
-            # val_loss = self.run_validation()
-            # if val_loss < best_loss:
-            #     best_loss = val_loss
-            #     self._save_model(self.model, self.config['model_path']['base_model'] + run_name)
+            val_loss = self.run_validation()
+            if val_loss < best_loss:
+                best_loss = val_loss
+                self._save_model(self.model, self.config['model_path']['base_model'] + run_name)
             
     def run_validation(self):
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))
@@ -245,7 +262,7 @@ def trainer_test(config):
 if __name__ == '__main__':
     import configparser
     
-    config = configparser.ConfigParser()
-    config.read(os.path.join('configs', 'config.cfg'))
+    # config = configparser.ConfigParser()
+    # config.read(os.path.join('configs', 'config.cfg'))
     
-    trainer_test(config)
+    # trainer_test(config)
