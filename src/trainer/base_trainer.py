@@ -219,7 +219,7 @@ class Trainer:
             val_loss = self.run_validation()
             if val_loss < best_loss:
                 best_loss = val_loss
-                self._save_model(self.model, self.config['model_path']['base_model'] + run_name)
+                self._save_model(self.model, run_name + '_' + self.config['model_path']['base_model'])
             
     def run_validation(self):
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))
@@ -251,7 +251,7 @@ class Trainer:
             #         })
             
         print(f'Validation loss: {val_loss}')
-        wandb.lod({'val_loss': val_loss})
+        wandb.log({'val_loss': val_loss})
         
         return val_loss
     
