@@ -3,9 +3,9 @@ import numpy as np
 import os
 import json
 from itertools import chain
-from torch.functional import Tensor
 from tqdm import tqdm
 from typing import List, Dict
+import wandb
 
 import torch
 from torch.utils.data import DataLoader
@@ -207,6 +207,13 @@ class Trainer:
                 
                 # log
                 total_train_step += 1
+                bs = int(self.config['training']['bsz_train'])
+                wandb.log({
+                    'train_total_loss': loss/bs,
+                    'train_node_loss': node_loss/bs,
+                    'train_edge_loss': edge_loss/bs,
+                    'learning_rate': self.lr_scheduler.get_last_lr()
+                    })
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
 
             val_loss = self.run_validation()
@@ -231,13 +238,20 @@ class Trainer:
             
             node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
             edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-            loss = node_loss
+            loss = node_loss + edge_loss
             
             val_loss += loss
 
             pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {loss}', refresh=True)
-        
+            # bs = int(self.config['training']['bsz_val'])
+            # wandb.log({
+            #         'val_total_loss': loss/bs,
+            #         'val_node_loss': node_loss/bs,
+            #         'val_edge_loss': edge_loss/bs
+            #         })
+            
         print(f'Validation loss: {val_loss}')
+        wandb.lod({'val_loss': val_loss})
         
         return val_loss
     

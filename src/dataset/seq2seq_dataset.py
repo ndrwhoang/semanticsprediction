@@ -32,6 +32,8 @@ class UDSDataset(Dataset):
             data_path = self.config['data_path']['val_raw']
         elif mode == 'test':
             data_path = self.config['data_path']['test_raw']
+        elif mode == 'train_subset':
+            data_path = self.config['data_path']['train_subset_raw']
         
         assert data_path is not None
         
