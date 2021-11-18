@@ -1,4 +1,5 @@
 import re
+import os
 import json
 from torch._C import dtype
 from tqdm import tqdm
@@ -39,9 +40,10 @@ class UDSDataset(Dataset):
         
         return data_path
     
-    def make_samples(self, data_path):
+    def make_samples(self, path):
         # Load data from raw file
-        print(f'Start procesing sample from raw data {data_path}')
+        print(f'Start procesing sample from raw data {path}')
+        data_path = os.path.join(*path.split('\\'))
         with open(data_path, 'r') as f:
             samples = json.load(f)
         f.close()
