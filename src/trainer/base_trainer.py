@@ -251,7 +251,7 @@ class Trainer:
             #         })
             
         print(f'Validation loss: {val_loss}')
-        wandb.log({'val_loss': val_loss})
+        wandb.log({'epoch_val_loss': val_loss})
         
         return val_loss
     

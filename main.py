@@ -9,3 +9,4 @@ if __name__ == '__main__':
     
     interface = Interface(config)
     interface.run_trial_training()
+    # interface.run_pretrained_training()
