@@ -21,7 +21,7 @@ class PretrainedModel(nn.Module):
     def forward(self, batch):
         (input_ids, node_ids, _, edge_ids, _) = batch
         
-        out, _, _ = self.pretrained_encoder(input_ids, return_dict=False)
+        out, _ = self.pretrained_encoder(input_ids, return_dict=False)
         
         node_out = self._index_node_logits(out, node_ids)
         edge_out = self._index_edge_logits(out, edge_ids)
