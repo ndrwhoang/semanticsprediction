@@ -60,7 +60,7 @@ class UDSDataset(Dataset):
         node_ids, node_labels = [], []
         edge_ids, edge_labels = [], []
         
-        for i_sample, (sample_id, sample) in enumerate(samples.items()):
+        for i_sample, (sample_id, sample) in enumerate(tqdm(samples.items(), total=len(samples))):
             if len(sample['word_labels']) == 0:
                 continue
             
