@@ -8,5 +8,5 @@ if __name__ == '__main__':
     config.read(os.path.join('configs', 'config.cfg'))
     
     interface = Interface(config)
-    interface.run_trial_training()
-    # interface.run_pretrained_training()
+    # interface.run_trial_training()
+    interface.run_pretrained_training()
