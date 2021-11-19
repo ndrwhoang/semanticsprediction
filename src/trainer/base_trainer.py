@@ -17,7 +17,7 @@ from src.dataset.seq2seq_dataset import collate_fn
 
 
 class Trainer:
-    def __init__(self, config, model, train_dataset, val_dataset=None, test_dataset=None):
+    def __init__(self, config, model, train_dataset, val_dataset=None, test_dataset=None, checkpoint=None):
         # Base class for training, will also handle inference if inference is simple enough
         # TODO: inference
         # TODO: result tracking
@@ -39,6 +39,8 @@ class Trainer:
                                    'cpu')
         print(f'----------- device : {self.device}')
         self.model.to(self.device)
+        if checkpoint is not None:
+            model.load_state_dict(torch.load(os.path.join(*checkpoint.split('\\'))))
         self.train_dataloader, self.val_dataloader = self._get_dataloader(self.config)
         self.optimizer, self.lr_scheduler = self._get_optimizer(self.config)
         # self.node_label2id, self.edge_label2id = self._load_label_dict(self.config)
@@ -172,7 +174,6 @@ class Trainer:
         # Take run_name to be used in saved checkpoint
         # Save checkpoint everytime val_loss decreases
         # Note: tqdm(enumerate) cause memory leakage?
-        # TODO: set up proper experiment tracking
         total_train_step = 0
         
         for epoch in range(int(self.config['training']['n_epoch'])):
