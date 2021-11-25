@@ -232,25 +232,26 @@ class Trainer:
             batch = self._to_device(batch)
             (_, node_ids, node_labels, edge_ids, edge_labels) = batch
             
-            # forward                
-            node_output, edge_output = self.model(batch)
-            
-            node_mask = self._extract_masks(node_labels, subspace='nodes')
-            edge_mask = self._extract_masks(edge_labels, subspace='edges')
-            
-            node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
-            edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-            loss = node_loss + edge_loss
-            
-            val_loss += loss
+            # forward
+            with torch.no_grad():                
+                node_output, edge_output = self.model(batch)
+                
+                node_mask = self._extract_masks(node_labels, subspace='nodes')
+                edge_mask = self._extract_masks(edge_labels, subspace='edges')
+                
+                node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
+                edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
+                loss = node_loss + edge_loss
+                
+                val_loss += loss
 
             pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {loss}', refresh=True)
-            # bs = int(self.config['training']['bsz_val'])
-            # wandb.log({
-            #         'val_total_loss': loss/bs,
-            #         'val_node_loss': node_loss/bs,
-            #         'val_edge_loss': edge_loss/bs
-            #         })
+                # bs = int(self.config['training']['bsz_val'])
+                # wandb.log({
+                #         'val_total_loss': loss/bs,
+                #         'val_node_loss': node_loss/bs,
+                #         'val_edge_loss': edge_loss/bs
+                #         })
             
         print(f'Validation loss: {val_loss}')
         wandb.log({'epoch_val_loss': val_loss})
