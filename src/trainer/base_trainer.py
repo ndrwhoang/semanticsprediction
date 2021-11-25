@@ -45,6 +45,8 @@ class Trainer:
         self.optimizer, self.lr_scheduler = self._get_optimizer(self.config)
         # self.node_label2id, self.edge_label2id = self._load_label_dict(self.config)
         self.masked_node_idx, self.masked_edge_idx = self._get_mask(self.config)
+        assert len(set(self.masked_edge_idx)) == len(self.masked_edge_idx)
+        assert len(set(self.masked_node_idx)) == len(self.masked_node_idx)
     
     def set_seed(self):
         self.seed = int(self.config['general']['seed'])
@@ -139,8 +141,7 @@ class Trainer:
     
     def _calculate_masked_loss(self, pred, true, mask):
         # note: nan * False = nan, not 0
-        loss = torch.sum((torch.nan_to_num(pred-true)*mask)**2.0) / torch.sum(mask)
-        
+        loss = torch.sum((torch.nan_to_num(pred-true)*mask)**2.0) / (torch.sum(mask)+0.00001)
         return loss
     
     def ______process_labels(self, labels):
@@ -161,9 +162,9 @@ class Trainer:
         # mask = labels != float('nan')
         mask = torch.ones(labels.size())
         if subspace == 'nodes':
-            mask[:, self.masked_node_idx] = 0.
+            mask[:, :, self.masked_node_idx] = 0.
         elif subspace == 'edges':
-            mask[:, self.masked_edge_idx] = 0.
+            mask[:, :, self.masked_edge_idx] = 0.
         else:
             print('error in choosing subspace to mask')
         mask = mask.to(self.device)
@@ -199,7 +200,7 @@ class Trainer:
                 node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
                 edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
                 loss = node_loss + edge_loss
-
+                
                 # step
                 self.optimizer.zero_grad()
                 loss.backward()
@@ -265,9 +266,10 @@ def trainer_test(config):
     
     from src.dataset.seq2seq_dataset import UDSDataset
     from src.model.baseline import BaseModel
+    # from src.model.pretrained_roberta import PretrainedModel
     
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
-    dataset = UDSDataset(config, 'train', tokenizer)
+    dataset = UDSDataset(config, 'train_subset', tokenizer)
     model = BaseModel(config)
     
     trainer = Trainer(config, model, dataset)
@@ -277,7 +279,7 @@ def trainer_test(config):
 if __name__ == '__main__':
     import configparser
     
-    # config = configparser.ConfigParser()
-    # config.read(os.path.join('configs', 'config.cfg'))
+    config = configparser.ConfigParser()
+    config.read(os.path.join('configs', 'config.cfg'))
     
-    # trainer_test(config)
+    trainer_test(config)
