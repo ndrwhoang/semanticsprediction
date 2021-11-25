@@ -11,7 +11,7 @@ class PretrainedModel(nn.Module):
         super(PretrainedModel, self).__init__()
         self.config = config['model']  
 
-        self.pretrained_encoder = RobertaModel.from_pretrained('roberta-base')
+        self.pretrained_encoder = RobertaModel.from_pretrained(self.config['roberta_version'])
         self.node_out = nn.Linear(int(self.config['d_model']), int(self.config['n_node']))
         self.edge_out = nn.Linear(int(self.config['d_model'])*2, int(self.config['n_edge']))
         self.activation = nn.Tanh()
