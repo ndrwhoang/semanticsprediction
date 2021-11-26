@@ -296,6 +296,8 @@ class Trainer:
             elif val_loss >= best_loss and frozen == True:
                 print(f'Unfreeze encoder at epoch {epoch}')
                 frozen = False
+                for g in self.optimizer.param_groups:
+                    g['lr'] = float(self.config['training']['unfreeze_lr'])
                 for param in self.model.pretrained_encoder.parameters():
                     param.requires_grad = True
             
