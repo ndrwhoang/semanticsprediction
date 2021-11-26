@@ -17,8 +17,9 @@ class PretrainedModel(nn.Module):
         self.activation = nn.Tanh()
         
         if self.config['freeze_pretrained'] == 'True':
+            print('Freezing encoder')
             for param in self.pretrained_encoder.parameters():
-                param.reuires_grad = False
+                param.requires_grad = False
 
         self.loss_fn = nn.MSELoss(reduction='none')
         

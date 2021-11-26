@@ -249,6 +249,11 @@ class Trainer:
             self.model.train()
             total_loss = 0
             
+            if epoch == 2:
+                print(f'Unfreeze encoder at epoch {epoch}')
+                for param in self.model.pretrained_encoder.parameters():
+                    param.requires_grad = True
+            
             for i, batch in pbar:
                 # if i == 5: break
                 batch = self._to_device(batch)
