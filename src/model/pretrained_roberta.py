@@ -15,6 +15,10 @@ class PretrainedModel(nn.Module):
         self.node_out = nn.Linear(int(self.config['d_model']), int(self.config['n_node']))
         self.edge_out = nn.Linear(int(self.config['d_model'])*2, int(self.config['n_edge']))
         self.activation = nn.Tanh()
+        
+        if self.config['freeze_pretrained'] == 'True':
+            for param in self.pretrained_encoder.parameters():
+                param.reuires_grad = False
 
         self.loss_fn = nn.MSELoss(reduction='none')
         
