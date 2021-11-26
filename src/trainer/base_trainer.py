@@ -205,7 +205,7 @@ class Trainer:
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
-                self.lr_scheduler.step()
+                # self.lr_scheduler.step()
                 
                 # log
                 total_train_step += 1
