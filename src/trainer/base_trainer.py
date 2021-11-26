@@ -176,11 +176,11 @@ class Trainer:
         # Save checkpoint everytime val_loss decreases
         # Note: tqdm(enumerate) cause memory leakage?
         total_train_step = 0
+        best_loss = self.run_validation()
         
         for epoch in range(int(self.config['training']['n_epoch'])):
             pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
             self.model.train()
-            best_loss = float('inf')
             
             for i, batch in pbar:
                 # if i == 5: break
