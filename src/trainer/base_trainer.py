@@ -259,6 +259,7 @@ class Trainer:
         return val_loss
     
     def _save_model(self, model, path):
+        print(f'Saving model checkpoint at {path}')
         save_path = os.path.join(*path.split('\\'))
         torch.save(model.state_dict(), open(save_path, 'wb'))
     
