@@ -171,6 +171,72 @@ class Trainer:
         
         return mask
     
+    def _extract_reverse_masks(self, labels, subspace):
+        mask = torch.zeros(labels.size())
+        if subspace == 'nodes':
+            mask[:, :, self.masked_node_idx] = 1.
+        elif subspace == 'edges':
+            mask[:, :, self.masked_edge_idx] = 1.
+        else:
+            print('error in choosing subspace to mask')
+        mask = mask.to(self.device)
+        
+        return mask
+    
+    def run_partial_train(self, run_name: str, finetune_thresh):
+        self.model.train()
+        pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
+        total_loss = 0
+        n_sample_trained = 0
+        best_loss = self.run_validation()
+        n_finetune_thresh = float(finetune_thresh) * len(self.train_dataloader)
+        bs = int(self.config['training']['bsz_train'])
+        
+        for i, batch in pbar:
+            batch = self._to_device(batch)
+            (_, node_ids, node_labels, edge_ids, edge_labels) = batch
+            
+            # earlt stopping at proportion of finetune subspace
+            n_sample_trained += bs
+            if n_sample_trained > n_finetune_thresh:
+                break
+            
+            # forward
+            node_output, edge_output = self.model(batch)
+            assert node_output.size() == node_labels.size()
+            assert edge_output.size() == edge_labels.size()
+            # print(node_output[0])
+            # print(node_labels[0])
+            
+            node_mask = self._extract_reverse_masks(node_labels, subspace='nodes')
+            edge_mask = self._extract_reverse_masks(edge_labels, subspace='edges')
+            
+            node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
+            edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
+            loss = node_loss + edge_loss
+            with torch.no_grad():
+                total_loss += loss
+            
+            # step
+            self.optimizer.zero_grad()
+            loss.backward()
+            self.optimizer.step()
+            # self.lr_scheduler.step()
+            
+            # log
+            wandb.log({
+                'train_total_loss': loss/bs,
+                'train_node_loss': node_loss/bs,
+                'train_edge_loss': edge_loss/bs,
+                'learning_rate': self.lr_scheduler.get_last_lr()
+                })
+            pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
+            
+        print(f'Training loss: {total_loss}')
+        val_loss = self.run_validation()
+        print(val_loss)
+            
+        
     def run_train(self, run_name: str):
         # Take run_name to be used in saved checkpoint
         # Save checkpoint everytime val_loss decreases
@@ -181,6 +247,7 @@ class Trainer:
         for epoch in range(int(self.config['training']['n_epoch'])):
             pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
             self.model.train()
+            total_loss = 0
             
             for i, batch in pbar:
                 # if i == 5: break
@@ -200,6 +267,8 @@ class Trainer:
                 node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
                 edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
                 loss = node_loss + edge_loss
+                with torch.no_grad():
+                    total_loss += loss
                 
                 # step
                 self.optimizer.zero_grad()
@@ -217,7 +286,8 @@ class Trainer:
                     'learning_rate': self.lr_scheduler.get_last_lr()
                     })
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
-
+            
+            print(f'Training loss: {total_loss}')
             val_loss = self.run_validation()
             if val_loss < best_loss:
                 best_loss = val_loss
@@ -226,7 +296,7 @@ class Trainer:
     def run_validation(self):
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))
         self.model.eval()
-        val_loss = 0
+        total_val_loss = 0
         
         for i, batch in pbar:
             batch = self._to_device(batch)
@@ -241,11 +311,11 @@ class Trainer:
                 
                 node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
                 edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-                loss = node_loss + edge_loss
+                val_loss = node_loss + edge_loss
                 
-                val_loss += loss
+                total_val_loss += val_loss
 
-            pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {loss}', refresh=True)
+            pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {val_loss}', refresh=True)
                 # bs = int(self.config['training']['bsz_val'])
                 # wandb.log({
                 #         'val_total_loss': loss/bs,
@@ -253,10 +323,10 @@ class Trainer:
                 #         'val_edge_loss': edge_loss/bs
                 #         })
             
-        print(f'Validation loss: {val_loss}')
-        wandb.log({'epoch_val_loss': val_loss})
+        print(f'Validation loss: {total_val_loss}')
+        wandb.log({'epoch_val_loss': total_val_loss})
         
-        return val_loss
+        return total_val_loss
     
     def _save_model(self, model, path):
         print(f'Saving model checkpoint at {path}')

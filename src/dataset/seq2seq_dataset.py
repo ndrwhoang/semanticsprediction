@@ -9,19 +9,21 @@ from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 from typing import List
 
-# node_prefix = 'What is the value of nodes <sep> '.split()
-# edge_prefix = 'What is the value of edge <sep> '.split()
+from src.utils import _get_mask, _extract_reverse_masks
 
 
 class UDSDataset(Dataset):    
-    def __init__(self, config, mode: str, tokenizer):
+    def __init__(self, config, mode: str, tokenizer, finetune=False):
         # Main dataset class, handles data processing 
         # Input: config from configparse, mode is the dataset partition (train, val, test), tokenizer is a Huggingface TokenizerFast object
         self.config = config
         self.tokenizer = tokenizer
+        self.finetune = finetune
         data_path = self.get_data_path(mode)
         self.samples = self.make_samples(data_path)
         self.input_ids, self.node_ids, self.node_labels, self.edge_ids, self.edge_labels = self.convert_sample_to_input(self.samples)
+        if self.finetune == True:
+            self.finetune_node_idx, self.finetune_edge_idx = _get_mask(self.config)
         
         self.n_sample = len(self.input_ids)
         print(f'Finished processing data, n_sample: {self.n_sample}')
@@ -71,7 +73,6 @@ class UDSDataset(Dataset):
                                       add_special_tokens=False, 
                                       return_offsets_mapping=True)
             input_id = tokenizer_out['input_ids']
-            input_ids.append(input_id)
             # Offset mapping only available from TokenizerFast class
             # Adjust the index mapping for offsets in subword tokenization
             offset_mapping = tokenizer_out['offset_mapping'] 
@@ -83,13 +84,13 @@ class UDSDataset(Dataset):
             for word in sample['word_labels'].keys():
                 alignment = self._find_alignment_for_token(eval(word), offset_mapping, original_indices)
                 node_id.append(alignment)
-            node_ids.append(node_id)
-            node_labels.append(torch.stack(node_label, dim=0))
+            
             
             # Add edge_id and edge_label
             placeholder_tensor = np.empty((int(self.config['model']['n_edge']),))
             placeholder_tensor[:] = np.nan
             edge_id = []
+            # often there iare no edge labels
             if len(sample['edge_labels']) == 0:
                 edge_label = [torch.tensor(placeholder_tensor, dtype=torch.float)]
                 edge_id.append(((0,), (0,)))
@@ -99,8 +100,28 @@ class UDSDataset(Dataset):
                     first_alignment = self._find_alignment_for_token(eval(word_pair)[0], offset_mapping, original_indices)
                     sec_alignment = self._find_alignment_for_token(eval(word_pair)[1], offset_mapping, original_indices)
                     edge_id.append((first_alignment, sec_alignment))
-            edge_ids.append(edge_id)
-            edge_labels.append(torch.stack(edge_label, dim=0))
+            
+            if self.finetune == False:  
+                # normal training 
+                input_ids.append(input_id)
+                node_ids.append(node_id)
+                node_labels.append(torch.stack(node_label, dim=0))
+                edge_ids.append(edge_id)
+                edge_labels.append(torch.stack(edge_label, dim=0))
+            else:
+                # finetuning, we only select samples with relevant subspaces present
+                node_label = torch.stack(node_label, dim=0)
+                edge_label = torch.stack(edge_label, dim=0)
+                finetune_node_mask = _extract_reverse_masks(self.finetune_node_idx, None, node_label, 'nodes')
+                finetune_edge_mask = _extract_reverse_masks(None, self.finetune_edge_idx, edge_labels, 'edges')
+                node_check = torch.sum((torch.nan_to_num(node_label)*finetune_node_mask)**2.0) > 0.0
+                edge_check = torch.sum((torch.nan_to_num(edge_label)*finetune_edge_mask)**2.0) > 0.0
+                if node_check or edge_check:
+                    input_ids.append(input_id)
+                    node_ids.append(node_id)
+                    node_labels.append(node_label)
+                    edge_ids.append(edge_id)
+                    edge_labels.append(edge_label)
             
             assert len(input_ids) == len(node_ids)
             assert len(input_ids) == len(node_labels)
@@ -157,6 +178,7 @@ def collate_fn(batch):
     edge_labels = pad_sequence(edge_labels, batch_first=True)
     
     return input_ids, node_ids, node_labels, edge_ids, edge_labels
+
 
 def dataloader_test(dataset):
     # Test function
