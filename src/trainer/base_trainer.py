@@ -243,16 +243,12 @@ class Trainer:
         # Note: tqdm(enumerate) cause memory leakage?
         total_train_step = 0
         best_loss = self.run_validation()
+        frozen = True
         
         for epoch in range(int(self.config['training']['n_epoch'])):
             pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
             self.model.train()
             total_loss = 0
-            
-            if epoch == 2:
-                print(f'Unfreeze encoder at epoch {epoch}')
-                for param in self.model.pretrained_encoder.parameters():
-                    param.requires_grad = True
             
             for i, batch in pbar:
                 # if i == 5: break
@@ -297,6 +293,11 @@ class Trainer:
             if val_loss < best_loss:
                 best_loss = val_loss
                 self._save_model(self.model, self.config['model_path']['checkpoint_dir'] + run_name + '.pt')
+            elif val_loss >= best_loss and frozen == True:
+                print(f'Unfreeze encoder at epoch {epoch}')
+                frozen = False
+                for param in self.model.pretrained_encoder.parameters():
+                    param.requires_grad = True
             
     def run_validation(self):
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))
