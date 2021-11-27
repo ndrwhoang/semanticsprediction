@@ -19,11 +19,11 @@ class UDSDataset(Dataset):
         self.config = config
         self.tokenizer = tokenizer
         self.finetune = finetune
+        if self.finetune == True:
+            self.finetune_node_idx, self.finetune_edge_idx = _get_mask(self.config)
         data_path = self.get_data_path(mode)
         self.samples = self.make_samples(data_path)
         self.input_ids, self.node_ids, self.node_labels, self.edge_ids, self.edge_labels = self.convert_sample_to_input(self.samples)
-        if self.finetune == True:
-            self.finetune_node_idx, self.finetune_edge_idx = _get_mask(self.config)
         
         self.n_sample = len(self.input_ids)
         print(f'Finished processing data, n_sample: {self.n_sample}')
@@ -112,16 +112,18 @@ class UDSDataset(Dataset):
                 # finetuning, we only select samples with relevant subspaces present
                 node_label = torch.stack(node_label, dim=0)
                 edge_label = torch.stack(edge_label, dim=0)
-                finetune_node_mask = _extract_reverse_masks(self.finetune_node_idx, None, node_label, 'nodes')
-                finetune_edge_mask = _extract_reverse_masks(None, self.finetune_edge_idx, edge_labels, 'edges')
+                node_label = node_label.unsqueeze(0)
+                edge_label = edge_label.unsqueeze(0)
+                finetune_node_mask = _extract_reverse_masks(self.finetune_node_idx, self.finetune_edge_idx, node_label, 'nodes')
+                finetune_edge_mask = _extract_reverse_masks(self.finetune_node_idx, self.finetune_edge_idx, edge_label, 'edges')
                 node_check = torch.sum((torch.nan_to_num(node_label)*finetune_node_mask)**2.0) > 0.0
                 edge_check = torch.sum((torch.nan_to_num(edge_label)*finetune_edge_mask)**2.0) > 0.0
                 if node_check or edge_check:
                     input_ids.append(input_id)
                     node_ids.append(node_id)
-                    node_labels.append(node_label)
+                    node_labels.append(node_label.squeeze(0))
                     edge_ids.append(edge_id)
-                    edge_labels.append(edge_label)
+                    edge_labels.append(edge_label.squeeze(0))
             
             assert len(input_ids) == len(node_ids)
             assert len(input_ids) == len(node_labels)
@@ -242,6 +244,50 @@ def index_offset_test_2():
     
     print(aligned)
 
+def misc_test():
+    example_str = 'The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb .'
+    tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
+    a = tokenizer(example_str, add_special_tokens=False, return_offsets_mapping=True)
+    print(tokenizer.convert_ids_to_tokens(a['input_ids']))
+    
+    
+    dataset = UDSDataset(config, 'train', tokenizer)
+    print(dataset.input_ids[0])
+    print(dataset.node_labels[0])
+    print(dataset.edge_labels[0])
+    mask = (dataset.node_labels[0] == dataset.node_labels[0]).int().float()
+    print(mask)
+    mask[:, [1, 3, 4, 5]] = 0
+    print(mask)
+    print(torch.nan_to_num(dataset.node_labels[0])*mask)
+    print(torch.nan_to_num(dataset.node_labels[0]))
+    
+    dataloader_test(dataset)
+    
+def finetune_sample_filtering_test(config):
+    tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
+    dataset = UDSDataset(config, 'train_subset', tokenizer, True)
+    dataloader = DataLoader(dataset, batch_size=1, collate_fn=collate_fn)
+    
+    for i, batch in enumerate(dataloader):
+        # if i == 3: break
+        print('===========')
+        print('*')
+        print('*')
+        input_ids, node_ids, node_labels, edge_ids, edge_labels = batch
+        
+        input_str = tokenizer.convert_ids_to_tokens(input_ids[0].tolist())
+        print(input_str)
+        print(node_ids[0])
+        a = node_labels[0].tolist()
+        label_indices = [17, 15, 16, 2, 0, 1]
+        for word in a:
+            print([word[idx] for idx in label_indices])
+        # print(edge_ids[0])
+        # print(edge_labels[0][0].tolist())
+        
+    
+
 if __name__ == '__main__':
     import os
     import configparser
@@ -252,22 +298,7 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(config_path)
     
-    # example_str = 'The sheikh in wheel - chair has been attacked with a F - 16 - launched bomb .'
-    # tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
-    # a = tokenizer(example_str, add_special_tokens=False, return_offsets_mapping=True)
-    # print(tokenizer.convert_ids_to_tokens(a['input_ids']))
+    finetune_sample_filtering_test(config)
     
     
-    # dataset = UDSDataset(config, 'train', tokenizer)
-    # print(dataset.input_ids[0])
-    # print(dataset.node_labels[0])
-    # print(dataset.edge_labels[0])
-    # mask = (dataset.node_labels[0] == dataset.node_labels[0]).int().float()
-    # print(mask)
-    # mask[:, [1, 3, 4, 5]] = 0
-    # print(mask)
-    # print(torch.nan_to_num(dataset.node_labels[0])*mask)
-    # print(torch.nan_to_num(dataset.node_labels[0]))
-    
-    # dataloader_test(dataset)
     

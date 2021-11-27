@@ -196,7 +196,7 @@ class Trainer:
             batch = self._to_device(batch)
             (_, node_ids, node_labels, edge_ids, edge_labels) = batch
             
-            # earlt stopping at proportion of finetune subspace
+            # early stopping at proportion of finetune subspace
             n_sample_trained += bs
             if n_sample_trained > n_finetune_thresh:
                 break
@@ -224,12 +224,12 @@ class Trainer:
             # self.lr_scheduler.step()
             
             # log
-            wandb.log({
-                'train_total_loss': loss/bs,
-                'train_node_loss': node_loss/bs,
-                'train_edge_loss': edge_loss/bs,
-                'learning_rate': self.lr_scheduler.get_last_lr()
-                })
+            # wandb.log({
+            #     'train_total_loss': loss/bs,
+            #     'train_node_loss': node_loss/bs,
+            #     'train_edge_loss': edge_loss/bs,
+            #     'learning_rate': self.lr_scheduler.get_last_lr()
+            #     })
             pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
             
         print(f'Training loss: {total_loss}')
@@ -332,7 +332,7 @@ class Trainer:
                 #         })
             
         print(f'Validation loss: {total_val_loss}')
-        wandb.log({'epoch_val_loss': total_val_loss})
+        # wandb.log({'epoch_val_loss': total_val_loss})
         
         return total_val_loss
     
@@ -355,6 +355,18 @@ def trainer_test(config):
     trainer = Trainer(config, model, dataset)
     trainer.run_train('testtesttest')
 
+def trainer_finetune_test(config):
+    from transformers import RobertaTokenizerFast
+    
+    from src.dataset.seq2seq_dataset import UDSDataset
+    from src.model.baseline import BaseModel
+    
+    tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
+    dataset = UDSDataset(config, 'train_subset', tokenizer)
+    model = BaseModel(config)
+    
+    trainer = Trainer(config, model, dataset)
+    trainer.run_partial_train('testtesttest', config['training']['finetune_thresh'])
 
 if __name__ == '__main__':
     import configparser
@@ -362,4 +374,5 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(os.path.join('configs', 'config.cfg'))
     
-    trainer_test(config)
+    # trainer_test(config)
+    trainer_finetune_test(config)

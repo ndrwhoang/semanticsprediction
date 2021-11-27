@@ -74,7 +74,7 @@ class Interface:
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, 'train', tokenizer)
         val_dataset = UDSDataset(self.config, 'val', tokenizer)
-        model = BaseModel(self.config)
+        model = PretrainedModel(self.config)
         trainer = Trainer(self.config, model, train_dataset, val_dataset)
         raise NotImplementedError
         trainer.run_lr_finder()
