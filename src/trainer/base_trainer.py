@@ -141,7 +141,7 @@ class Trainer:
     
     def _calculate_masked_loss(self, pred, true, mask):
         # note: nan * False = nan, not 0
-        loss = torch.sum((torch.nan_to_num(pred-true)*mask)**2.0) / (torch.sum(mask)+0.00001)
+        loss = torch.sum((torch.nan_to_num(pred-true)*mask)**2.0) / (torch.sum(torch.nan_to_num(pred-true)*mask!=0)+0.00001)
         return loss
     
     def ______process_labels(self, labels):
@@ -374,5 +374,5 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(os.path.join('configs', 'config.cfg'))
     
-    # trainer_test(config)
-    trainer_finetune_test(config)
+    trainer_test(config)
+    # trainer_finetune_test(config)
