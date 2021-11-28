@@ -223,13 +223,13 @@ class Trainer:
             self.optimizer.step()
             # self.lr_scheduler.step()
             
-            # log
-            # wandb.log({
-            #     'train_total_loss': loss/bs,
-            #     'train_node_loss': node_loss/bs,
-            #     'train_edge_loss': edge_loss/bs,
-            #     'learning_rate': self.lr_scheduler.get_last_lr()
-            #     })
+            log
+            wandb.log({
+                'train_total_loss': loss/bs,
+                'train_node_loss': node_loss/bs,
+                'train_edge_loss': edge_loss/bs,
+                'learning_rate': self.lr_scheduler.get_last_lr()
+                })
             pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
             
         print(f'Training loss: {total_loss}')
@@ -332,7 +332,7 @@ class Trainer:
                 #         })
             
         print(f'Validation loss: {total_val_loss}')
-        # wandb.log({'epoch_val_loss': total_val_loss})
+        wandb.log({'epoch_val_loss': total_val_loss})
         
         return total_val_loss
     
