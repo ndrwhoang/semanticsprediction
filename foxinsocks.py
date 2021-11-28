@@ -3,6 +3,7 @@ import json
 import torch
 import configparser
 from itertools import chain
+import numpy as np
 from torch.nn.utils.rnn import pad_sequence
 
 
@@ -119,6 +120,30 @@ def test_make_label_tensor():
                 if lv != 10.0 and mv != True:
                     print('bbbbbbbbbbbbbb')
 
+
+def masking_loss():
+    null = float('nan')
+    word_1 = torch.from_numpy(np.asarray([-1.3932, -1.3941, 1.4353, -1.3913, null, null, null, null, null, null, null, null, null, null, null, null, null, null]))
+    word_2 = torch.from_numpy(np.asarray([null, null, null, null, 0.0458, -0.0, -0.0, -0.3556, -0.0561, 0.1096, 0.236, 0.236, -0.0561, -0.1343, -0.0, -0.0204, -0.1343, -0.2656]))
+    true_ = torch.stack([word_1, word_2], dim=0).unsqueeze(0)
+    pred = torch.rand(1, 2, 18)
+    
+    mask = torch.ones(true_.size())
+    mask[:, :, [0, 17]] = 0.
+    mask_ = torch.isnan(true_) != True
+    mask_ = mask_*mask
+    
+    print(true_)
+    print(mask_)
+    print(mask_.sum())
+    print(mask)
+    
+    a = (torch.nan_to_num(true_)**2)*mask_ 
+    print(a)
+    
+    
+
 if __name__ == '__main__':
     print('hello world')
     # test_output_indexing_new()
+    masking_loss()

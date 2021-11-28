@@ -141,7 +141,10 @@ class Trainer:
     
     def _calculate_masked_loss(self, pred, true, mask):
         # note: nan * False = nan, not 0
-        loss = torch.sum((torch.nan_to_num(pred-true)*mask)**2.0) / (torch.sum(torch.nan_to_num(pred-true)*mask!=0)+0.00001)
+        # mask is subspace mask, mask_ is target value nan mask ('normal' mask)
+        mask_ = torch.isnan(true) != True
+        mask_ = mask_*mask
+        loss = torch.sum((torch.nan_to_num(pred-true)**2)*mask_) / (torch.sum(mask_)+0.000001)
         return loss
     
     def ______process_labels(self, labels):
@@ -281,9 +284,9 @@ class Trainer:
                 total_train_step += 1
                 bs = int(self.config['training']['bsz_train'])
                 wandb.log({
-                    'train_total_loss': loss/bs,
-                    'train_node_loss': node_loss/bs,
-                    'train_edge_loss': edge_loss/bs,
+                    'train_total_loss': loss,
+                    'train_node_loss': node_loss,
+                    'train_edge_loss': edge_loss,
                     'learning_rate': self.lr_scheduler.get_last_lr()
                     })
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
