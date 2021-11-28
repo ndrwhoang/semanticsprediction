@@ -12,12 +12,13 @@ from src.trainer.base_trainer import Trainer
 class Interface:
     def __init__(self, config):
         self.config = config
+        self.config_dict = {s:dict(config.items(s)) for s in config.sections()}
     
     def run_trial_training(self, run_name='subset_test_run', notes=None):
         wandb.init(project='uds', 
                    name=run_name, 
                    notes=notes, 
-                   config=self.config
+                   config=self.config_dict
                    )
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, 'train_subset', tokenizer)
@@ -29,7 +30,7 @@ class Interface:
         wandb.init(project='uds', 
                    name=run_name, 
                    notes=notes, 
-                   config=self.config
+                   config=self.config_dict
                    )
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, 'train', tokenizer)
@@ -42,7 +43,7 @@ class Interface:
         wandb.init(project='uds', 
                    name=run_name, 
                    notes=notes, 
-                   config=self.config
+                   config=self.config_dict
                    )
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, 'train', tokenizer)
@@ -55,7 +56,7 @@ class Interface:
         wandb.init(project='uds', 
                    name=run_name, 
                    notes=notes, 
-                   config=self.config
+                   config=self.config_dict
                    )
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, 'train', tokenizer)
@@ -69,7 +70,7 @@ class Interface:
         wandb.init(project='uds', 
                    name=run_name, 
                    notes=notes, 
-                   config=self.config
+                   config=self.config_dict
                    )
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, 'train', tokenizer)

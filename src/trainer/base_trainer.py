@@ -287,7 +287,7 @@ class Trainer:
                     'train_total_loss': loss,
                     'train_node_loss': node_loss,
                     'train_edge_loss': edge_loss,
-                    'learning_rate': self.lr_scheduler.get_last_lr()
+                    'learning_rate': self.optimizer.param_groups[0]['lr']
                     })
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
             
@@ -328,11 +328,11 @@ class Trainer:
 
             pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {val_loss}', refresh=True)
                 # bs = int(self.config['training']['bsz_val'])
-                # wandb.log({
-                #         'val_total_loss': loss/bs,
-                #         'val_node_loss': node_loss/bs,
-                #         'val_edge_loss': edge_loss/bs
-                #         })
+            wandb.log({
+                    'val_total_loss': val_loss,
+                    'val_node_loss': node_loss,
+                    'val_edge_loss': edge_loss
+                    })
             
         print(f'Validation loss: {total_val_loss}')
         wandb.log({'epoch_val_loss': total_val_loss})
