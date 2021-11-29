@@ -129,7 +129,7 @@ def masking_loss():
     pred = torch.rand(1, 2, 18)
     
     mask = torch.ones(true_.size())
-    mask[:, :, [0, 17]] = 0.
+    mask[:, :, []] = 0.
     mask_ = torch.isnan(true_) != True
     mask_ = mask_*mask
     
