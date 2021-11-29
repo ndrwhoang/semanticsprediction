@@ -16,9 +16,8 @@ from torch.optim.lr_scheduler import OneCycleLR
 from src.dataset.seq2seq_dataset import collate_fn
 
 
-class Trainer:
+class Finetuner:
     def __init__(self, config, model, train_dataset, val_dataset=None, test_dataset=None, checkpoint=None):
-        # Base class for training
         self.config = config
         self.model = model
         self.train_dataset = train_dataset
@@ -71,7 +70,7 @@ class Trainer:
                 'weight_decay': 0.0
             }   
         ]
-        optimizer = AdamW(optimized_params, lr=float(config['training']['lr']))
+        optimizer = AdamW(optimized_params, lr=float(config['training']['lr_finetune']))
         lr_scheduler = OneCycleLR(
             optimizer, 
             max_lr=float(self.config['training']['max_lr']), 
@@ -82,7 +81,7 @@ class Trainer:
     
     def _get_dataloader(self, config):
         train_dataloader = DataLoader(self.train_dataset,
-                                      batch_size=int(config['training']['bsz_train']),
+                                      batch_size=1,
                                       collate_fn=collate_fn,
                                       shuffle=False,
                                       drop_last=False)
@@ -93,20 +92,6 @@ class Trainer:
                                     drop_last=False)
         
         return train_dataloader, val_dataloader
-    
-    def _load_label_dict(self, config):
-        # Get the semantic subspace id to produce mask
-        node_dict_path = os.path.join(*config['data_path']['node_dict'].split('\\'))
-        edge_dict_path = os.path.join(*config['data_path']['edge_dict'].split('\\'))
-        
-        with open(node_dict_path, 'r') as f:
-            node_label2id = json.load(f)
-        f.close()
-        with open(edge_dict_path, 'r') as f:
-            edge_label2id = json.load(f)
-        f.close()
-        
-        return node_label2id, edge_label2id
         
     def _get_mask(self, config):
         # Produce mask to exclude semantic subspaces, 
@@ -141,22 +126,12 @@ class Trainer:
         # note: nan * False = nan, not 0
         # mask is subspace mask, mask_ is target value nan mask ('normal' mask)
         mask_ = torch.isnan(true) != True
+        # print(mask_)
+        # print(mask)
         mask_ = mask_*mask
+        # print(mask_)
         loss = torch.sum((torch.nan_to_num(pred-true)**2)*mask_) / (torch.sum(mask_)+0.000001)
         return loss
-
-    def _extract_masks(self, labels, subspace):
-        # mask = labels != float('nan')
-        mask = torch.ones(labels.size())
-        if subspace == 'nodes':
-            mask[:, :, self.masked_node_idx] = 0.
-        elif subspace == 'edges':
-            mask[:, :, self.masked_edge_idx] = 0.
-        else:
-            print('error in choosing subspace to mask')
-        mask = mask.to(self.device)
-        
-        return mask
     
     def _extract_reverse_masks(self, labels, subspace):
         mask = torch.zeros(labels.size())
@@ -171,85 +146,37 @@ class Trainer:
         return mask
     
     def run_partial_train(self, run_name: str, finetune_thresh):
-        self.model.train()
-        pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
-        total_loss = 0
         n_sample_trained = 0
-        best_loss = self.run_validation()
-        n_finetune_thresh = float(finetune_thresh) * len(self.train_dataloader)
-        bs = int(self.config['training']['bsz_train'])
+        self.run_validation()
         
-        for i, batch in pbar:
-            batch = self._to_device(batch)
-            (_, node_ids, node_labels, edge_ids, edge_labels) = batch
-            
-            # early stopping at proportion of finetune subspace
-            n_sample_trained += bs
-            if n_sample_trained > n_finetune_thresh:
-                break
-            
-            # forward
-            node_output, edge_output = self.model(batch)
-            assert node_output.size() == node_labels.size()
-            assert edge_output.size() == edge_labels.size()
-            # print(node_output[0])
-            # print(node_labels[0])
-            
-            node_mask = self._extract_reverse_masks(node_labels, subspace='nodes')
-            edge_mask = self._extract_reverse_masks(edge_labels, subspace='edges')
-            
-            node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
-            edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-            loss = node_loss + edge_loss
-            with torch.no_grad():
-                total_loss += loss
-            
-            # step
-            self.optimizer.zero_grad()
-            loss.backward()
-            self.optimizer.step()
-            # self.lr_scheduler.step()
-            
-            # log
-            wandb.log({
-                'train_total_loss': loss/bs,
-                'train_node_loss': node_loss/bs,
-                'train_edge_loss': edge_loss/bs,
-                'learning_rate': self.lr_scheduler.get_last_lr()
-                })
-            pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
-            
-        print(f'Training loss: {total_loss}')
-        val_loss = self.run_validation()
-        print(val_loss)
-            
-    def run_train(self, run_name: str):
-        # Take run_name to be used in saved checkpoint
-        # Save checkpoint everytime val_loss decreases
-        # Note: tqdm(enumerate) cause memory leakage?
-        total_train_step = 0
-        best_loss = self.run_validation()
-        frozen = True
+        if finetune_thresh < 1:
+            n_finetune_thresh = float(finetune_thresh) * len(self.train_dataloader)
+        else:
+            n_finetune_thresh = finetune_thresh
         
-        for epoch in range(int(self.config['training']['n_epoch'])):
-            pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
+        for epoch in range(1):
             self.model.train()
+            pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
             total_loss = 0
-            
             for i, batch in pbar:
-                # if i == 5: break
                 batch = self._to_device(batch)
                 (_, _, node_labels, _, edge_labels) = batch
+                
+                # early stopping at proportion of finetune subspace
+                n_sample_trained += 1
+                if n_sample_trained > n_finetune_thresh:
+                    break
                 
                 # forward
                 node_output, edge_output = self.model(batch)
                 assert node_output.size() == node_labels.size()
                 assert edge_output.size() == edge_labels.size()
-                # print(node_output[0])
-                # print(node_labels[0])
                 
-                node_mask = self._extract_masks(node_labels, subspace='nodes')
-                edge_mask = self._extract_masks(edge_labels, subspace='edges')
+                node_mask = self._extract_reverse_masks(node_labels, subspace='nodes')
+                edge_mask = self._extract_reverse_masks(edge_labels, subspace='edges')
+                
+                # print(node_mask)
+                # print(edge_mask)
                 
                 node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
                 edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
@@ -264,29 +191,17 @@ class Trainer:
                 # self.lr_scheduler.step()
                 
                 # log
-                total_train_step += 1
-                bs = int(self.config['training']['bsz_train'])
                 wandb.log({
                     'train_total_loss': loss,
                     'train_node_loss': node_loss,
                     'train_edge_loss': edge_loss,
                     'learning_rate': float(self.optimizer.param_groups[0]['lr'])
                     })
-                pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
+                pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
             
             print(f'Training loss: {total_loss}')
-            val_loss = self.run_validation()
-            if val_loss < best_loss:
-                best_loss = val_loss
-                self._save_model(self.model, self.config['model_path']['checkpoint_dir'] + run_name + '.pt')
-            elif val_loss >= best_loss and frozen == True:
-                print(f'Unfreeze encoder at epoch {epoch}')
-                frozen = False
-                for g in self.optimizer.param_groups:
-                    g['lr'] = float(self.config['training']['unfreeze_lr'])
-                for param in self.model.pretrained_encoder.parameters():
-                    param.requires_grad = True
-            
+            self.run_validation()
+               
     def run_validation(self):
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))
         self.model.eval()
@@ -294,14 +209,14 @@ class Trainer:
         
         for i, batch in pbar:
             batch = self._to_device(batch)
-            (_, node_ids, node_labels, edge_ids, edge_labels) = batch
+            (_, _, node_labels, _, edge_labels) = batch
             
             # forward
             with torch.no_grad():                
                 node_output, edge_output = self.model(batch)
                 
-                node_mask = self._extract_masks(node_labels, subspace='nodes')
-                edge_mask = self._extract_masks(edge_labels, subspace='edges')
+                node_mask = self._extract_reverse_masks(node_labels, subspace='nodes')
+                edge_mask = self._extract_reverse_masks(edge_labels, subspace='edges')
                 
                 node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
                 edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
@@ -322,24 +237,18 @@ class Trainer:
         
         return total_val_loss
     
-    def _save_model(self, model, path):
-        print(f'Saving model checkpoint at {path}')
-        save_path = os.path.join(*path.split('\\'))
-        torch.save(model.state_dict(), open(save_path, 'wb'))
-    
-def trainer_test(config):
+def trainer_finetune_test(config):
     from transformers import RobertaTokenizerFast
     
     from src.dataset.seq2seq_dataset import UDSDataset
     from src.model.baseline import BaseModel
-    # from src.model.pretrained_roberta import PretrainedModel
     
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
     dataset = UDSDataset(config, 'train_subset', tokenizer)
     model = BaseModel(config)
     
-    trainer = Trainer(config, model, dataset)
-    trainer.run_train('testtesttest')
+    trainer = Finetuner(config, model, dataset)
+    trainer.run_partial_train('testtesttest', 5)
 
 if __name__ == '__main__':
     import configparser
@@ -347,5 +256,4 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(os.path.join('configs', 'config.cfg'))
     
-    trainer_test(config)
-    # trainer_finetune_test(config)
+    trainer_finetune_test(config)
