@@ -151,7 +151,7 @@ class Finetuner:
         self.run_validation()
         
         if finetune_thresh < 1:
-            n_finetune_thresh = float(finetune_thresh) * len(self.train_dataset.n_sample)
+            n_finetune_thresh = float(finetune_thresh) * self.train_dataset.n_sample
         else:
             n_finetune_thresh = finetune_thresh
             
