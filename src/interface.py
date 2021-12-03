@@ -6,6 +6,7 @@ from src.dataset.seq2seq_dataset import UDSDataset
 from src.model.baseline import BaseModel
 from src.model.pretrained_roberta import PretrainedModel
 from src.trainer.base_trainer import Trainer
+from src.trainer.base_finetuner import Finetuner
 
 
 
@@ -53,7 +54,7 @@ class Interface:
         trainer.run_train(run_name)
     
     def run_pretrained_finetune(self, run_name, notes=None):
-        wandb.init(project='uds', 
+        wandb.init(project='uds_finetune', 
                    name=run_name, 
                    notes=notes, 
                    config=self.config_dict
@@ -62,8 +63,8 @@ class Interface:
         train_dataset = UDSDataset(self.config, 'train', tokenizer)
         val_dataset = UDSDataset(self.config, 'val', tokenizer)
         model = PretrainedModel(self.config)
-        trainer = Trainer(self.config, model, train_dataset, val_dataset=val_dataset, checkpoint=self.config['model_path']['baseline'])
-        trainer.run_partial_train(run_name, float(self.config['training']['finetune_thresh']))
+        finetuner = Finetuner(self.config, model, train_dataset, val_dataset=val_dataset, checkpoint=self.config['model_path']['encoder_base_ckpt'])
+        # finetuner.run_partial_train(run_name, float(self.config['training']['finetune_thresh']))
     
     def run_lr_finder(self, run_name='lr_finder', notes=None):
         # TODO: lr_finder

@@ -38,6 +38,7 @@ class Finetuner:
         self.model.to(self.device)
         if checkpoint is not None:
             model.load_state_dict(torch.load(os.path.join(*checkpoint.split('\\'))))
+            print(f'Successfully loaded checkpoint from {checkpoint}')
         self.train_dataloader, self.val_dataloader = self._get_dataloader(self.config)
         self.optimizer, self.lr_scheduler = self._get_optimizer(self.config)
         # self.node_label2id, self.edge_label2id = self._load_label_dict(self.config)
@@ -81,7 +82,7 @@ class Finetuner:
     
     def _get_dataloader(self, config):
         train_dataloader = DataLoader(self.train_dataset,
-                                      batch_size=1,
+                                      batch_size=int(config['training']['bsz_finetune']),
                                       collate_fn=collate_fn,
                                       shuffle=False,
                                       drop_last=False)
@@ -163,7 +164,7 @@ class Finetuner:
                 (_, _, node_labels, _, edge_labels) = batch
                 
                 # early stopping at proportion of finetune subspace
-                n_sample_trained += 1
+                n_sample_trained += int(self.config['training']['bsz_finetune'])
                 if n_sample_trained > n_finetune_thresh:
                     break
                 
