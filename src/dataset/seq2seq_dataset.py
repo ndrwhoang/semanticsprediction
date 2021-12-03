@@ -29,16 +29,19 @@ class UDSDataset(Dataset):
         print(f'Finished processing data, n_sample: {self.n_sample}')
        
     def get_data_path(self, mode):
-        if mode == 'train':
-            data_path = self.config['data_path']['train_raw']
-        elif mode == 'val':
-            data_path = self.config['data_path']['val_raw']
-        elif mode == 'test':
-            data_path = self.config['data_path']['test_raw']
-        elif mode == 'train_subset':
-            data_path = self.config['data_path']['train_subset_raw']
+        mode_to_path = {
+            'train': self.config['data_path']['train_raw'],
+            'val': self.config['data_path']['val_raw'],
+            'test': self.config['data_path']['test_raw'],
+            'train_subset': self.config['data_path']['train_subset_raw'],
+            'finetune_edge': self.config['data_path']['train_protoroles'],
+            'finetune_entity_type': self.config['data_path']['train_entity_type'],
+            'finetune_factuality': self.config['data_path']['train_factuality'],
+            'finetune_genericity': self.config['data_path']['train_genericity'],
+            'finetune_time': self.config['data_path']['train_time']
+        }
         
-        assert data_path is not None
+        data_path = mode_to_path[mode]
         
         return data_path
     
