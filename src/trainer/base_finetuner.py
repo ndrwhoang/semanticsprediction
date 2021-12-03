@@ -151,9 +151,11 @@ class Finetuner:
         self.run_validation()
         
         if finetune_thresh < 1:
-            n_finetune_thresh = float(finetune_thresh) * len(self.train_dataloader)
+            n_finetune_thresh = float(finetune_thresh) * len(self.train_dataset.n_sample)
         else:
             n_finetune_thresh = finetune_thresh
+            
+        print(f'Commences finetuning, stopping after {n_finetune_thresh}')
         
         for epoch in range(1):
             self.model.train()

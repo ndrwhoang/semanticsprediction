@@ -64,7 +64,7 @@ class Interface:
         val_dataset = UDSDataset(self.config, 'val', tokenizer)
         model = PretrainedModel(self.config)
         finetuner = Finetuner(self.config, model, train_dataset, val_dataset=val_dataset, checkpoint=self.config['model_path']['encoder_base_ckpt'])
-        # finetuner.run_partial_train(run_name, float(self.config['training']['finetune_thresh']))
+        finetuner.run_partial_train(run_name, float(self.config['training']['finetune_thresh']))
     
     def run_lr_finder(self, run_name='lr_finder', notes=None):
         # TODO: lr_finder
