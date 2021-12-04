@@ -54,15 +54,16 @@ class Interface:
         trainer.run_train(run_name)
     
     def run_pretrained_finetune(self, run_name, data_subspace, notes=None):
-        wandb.init(project='uds_finetune', 
-                   name=run_name, 
-                   notes=notes, 
-                   config=self.config_dict
-                   )
+        # wandb.init(project='uds_finetune', 
+        #            name=run_name, 
+        #            notes=notes, 
+        #            config=self.config_dict
+        #            )
         tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
         train_dataset = UDSDataset(self.config, data_subspace, tokenizer)
         val_dataset = UDSDataset(self.config, 'val', tokenizer)
         model = PretrainedModel(self.config)
+        model.reset_prediciton_heads()
         finetuner = Finetuner(self.config, model, train_dataset, val_dataset=val_dataset, checkpoint=self.config['model_path']['encoder_base_ckpt'])
         finetuner.run_partial_train(run_name, float(self.config['training']['finetune_thresh']))
     

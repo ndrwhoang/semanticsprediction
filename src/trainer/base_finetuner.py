@@ -167,6 +167,7 @@ class Finetuner:
                 
                 # early stopping at proportion of finetune subspace
                 n_sample_trained += int(self.config['training']['bsz_finetune'])
+                
                 if n_sample_trained > n_finetune_thresh:
                     break
                 
@@ -194,12 +195,12 @@ class Finetuner:
                 # self.lr_scheduler.step()
                 
                 # log
-                wandb.log({
-                    'train_total_loss': loss,
-                    'train_node_loss': node_loss,
-                    'train_edge_loss': edge_loss,
-                    'learning_rate': float(self.optimizer.param_groups[0]['lr'])
-                    })
+                # wandb.log({
+                #     'train_total_loss': loss,
+                #     'train_node_loss': node_loss,
+                #     'train_edge_loss': edge_loss,
+                #     'learning_rate': float(self.optimizer.param_groups[0]['lr'])
+                #     })
                 pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
             
             print(f'Training loss: {total_loss}')
@@ -229,14 +230,14 @@ class Finetuner:
 
             pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {val_loss}', refresh=True)
                 # bs = int(self.config['training']['bsz_val'])
-            wandb.log({
-                    'val_total_loss': val_loss,
-                    'val_node_loss': node_loss,
-                    'val_edge_loss': edge_loss
-                    })
+            # wandb.log({
+            #         'val_total_loss': val_loss,
+            #         'val_node_loss': node_loss,
+            #         'val_edge_loss': edge_loss
+            #         })
             
         print(f'Validation loss: {total_val_loss}')
-        wandb.log({'epoch_val_loss': total_val_loss})
+        # wandb.log({'epoch_val_loss': total_val_loss})
         
         return total_val_loss
     

@@ -22,6 +22,10 @@ class PretrainedModel(nn.Module):
                 param.requires_grad = False
 
         self.loss_fn = nn.MSELoss(reduction='none')
+    
+    def reset_prediciton_heads(self):
+        self.node_out.reset_parameters()
+        self.edge_out.reset_parameters()
         
     def forward(self, batch):
         (input_ids, node_ids, _, edge_ids, _) = batch
@@ -78,22 +82,23 @@ def model_output_test(config):
                             drop_last=True,
                             collate_fn=collate_fn)
     model = PretrainedModel(config)
+    model.reset_prediciton_heads()
     
-    for i, sample in enumerate(dataloader):
-        if i == 3: break  
-        print('==========')
-        node_logits, edge_logits = model(sample)
-        print(node_logits.size())  
-        print(edge_logits.size())
+    # for i, sample in enumerate(dataloader):
+    #     if i == 3: break  
+    #     print('==========')
+    #     node_logits, edge_logits = model(sample)
+    #     print(node_logits.size())  
+    #     print(edge_logits.size())
 
 if __name__ == '__main__':
     import os
     import configparser
     
-    # config = configparser.ConfigParser()
-    # config.read(os.path.join('configs', 'config.cfg'))
+    config = configparser.ConfigParser()
+    config.read(os.path.join('configs', 'config.cfg'))
     
-    # model_output_test(config)
+    model_output_test(config)
     
         
         
