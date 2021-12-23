@@ -15,9 +15,11 @@ class PretrainedModel(nn.Module):
         self.node_out = nn.Linear(int(self.config['d_model']), int(self.config['n_node']))
         self.edge_out = nn.Linear(int(self.config['d_model'])*2, int(self.config['n_edge']))
         self.activation = nn.Tanh()
+        self.frozen = False
         
         if self.config['freeze_pretrained'] == 'True':
             print('Freezing encoder')
+            self.frozen = True
             for param in self.pretrained_encoder.parameters():
                 param.requires_grad = False
 
@@ -27,8 +29,15 @@ class PretrainedModel(nn.Module):
         self.node_out.reset_parameters()
         self.edge_out.reset_parameters()
         
-    def forward(self, batch):
-        (input_ids, node_ids, _, edge_ids, _) = batch
+    def forward(self, batch, return_type=None):
+        if return_type not in ['output', 'loss']:
+            raise ValueError('Specify `output` or `loss` return_type')
+        # (input_ids, node_ids, _, edge_ids, _) = batch
+        input_ids = batch['input_ids']
+        node_ids = batch['node_ids']
+        node_labels = batch['node_labels']
+        edge_ids = batch['edge_ids']
+        edge_labels = batch['edge_labels']
         
         out, _ = self.pretrained_encoder(input_ids, return_dict=False)
         
@@ -41,7 +50,20 @@ class PretrainedModel(nn.Module):
         node_output = self.activation(node_logits)*5
         edge_output = self.activation(edge_logits)*5
         
-        return node_output, edge_output
+        # assert torch.isnan(node_out).any() is not True
+        # assert torch.isnan(edge_out).any() is not True
+        # assert torch.isnan(node_logits).any() is not True
+        # assert torch.isnan(edge_logits).any() is not True
+        # assert torch.isnan(node_output).any() is not True
+        # assert torch.isnan(edge_output).any() is not True
+        
+        if return_type == 'output':
+            return node_output, edge_output
+        elif return_type == 'loss': 
+            node_loss = self.loss_fn(node_output, node_labels)
+            edge_loss = self.loss_fn(edge_output, edge_labels)
+            
+            return node_loss, edge_loss  
     
     def _index_node_logits(self, raw_logits, node_ids):
         # Indexing relevant words

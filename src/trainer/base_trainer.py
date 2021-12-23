@@ -12,8 +12,9 @@ from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import OneCycleLR
+from torch.cuda.amp import GradScaler
 
-from src.dataset.seq2seq_dataset import collate_fn
+# from src.dataset.seq2seq_dataset import collate_fn
 
 
 class Trainer:
@@ -35,16 +36,19 @@ class Trainer:
                                    torch.cuda.is_available and 
                                    self.config['general'].getboolean('use_gpu') else
                                    'cpu')
-        print(f'----------- device : {self.device}')
+        logger.info(f'----------- device : {self.device}')
         self.model.to(self.device)
         if checkpoint is not None:
             model.load_state_dict(torch.load(os.path.join(*checkpoint.split('\\'))))
         self.train_dataloader, self.val_dataloader = self._get_dataloader(self.config)
         self.optimizer, self.lr_scheduler = self._get_optimizer(self.config)
+        
+        self.use_amp = self.config['training'].getboolean('mixed_precision')
+        if self.use_amp:
+            self.grad_scaler = GradScaler()
+            
         # self.node_label2id, self.edge_label2id = self._load_label_dict(self.config)
-        self.masked_node_idx, self.masked_edge_idx = self._get_mask(self.config)
-        assert len(set(self.masked_edge_idx)) == len(self.masked_edge_idx)
-        assert len(set(self.masked_node_idx)) == len(self.masked_node_idx)
+        # self.masked_node_idx, self.masked_edge_idx = self._get_mask(self.config)
     
     def set_seed(self):
         self.seed = int(self.config['general']['seed'])
@@ -83,247 +87,196 @@ class Trainer:
     def _get_dataloader(self, config):
         train_dataloader = DataLoader(self.train_dataset,
                                       batch_size=int(config['training']['bsz_train']),
-                                      collate_fn=collate_fn,
+                                      collate_fn=self.train_dataset.collate_fn,
                                       shuffle=False,
-                                      drop_last=False)
+                                      drop_last=False,
+                                      num_workers=int(config['general']['num_worker']),
+                                      pin_memory=True)
         val_dataloader = DataLoader(self.val_dataset,
                                     batch_size=int(config['training']['bsz_val']),
-                                    collate_fn=collate_fn,
+                                    collate_fn=self.val_dataset.collate_fn,
                                     shuffle=False,
-                                    drop_last=False)
+                                    drop_last=False,
+                                    num_workers=int(config['general']['num_worker']),
+                                    pin_memory=True)
         
         return train_dataloader, val_dataloader
     
-    def _load_label_dict(self, config):
-        # Get the semantic subspace id to produce mask
-        node_dict_path = os.path.join(*config['data_path']['node_dict'].split('\\'))
-        edge_dict_path = os.path.join(*config['data_path']['edge_dict'].split('\\'))
-        
-        with open(node_dict_path, 'r') as f:
-            node_label2id = json.load(f)
-        f.close()
-        with open(edge_dict_path, 'r') as f:
-            edge_label2id = json.load(f)
-        f.close()
-        
-        return node_label2id, edge_label2id
-        
-    def _get_mask(self, config):
-        # Produce mask to exclude semantic subspaces, 
-        # change in config 'training' section
-        masked_node_subspace = config['training']['node_subspace'].split(' ')
-        masked_edge_subspace = config['training']['edge_subspace'].split(' ')
-        if masked_node_subspace == ['none'] and masked_edge_subspace == ['none']:
-            return [], []
-        subspace_dict_path = os.path.join(*config['data_path']['subspace_dict'].split('\\'))
-        with open(subspace_dict_path, 'r') as f:
-            subspace2id = json.load(f)
-        f.close()
-        masked_node_idx = [subspace2id[subspace] for subspace in masked_node_subspace]
-        masked_edge_idx = [subspace2id[subspace] for subspace in masked_edge_subspace]
-        masked_node_idx = list(chain.from_iterable(masked_node_idx))
-        masked_edge_idx = list(chain.from_iterable(masked_edge_idx))
-        
-        return masked_node_idx, masked_edge_idx   
-    
     def _to_device(self, batch):
-        out = []
-        for item in batch:
+        for k, v in batch.items():
             try:
-                out.append(item.to(self.device))
+                batch[k] = v.to(self.device)
             except:
-                out.append(item)
-        out = tuple(out)
+                batch[k] = v       
         
-        return out
+        return batch
     
-    def _calculate_masked_loss(self, pred, true, mask):
+    def _calculate_masked_loss(self, pred, true):
         # note: nan * False = nan, not 0
         # mask is subspace mask, mask_ is target value nan mask ('normal' mask)
         mask_ = torch.isnan(true) != True
-        mask_ = mask_*mask
         loss = torch.sum((torch.nan_to_num(pred-true)**2)*mask_) / (torch.sum(mask_)+0.000001)
         return loss
 
-    def _extract_masks(self, labels, subspace):
-        # mask = labels != float('nan')
-        mask = torch.ones(labels.size())
-        if subspace == 'nodes':
-            mask[:, :, self.masked_node_idx] = 0.
-        elif subspace == 'edges':
-            mask[:, :, self.masked_edge_idx] = 0.
-        else:
-            print('error in choosing subspace to mask')
-        mask = mask.to(self.device)
-        
-        return mask
-    
-    def _extract_reverse_masks(self, labels, subspace):
-        mask = torch.zeros(labels.size())
-        if subspace == 'nodes':
-            mask[:, :, self.masked_node_idx] = 1.
-        elif subspace == 'edges':
-            mask[:, :, self.masked_edge_idx] = 1.
-        else:
-            print('error in choosing subspace to mask')
-        mask = mask.to(self.device)
-        
-        return mask
-    
     def run_partial_train(self, run_name: str, finetune_thresh):
         self.model.train()
         pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
-        total_loss = 0
+        epoch_loss = 0
+        batch_loss = 0
+        self.model.zero_grad(set_to_none=True)
+        
         n_sample_trained = 0
-        best_loss = self.run_validation()
         n_finetune_thresh = float(finetune_thresh) * len(self.train_dataloader)
         bs = int(self.config['training']['bsz_train'])
         
         for i, batch in pbar:
-            batch = self._to_device(batch)
-            (_, node_ids, node_labels, edge_ids, edge_labels) = batch
-            
             # early stopping at proportion of finetune subspace
             n_sample_trained += bs
             if n_sample_trained > n_finetune_thresh:
                 break
             
-            # forward
-            node_output, edge_output = self.model(batch)
-            assert node_output.size() == node_labels.size()
-            assert edge_output.size() == edge_labels.size()
-            # print(node_output[0])
-            # print(node_labels[0])
-            
-            node_mask = self._extract_reverse_masks(node_labels, subspace='nodes')
-            edge_mask = self._extract_reverse_masks(edge_labels, subspace='edges')
-            
-            node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
-            edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-            loss = node_loss + edge_loss
-            with torch.no_grad():
-                total_loss += loss
-            
+            batch = self._to_device(batch)
+            batch_loss = self._training_step(batch)  
+                
             # step
-            self.optimizer.zero_grad()
-            loss.backward()
             self.optimizer.step()
-            # self.lr_scheduler.step()
+            self.model.zero_grad(set_to_none=True)
             
             # log
-            wandb.log({
-                'train_total_loss': loss/bs,
-                'train_node_loss': node_loss/bs,
-                'train_edge_loss': edge_loss/bs,
-                'learning_rate': self.lr_scheduler.get_last_lr()
-                })
-            pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
+            pbar.set_description(f'(Training) Epoch: 0 - Steps: {i}/{len(self.train_dataloader)} - Loss: {batch_loss}', refresh=True)
+            epoch_loss += batch_loss
+            batch_loss = 0
             
-        print(f'Training loss: {total_loss}')
+        logger.info(f'Training loss: {epoch_loss}')
         val_loss = self.run_validation()
-        print(val_loss)
-            
+        logger.info(val_loss)
+      
     def run_train(self, run_name: str):
-        # Take run_name to be used in saved checkpoint
-        # Save checkpoint everytime val_loss decreases
-        # Note: tqdm(enumerate) cause memory leakage?
-        total_train_step = 0
-        best_loss = self.run_validation()
+        # best_loss = self.run_validation()
         frozen = True
+        best_score = float('inf')
         
         for epoch in range(int(self.config['training']['n_epoch'])):
             pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
+            epoch_loss = 0
+            batch_loss = 0
             self.model.train()
-            total_loss = 0
+            self.model.zero_grad(set_to_none=True)
             
             for i, batch in pbar:
-                # if i == 5: break
+                # if i == 10: break
                 batch = self._to_device(batch)
-                (_, _, node_labels, _, edge_labels) = batch
-                
-                # forward
-                node_output, edge_output = self.model(batch)
-                assert node_output.size() == node_labels.size()
-                assert edge_output.size() == edge_labels.size()
-                # print(node_output[0])
-                # print(node_labels[0])
-                
-                node_mask = self._extract_masks(node_labels, subspace='nodes')
-                edge_mask = self._extract_masks(edge_labels, subspace='edges')
-                
-                node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
-                edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-                loss = node_loss + edge_loss
-                with torch.no_grad():
-                    total_loss += loss
-                
+                batch_loss = self._training_step(batch)  
+                 
                 # step
-                self.optimizer.zero_grad()
-                loss.backward()
-                self.optimizer.step()
-                # self.lr_scheduler.step()
+                if not self.use_amp:
+                    self.optimizer.step()
+                else:
+                    self.scaler.step(self.optimizer)
+                    self.scaler.update()
+                self.model.zero_grad(set_to_none=True)
                 
-                # log
-                total_train_step += 1
-                bs = int(self.config['training']['bsz_train'])
-                wandb.log({
-                    'train_total_loss': loss,
-                    'train_node_loss': node_loss,
-                    'train_edge_loss': edge_loss,
-                    'learning_rate': float(self.optimizer.param_groups[0]['lr'])
-                    })
-                pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {loss}', refresh=True)
-            
-            print(f'Training loss: {total_loss}')
+                pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {batch_loss}', refresh=True)
+                epoch_loss += batch_loss
+                batch_loss = 0
+                
             val_loss = self.run_validation()
-            if val_loss < best_loss:
-                best_loss = val_loss
-                self._save_model(self.model, self.config['model_path']['checkpoint_dir'] + run_name + '.pt')
-            elif val_loss >= best_loss and frozen == True:
-                print(f'Unfreeze encoder at epoch {epoch}')
-                frozen = False
-                for g in self.optimizer.param_groups:
-                    g['lr'] = float(self.config['training']['unfreeze_lr'])
-                for param in self.model.pretrained_encoder.parameters():
-                    param.requires_grad = True
-            
+            best_score = self._save_ckpt_unfreeze_on_eval_score(val_loss, best_score, epoch, run_name)
+    
     def run_validation(self):
+        # TODO: adds correlation as a metric 
         pbar = tqdm(enumerate(self.val_dataloader), total = len(self.val_dataloader))
         self.model.eval()
-        total_val_loss = 0
+        epoch_loss = 0
+        batch_loss = 0
         
         for i, batch in pbar:
             batch = self._to_device(batch)
-            (_, node_ids, node_labels, edge_ids, edge_labels) = batch
-            
-            # forward
-            with torch.no_grad():                
-                node_output, edge_output = self.model(batch)
-                
-                node_mask = self._extract_masks(node_labels, subspace='nodes')
-                edge_mask = self._extract_masks(edge_labels, subspace='edges')
-                
-                node_loss = self._calculate_masked_loss(node_output, node_labels, node_mask)
-                edge_loss = self._calculate_masked_loss(edge_output, edge_labels, edge_mask)
-                val_loss = node_loss + edge_loss
-                
-                total_val_loss += val_loss
+            batch_loss = self._prediction_step(batch)
 
-            pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {val_loss}', refresh=True)
-                # bs = int(self.config['training']['bsz_val'])
-            wandb.log({
-                    'val_total_loss': val_loss,
-                    'val_node_loss': node_loss,
-                    'val_edge_loss': edge_loss
-                    })
-            
-        print(f'Validation loss: {total_val_loss}')
-        wandb.log({'epoch_val_loss': total_val_loss})
+            pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {batch_loss}', refresh=True)
+            epoch_loss += batch_loss
+            batch_loss = 0
+                        
+        logger.info(f'Validation loss: {epoch_loss}')
+        wandb.log({'epoch_val_loss': epoch_loss})
         
-        return total_val_loss
+        return epoch_loss
+    
+    def _training_step(self, batch):
+        self.model.train()
+        node_labels = batch['node_labels']
+        edge_labels = batch['edge_labels']
+        
+        # Forward
+        node_loss, edge_loss = self.model(batch, return_type='output')
+        
+        # assert node_loss.size() == node_labels.size()
+        # assert edge_loss.size() == edge_labels.size()
+        
+        masked_node_loss = self._calculate_masked_loss(node_loss, node_labels)
+        masked_edge_loss = self._calculate_masked_loss(edge_loss, edge_labels)
+        
+        logger.debug('==================================')
+        logger.debug(node_labels.tolist())
+        logger.debug('*')
+        logger.debug(node_loss.tolist())
+        logging.debug(masked_node_loss.tolist())
+        logging.debug(masked_edge_loss.tolist())
+        
+        loss = masked_node_loss + masked_edge_loss        
+        loss.backward()
+        
+        
+        # log
+        wandb.log({
+            'train_total_loss': loss.item(),
+            'train_node_loss': masked_node_loss.item(),
+            'train_edge_loss': masked_edge_loss.item(),
+            'learning_rate': float(self.optimizer.param_groups[0]['lr'])
+            })
+        
+        return loss.item()
+    
+    @torch.no_grad()
+    def _prediction_step(self, batch):
+        self.model.valid()
+        node_labels = batch['node_labels']
+        edge_labels = batch['edge_labels']
+        
+        # Forward
+        node_loss, edge_loss = self.model(batch, return_type='output')
+        
+        masked_node_loss = self._calculate_masked_loss(node_loss, node_labels)
+        masked_edge_loss = self._calculate_masked_loss(edge_loss, edge_labels)
+        
+        loss = masked_node_loss + masked_edge_loss  
+        
+        wandb.log({
+            'pred_total_loss': loss.item(),
+            'pred_node_loss': masked_node_loss.item(),
+            'pred_edge_loss': masked_edge_loss.item()
+            })  
+        
+        return loss.item()
+    
+    def _save_ckpt_unfreeze_on_eval_score(self, val_score, best_score, epoch, run_name):
+        if val_score < best_score:
+                best_score = val_score
+                self._save_model(self.model, self.config['model_path']['checkpoint_dir'] + run_name + '.pt')
+                
+        elif val_score >= best_score and self.model.frozen == True:
+            print(f'Unfreeze encoder at epoch {epoch}')
+            self.model.frozen = False
+            for g in self.optimizer.param_groups:
+                g['lr'] = float(self.config['training']['unfreeze_lr'])
+            for param in self.model.pretrained_encoder.parameters():
+                param.requires_grad = True
+        
+        return best_score
     
     def _save_model(self, model, path):
-        print(f'Saving model checkpoint at {path}')
+        logger.info(f'Saving model checkpoint at {path}')
         save_path = os.path.join(*path.split('\\'))
         torch.save(model.state_dict(), open(save_path, 'wb'))
     
@@ -332,20 +285,25 @@ def trainer_test(config):
     
     from src.dataset.seq2seq_dataset import UDSDataset
     from src.model.baseline import BaseModel
-    # from src.model.pretrained_roberta import PretrainedModel
+    from src.model.pretrained_roberta import PretrainedModel
     
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
     dataset = UDSDataset(config, 'train_subset', tokenizer)
-    model = BaseModel(config)
+    model = PretrainedModel(config)
     
     trainer = Trainer(config, model, dataset)
     trainer.run_train('testtesttest')
 
 if __name__ == '__main__':
     import configparser
+    import logging
+    
+    logging.basicConfig()
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
     
     config = configparser.ConfigParser()
     config.read(os.path.join('configs', 'config.cfg'))
     
-    trainer_test(config)
+    # trainer_test(config)
     # trainer_finetune_test(config)

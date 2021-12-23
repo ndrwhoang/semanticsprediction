@@ -5,8 +5,10 @@ import configparser
 from itertools import chain
 import numpy as np
 from torch.nn.utils.rnn import pad_sequence
+from tqdm import tqdm
+import re
 
-
+from src.utils import _extract_masks
 
 def test_output_indexing():
     raw_logits = torch.FloatTensor(8, 512, 768)
@@ -140,10 +142,8 @@ def masking_loss():
     
     a = (torch.nan_to_num(true_)**2)*mask_ 
     print(a)
-    
-    
 
 if __name__ == '__main__':
     print('hello world')
     # test_output_indexing_new()
-    masking_loss()
+    # masking_loss()

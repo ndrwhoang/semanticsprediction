@@ -7,9 +7,9 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
-from typing import List
+from itertools import chain
 
-from src.utils import _get_mask, _extract_reverse_masks
+from src.utils import _get_masking_idx, _extract_masks
 
 
 class UDSDataset(Dataset):    
@@ -19,8 +19,7 @@ class UDSDataset(Dataset):
         self.config = config
         self.tokenizer = tokenizer
         self.finetune = finetune
-        if self.finetune == True:
-            self.finetune_node_idx, self.finetune_edge_idx = _get_mask(self.config)
+        self.masking_node_idx, self.masking_edge_idx = _get_masking_idx(self.config)            
         data_path = self.get_data_path(mode)
         self.samples = self.make_samples(data_path)
         self.input_ids, self.node_ids, self.node_labels, self.edge_ids, self.edge_labels = self.convert_sample_to_input(self.samples)
@@ -93,7 +92,7 @@ class UDSDataset(Dataset):
             placeholder_tensor = np.empty((int(self.config['model']['n_edge']),))
             placeholder_tensor[:] = np.nan
             edge_id = []
-            # often there iare no edge labels
+            # often there are no edge labels
             if len(sample['edge_labels']) == 0:
                 edge_label = [torch.tensor(placeholder_tensor, dtype=torch.float)]
                 edge_id.append(((0,), (0,)))
@@ -104,37 +103,33 @@ class UDSDataset(Dataset):
                     sec_alignment = self._find_alignment_for_token(eval(word_pair)[1], offset_mapping, original_indices)
                     edge_id.append((first_alignment, sec_alignment))
             
-            if self.finetune == False:  
-                # normal training 
+            # Stack to tensor of (n_label, label_dim)
+            node_label = torch.stack(node_label, dim=0)
+            edge_label = torch.stack(edge_label, dim=0)
+            
+            # Masking specific subspaces, controlled by config (whatever is listed is not masked)
+            node_mask = _extract_masks(node_label, self.masking_node_idx, 'nodes')
+            edge_mask = _extract_masks(edge_label, self.masking_edge_idx, 'edges')
+            masked_node_label = node_label*node_mask
+            masked_edge_label = edge_label*edge_mask
+            
+            # In case masking makes the sample not having any target, skips the sample
+            node_non_empty_check = torch.sum((torch.nan_to_num(masked_node_label))**2.0) > 0.0
+            edge_non_empty_check = torch.sum((torch.nan_to_num(masked_edge_label))**2.0) > 0.
+            if node_non_empty_check or edge_non_empty_check:
                 input_ids.append(input_id)
                 node_ids.append(node_id)
-                node_labels.append(torch.stack(node_label, dim=0))
+                node_labels.append(masked_node_label)
                 edge_ids.append(edge_id)
-                edge_labels.append(torch.stack(edge_label, dim=0))
-            else:
-                # finetuning, we only select samples with relevant subspaces present
-                node_label = torch.stack(node_label, dim=0)
-                edge_label = torch.stack(edge_label, dim=0)
-                node_label = node_label.unsqueeze(0)
-                edge_label = edge_label.unsqueeze(0)
-                finetune_node_mask = _extract_reverse_masks(self.finetune_node_idx, self.finetune_edge_idx, node_label, 'nodes')
-                finetune_edge_mask = _extract_reverse_masks(self.finetune_node_idx, self.finetune_edge_idx, edge_label, 'edges')
-                node_check = torch.sum((torch.nan_to_num(node_label)*finetune_node_mask)**2.0) > 0.0
-                edge_check = torch.sum((torch.nan_to_num(edge_label)*finetune_edge_mask)**2.0) > 0.0
-                if node_check or edge_check:
-                    input_ids.append(input_id)
-                    node_ids.append(node_id)
-                    node_labels.append(node_label.squeeze(0))
-                    edge_ids.append(edge_id)
-                    edge_labels.append(edge_label.squeeze(0))
+                edge_labels.append(masked_edge_label)
             
-            assert len(input_ids) == len(node_ids)
-            assert len(input_ids) == len(node_labels)
-            assert len(input_ids) == len(edge_ids)
-            assert len(input_ids) == len(edge_labels)
+            # assert len(input_ids) == len(node_ids)
+            # assert len(input_ids) == len(node_labels)
+            # assert len(input_ids) == len(edge_ids)
+            # assert len(input_ids) == len(edge_labels)
             
         return input_ids, node_ids, node_labels, edge_ids, edge_labels
-        
+    
     def _find_alignment_for_token(self, token, offset_mapping, original_indices):
         # Given a tuple of head node (form: str, index: int),
         # where index is the token index when sentence is split by ' '
@@ -167,45 +162,58 @@ class UDSDataset(Dataset):
                 print(label_id)
         
         return aligned
-                  
+    
     def __len__(self):
         return len(self.input_ids)
     
     def __getitem__(self, item):
         return self.input_ids[item], self.node_ids[item], self.node_labels[item], self.edge_ids[item], self.edge_labels[item]
 
-def collate_fn(batch):
-    input_ids, node_ids, node_labels, edge_ids, edge_labels = zip(*batch)
-    
-    input_ids = [torch.tensor(input_id) for input_id in input_ids]
-    input_ids = pad_sequence(input_ids, batch_first=True)    
-    node_labels = pad_sequence(node_labels, batch_first=True)
-    edge_labels = pad_sequence(edge_labels, batch_first=True)
-    
-    return input_ids, node_ids, node_labels, edge_ids, edge_labels
+    def collate_fn(self, batch):
+        input_ids, node_ids, node_labels, edge_ids, edge_labels = zip(*batch)
+        
+        input_ids = [torch.tensor(input_id) for input_id in input_ids]
+        input_ids = pad_sequence(input_ids, batch_first=True)    
+        node_labels = pad_sequence(node_labels, batch_first=True)
+        edge_labels = pad_sequence(edge_labels, batch_first=True)
+        
+        return {'input_ids': input_ids, 
+                'node_ids': node_ids, 
+                'node_labels': node_labels, 
+                'edge_ids': edge_ids, 
+                'edge_labels': edge_labels}
 
 
-def dataloader_test(dataset):
+def dataloader_test(config):
     # Test function
     print('dataloader test')
-    dataloader = DataLoader(dataset, batch_size=1, collate_fn=collate_fn)
+    tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
+    dataset = UDSDataset(config, 'train_subset', tokenizer, True)
+    dataloader = DataLoader(dataset, batch_size=1, collate_fn=dataset.collate_fn)
     for i, batch in enumerate(dataloader):
         # if i == 3: break
         print('===========')
         print('*')
         print('*')
         print('*')
-        input_ids, node_ids, node_labels, edge_ids, edge_labels = batch
+        # input_ids, node_ids, node_labels, edge_ids, edge_labels = batch
+        input_ids = batch['input_ids']
+        node_ids = batch['node_ids']
+        node_labels = batch['node_labels']
+        edge_ids = batch['edge_ids']
+        edge_labels = batch['edge_labels']
         
         a = tokenizer.convert_ids_to_tokens(input_ids[0].tolist())
         print(a)
+        print('node label out')
         print(node_ids[0])
         b = [a[i[0]:i[-1]+1] for i in node_ids[0]]
         print(b)
-        # print(node_labels[0].tolist())
+        print(node_labels[0].tolist())
         # for label in node_labels[0].tolist():
         #     print(label)
         assert len(b) == node_labels.size(1)
+        print('edge label out')
         print(edge_ids[0])
         print(edge_labels[0].tolist())
         print(edge_labels.size())
@@ -270,14 +278,16 @@ def misc_test():
 def finetune_sample_filtering_test(config):
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
     dataset = UDSDataset(config, 'train_subset', tokenizer, True)
-    dataloader = DataLoader(dataset, batch_size=1, collate_fn=collate_fn)
+    dataloader = DataLoader(dataset, batch_size=1, collate_fn=dataset.collate_fn)
     
     for i, batch in enumerate(dataloader):
-        # if i == 3: break
+        if i == 3: break
         print('===========')
         print('*')
         print('*')
-        input_ids, node_ids, node_labels, edge_ids, edge_labels = batch
+        input_ids = batch['input_ids']
+        node_ids = batch['node_ids']
+        node_labels = batch['node_labels']
         
         input_str = tokenizer.convert_ids_to_tokens(input_ids[0].tolist())
         print(input_str)
@@ -290,7 +300,6 @@ def finetune_sample_filtering_test(config):
         # print(edge_labels[0][0].tolist())
         
     
-
 if __name__ == '__main__':
     import os
     import configparser
@@ -301,7 +310,7 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read(config_path)
     
-    finetune_sample_filtering_test(config)
-    
+    dataloader_test(config)
+
     
     

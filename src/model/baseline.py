@@ -48,8 +48,15 @@ class BaseModel(nn.Module):
 
         self.loss_fn = nn.MSELoss(reduction='none')
         
-    def forward(self, batch):
-        (input_ids, node_ids, _, edge_ids, _) = batch
+    def forward(self, batch, return_type = None):
+        if return_type is None:
+            raise ValueError('Specify `output` or `loss` return_type')
+        # (input_ids, node_ids, _, edge_ids, _) = batch
+        input_ids = batch['input_ids']
+        node_ids = batch['node_ids']
+        node_labels = batch['node_labels']
+        edge_ids = batch['edge_ids']
+        edge_labels = batch['edge_labels']
         
         out = self.embedding(input_ids) * math.sqrt(input_ids.size(1))
         out = self.pos_embedding(out)
@@ -64,7 +71,17 @@ class BaseModel(nn.Module):
         node_output = self.activation(node_logits)*5
         edge_output = self.activation(edge_logits)*5
         
-        return node_output, edge_output
+        print('aa')
+        print(node_output.tolist())
+        print('aa')
+        
+        if return_type == 'ouput':
+            return node_output, edge_output
+        elif return_type == 'loss': 
+            node_loss = self.loss_fn(node_output, node_labels)
+            edge_loss = self.loss_fn(edge_output, edge_labels)
+            
+            return node_loss, edge_loss           
     
     def _index_node_logits(self, raw_logits, node_ids):
         # Indexing relevant words
@@ -94,33 +111,45 @@ def model_output_test(config):
     # Test function
     print('starts model output test')
     from torch.utils.data import DataLoader
-    from src.dataset.seq2seq_dataset import UDSDataset, collate_fn
+    from src.dataset.seq2seq_dataset import UDSDataset
     from transformers import RobertaTokenizerFast
     
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
-    dataset = UDSDataset(config, 'train', tokenizer)
+    dataset = UDSDataset(config, 'train_subset', tokenizer)
     dataloader = DataLoader(dataset, 
-                            batch_size=4, 
+                            batch_size=1, 
                             shuffle=True,
                             drop_last=True,
-                            collate_fn=collate_fn)
+                            collate_fn=dataset.collate_fn)
     model = BaseModel(config)
     
     for i, sample in enumerate(dataloader):
-        if i == 3: break  
-        print('==========')
-        node_logits, edge_logits = model(sample)
-        print(node_logits.size())  
-        print(edge_logits.size())
+        if i == 15: break  
+        logger.debug('==========')
+        node_out, edge_out = model(sample, return_type='loss')
+        # print(node_logits.size(), sample['node_labels'].size())  
+        # print(edge_logits.size(), sample['edge_labels'].size())
+        
+        assert node_out.size() == sample['node_labels'].size()
+        logger.debug(node_out.tolist()) 
+        logger.debug(sample['node_labels'].tolist()) 
+        # logger.debug(edge_out)  
+        # logger.debug(sample['edge_labels'])    
+        
 
 if __name__ == '__main__':
     import os
     import configparser
+    import logging
     
-    # config = configparser.ConfigParser()
-    # config.read(os.path.join('configs', 'config.cfg'))
+    logging.basicConfig()
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
     
-    # model_output_test(config)
+    config = configparser.ConfigParser()
+    config.read(os.path.join('configs', 'config.cfg'))
+    
+    model_output_test(config)
     
         
         
