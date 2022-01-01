@@ -8,9 +8,13 @@ import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 from itertools import chain
+import logging
 
 from src.utils import _get_masking_idx, _extract_masks
 
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class UDSDataset(Dataset):    
     def __init__(self, config, mode: str, tokenizer, finetune=False):
@@ -25,7 +29,7 @@ class UDSDataset(Dataset):
         self.input_ids, self.node_ids, self.node_labels, self.edge_ids, self.edge_labels = self.convert_sample_to_input(self.samples)
         
         self.n_sample = len(self.input_ids)
-        print(f'Finished processing data, n_sample: {self.n_sample}')
+        logger.info(f'Finished processing data, n_sample: {self.n_sample}')
        
     def get_data_path(self, mode):
         mode_to_path = {
@@ -46,7 +50,7 @@ class UDSDataset(Dataset):
     
     def make_samples(self, path):
         # Load data from raw file
-        print(f'Start procesing sample from raw data {path}')
+        logger.info(f'Start procesing sample from raw data {path}')
         data_path = os.path.join(*path.split('\\'))
         with open(data_path, 'r') as f:
             samples = json.load(f)
@@ -61,7 +65,7 @@ class UDSDataset(Dataset):
         # - word_labels: a list of tensor of node semantic attribute values
         # - edge_ids: a list of tuples of pair of tuples (nodes in an edge relation) for each head
         # - edge_labels: a list of tensor of edge semantic attribute values
-        print('Start processing sample to input ids')
+        logger.info('Start processing sample to input ids')
         input_ids = []
         node_ids, node_labels = [], []
         edge_ids, edge_labels = [], []
@@ -155,11 +159,11 @@ class UDSDataset(Dataset):
             try:
                 aligned = (first_subword_id, last_subword_id)
             except UnboundLocalError:
-                # Shouldn't run into this unless a subtoken is longer than token
-                # Shouldn't run into this ever
-                print(original_indices)
-                print(offset_mapping)
-                print(label_id)
+                logger.error('Shouldn\'t run into this unless a subtoken is longer than token')
+                logger.error('Shouldn\'t run into this ever')
+                logger.error(original_indices)
+                logger.error(offset_mapping)
+                logger.error(label_id)
         
         return aligned
     

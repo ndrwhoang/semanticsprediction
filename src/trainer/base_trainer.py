@@ -6,6 +6,7 @@ from itertools import chain
 from tqdm import tqdm
 from typing import List, Dict
 import wandb
+import logging
 
 import torch
 from torch.utils.data import DataLoader
@@ -16,9 +17,13 @@ from torch.cuda.amp import GradScaler
 
 # from src.dataset.seq2seq_dataset import collate_fn
 
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class Trainer:
     def __init__(self, config, model, train_dataset, val_dataset=None, test_dataset=None, checkpoint=None):
+        # TODO: set deepspeed (doesnt work on Windows?)
         # Base class for training
         self.config = config
         self.model = model
@@ -26,29 +31,43 @@ class Trainer:
         self.val_dataset = val_dataset
         self.test_dataset = test_dataset
         
+        # Default to using train set if validation set not provided
         if self.val_dataset == None:
             self.val_dataset = train_dataset
         if self.test_dataset == None:
             self.test_dataste = train_dataset
         
+        # Seed
         self.set_seed()
+        
+        # Use GPU if available
         self.device = torch.device('cuda' if 
                                    torch.cuda.is_available and 
                                    self.config['general'].getboolean('use_gpu') else
                                    'cpu')
         logger.info(f'----------- device : {self.device}')
+        
+        # Load checkpoint if available
         self.model.to(self.device)
         if checkpoint is not None:
             model.load_state_dict(torch.load(os.path.join(*checkpoint.split('\\'))))
+            
+        # Create dataloaders
         self.train_dataloader, self.val_dataloader = self._get_dataloader(self.config)
+        
+        # Create optimizers
         self.optimizer, self.lr_scheduler = self._get_optimizer(self.config)
         
+        # Mixed precision training
         self.use_amp = self.config['training'].getboolean('mixed_precision')
         if self.use_amp:
             self.grad_scaler = GradScaler()
             
-        # self.node_label2id, self.edge_label2id = self._load_label_dict(self.config)
-        # self.masked_node_idx, self.masked_edge_idx = self._get_mask(self.config)
+        # Gradient accumulation
+        self.use_grad_accumulation = self.config['training'].getboolean('grad_accumulation')
+        if self.grad_accum:
+            self.grad_accumulation_steps = float(self.config['training']['grad_accumulation_steps'])
+            
     
     def set_seed(self):
         self.seed = int(self.config['general']['seed'])
@@ -89,7 +108,7 @@ class Trainer:
                                       batch_size=int(config['training']['bsz_train']),
                                       collate_fn=self.train_dataset.collate_fn,
                                       shuffle=False,
-                                      drop_last=False,
+                                      drop_last=True,
                                       num_workers=int(config['general']['num_worker']),
                                       pin_memory=True)
         val_dataloader = DataLoader(self.val_dataset,
@@ -153,7 +172,6 @@ class Trainer:
       
     def run_train(self, run_name: str):
         # best_loss = self.run_validation()
-        frozen = True
         best_score = float('inf')
         
         for epoch in range(int(self.config['training']['n_epoch'])):
@@ -169,12 +187,13 @@ class Trainer:
                 batch_loss = self._training_step(batch)  
                  
                 # step
-                if not self.use_amp:
-                    self.optimizer.step()
-                else:
-                    self.scaler.step(self.optimizer)
-                    self.scaler.update()
-                self.model.zero_grad(set_to_none=True)
+                if (i+1) % self.grad_accumulation_steps == 0 or self.use_grad_accumulation == False:
+                    if not self.use_amp:
+                        self.optimizer.step()
+                    else:
+                        self.scaler.step(self.optimizer)
+                        self.scaler.update()
+                    self.model.zero_grad(set_to_none=True)
                 
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {batch_loss}', refresh=True)
                 epoch_loss += batch_loss
@@ -227,6 +246,8 @@ class Trainer:
         loss = masked_node_loss + masked_edge_loss        
         loss.backward()
         
+        if self.use_grad_accumulation:
+            loss = loss / self.grad_accumulation_steps
         
         # log
         wandb.log({
@@ -296,14 +317,9 @@ def trainer_test(config):
 
 if __name__ == '__main__':
     import configparser
-    import logging
-    
-    logging.basicConfig()
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
     
     config = configparser.ConfigParser()
     config.read(os.path.join('configs', 'config.cfg'))
     
-    # trainer_test(config)
+    trainer_test(config)
     # trainer_finetune_test(config)

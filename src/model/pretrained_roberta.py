@@ -1,8 +1,12 @@
-import math
+import logging
 import torch
 import torch.nn as nn
 from transformers import RobertaModel
 from torch.nn.utils.rnn import pad_sequence
+
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class PretrainedModel(nn.Module):
     def __init__(self, config):
@@ -18,7 +22,7 @@ class PretrainedModel(nn.Module):
         self.frozen = False
         
         if self.config['freeze_pretrained'] == 'True':
-            print('Freezing encoder')
+            logger.info('Freezing encoder')
             self.frozen = True
             for param in self.pretrained_encoder.parameters():
                 param.requires_grad = False
