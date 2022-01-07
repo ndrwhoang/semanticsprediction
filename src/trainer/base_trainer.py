@@ -4,11 +4,12 @@ import os
 import json
 from itertools import chain
 from tqdm import tqdm
-from typing import List, Dict
 import wandb
 import logging
 
 import torch
+import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from torch.optim import AdamW
@@ -64,10 +65,9 @@ class Trainer:
             self.grad_scaler = GradScaler()
             
         # Gradient accumulation
-        self.use_grad_accumulation = self.config['training'].getboolean('grad_accumulation')
-        if self.grad_accum:
-            self.grad_accumulation_steps = float(self.config['training']['grad_accumulation_steps'])
-            
+        self.grad_accumulation_steps = float(self.config['training']['grad_accumulation_steps'])
+        
+        logger.info(f'Training with Mixed Precision: {self.use_amp} and Gradient Accumulation: {self.grad_accumulation_steps}')
     
     def set_seed(self):
         self.seed = int(self.config['general']['seed'])
@@ -130,13 +130,20 @@ class Trainer:
         
         return batch
     
+    # def _calculate_masked_loss(self, pred, true):
+    #     mask_ = torch.isnan(true) != True
+    #     loss = (torch.sum((torch.nan_to_num(pred-true)**2)*mask_) + 1e-16) / (torch.sum(mask_)+1)
+    #     return loss
+    
     def _calculate_masked_loss(self, pred, true):
-        # note: nan * False = nan, not 0
-        # mask is subspace mask, mask_ is target value nan mask ('normal' mask)
-        mask_ = torch.isnan(true) != True
-        loss = torch.sum((torch.nan_to_num(pred-true)**2)*mask_) / (torch.sum(mask_)+0.000001)
+        mask = torch.isnan(true) != True
+        # pred = torch.masked_select(pred, mask)
+        # true = torch.masked_select(true, mask)
+        loss = F.mse_loss(pred[mask], true[mask], reduction='mean')
+        
         return loss
-
+        
+    
     def run_partial_train(self, run_name: str, finetune_thresh):
         self.model.train()
         pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
@@ -171,28 +178,27 @@ class Trainer:
         logger.info(val_loss)
       
     def run_train(self, run_name: str):
-        # best_loss = self.run_validation()
+        best_loss = self.run_validation()
         best_score = float('inf')
         
         for epoch in range(int(self.config['training']['n_epoch'])):
-            pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), mininterval=2)
+            pbar = tqdm(enumerate(self.train_dataloader), total=len(self.train_dataloader), miniters=1)
             epoch_loss = 0
             batch_loss = 0
             self.model.train()
             self.model.zero_grad(set_to_none=True)
             
             for i, batch in pbar:
-                # if i == 10: break
-                batch = self._to_device(batch)
+                batch.to_device(self.device)
                 batch_loss = self._training_step(batch)  
                  
                 # step
-                if (i+1) % self.grad_accumulation_steps == 0 or self.use_grad_accumulation == False:
+                if (i+1) % self.grad_accumulation_steps == 0:
                     if not self.use_amp:
                         self.optimizer.step()
                     else:
-                        self.scaler.step(self.optimizer)
-                        self.scaler.update()
+                        self.grad_scaler.step(self.optimizer)
+                        self.grad_scaler.update()
                     self.model.zero_grad(set_to_none=True)
                 
                 pbar.set_description(f'(Training) Epoch: {epoch} - Steps: {i}/{len(self.train_dataloader)} - Loss: {batch_loss}', refresh=True)
@@ -210,7 +216,7 @@ class Trainer:
         batch_loss = 0
         
         for i, batch in pbar:
-            batch = self._to_device(batch)
+            batch.to_device(self.device)
             batch_loss = self._prediction_step(batch)
 
             pbar.set_description(f'(Validating) Steps: {i}/{len(self.val_dataloader)} - Loss: {batch_loss}', refresh=True)
@@ -224,40 +230,46 @@ class Trainer:
     
     def _training_step(self, batch):
         self.model.train()
-        node_labels = batch['node_labels']
-        edge_labels = batch['edge_labels']
+        node_labels = batch.node_labels
+        edge_labels = batch.edge_labels
         
         # Forward
-        node_loss, edge_loss = self.model(batch, return_type='output')
+        output = self.model(batch)
         
         # assert node_loss.size() == node_labels.size()
         # assert edge_loss.size() == edge_labels.size()
         
-        masked_node_loss = self._calculate_masked_loss(node_loss, node_labels)
-        masked_edge_loss = self._calculate_masked_loss(edge_loss, edge_labels)
+        # masked_node_loss = self._calculate_masked_loss(node_loss, node_labels)
+        # masked_edge_loss = self._calculate_masked_loss(edge_loss, edge_labels)
         
         logger.debug('==================================')
         logger.debug(node_labels.tolist())
         logger.debug('*')
-        logger.debug(node_loss.tolist())
-        logging.debug(masked_node_loss.tolist())
-        logging.debug(masked_edge_loss.tolist())
+        logger.debug(output.node_loss.tolist())
+        logger.debug(output.edge_loss.tolist())
+        logger.debug('*')
         
-        loss = masked_node_loss + masked_edge_loss        
-        loss.backward()
-        
-        if self.use_grad_accumulation:
+        loss = output.node_loss + output.edge_loss
+
+        # Divide loss for accumulation
+        if self.grad_accumulation_steps > 1:
             loss = loss / self.grad_accumulation_steps
+        
+        # Switching between backward schemes
+        if self.use_amp:    
+            self.grad_scaler.scale(loss).backward()
+        else:
+            loss.backward()
         
         # log
         wandb.log({
             'train_total_loss': loss.item(),
-            'train_node_loss': masked_node_loss.item(),
-            'train_edge_loss': masked_edge_loss.item(),
+            'train_node_loss': output.node_loss.item(),
+            'train_edge_loss': output.edge_loss.item(),
             'learning_rate': float(self.optimizer.param_groups[0]['lr'])
             })
         
-        return loss.item()
+        return loss.detach()
     
     @torch.no_grad()
     def _prediction_step(self, batch):
@@ -266,17 +278,14 @@ class Trainer:
         edge_labels = batch['edge_labels']
         
         # Forward
-        node_loss, edge_loss = self.model(batch, return_type='output')
-        
-        masked_node_loss = self._calculate_masked_loss(node_loss, node_labels)
-        masked_edge_loss = self._calculate_masked_loss(edge_loss, edge_labels)
-        
-        loss = masked_node_loss + masked_edge_loss  
+        output = self.model(batch)
+                
+        loss = output.node_loss + output.edge_loss  
         
         wandb.log({
             'pred_total_loss': loss.item(),
-            'pred_node_loss': masked_node_loss.item(),
-            'pred_edge_loss': masked_edge_loss.item()
+            'pred_node_loss': output.node_loss.item(),
+            'pred_edge_loss': output.edge_loss.item()
             })  
         
         return loss.item()

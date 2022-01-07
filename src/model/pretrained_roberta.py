@@ -1,12 +1,23 @@
 import logging
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from transformers import RobertaModel
+from transformers import logging as t_logging
+t_logging.set_verbosity_error()
+from dataclasses import dataclass
 from torch.nn.utils.rnn import pad_sequence
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+
+@dataclass
+class ModelOutput:
+    node_output: torch.Tensor
+    edge_output: torch.Tensor
+    node_loss: torch.Tensor
+    edge_loss: torch.Tensor
 
 class PretrainedModel(nn.Module):
     def __init__(self, config):
@@ -26,22 +37,30 @@ class PretrainedModel(nn.Module):
             self.frozen = True
             for param in self.pretrained_encoder.parameters():
                 param.requires_grad = False
-
-        self.loss_fn = nn.MSELoss(reduction='none')
+    
+    def loss_fn(self, pred, true):
+        mask = torch.isnan(true) != True
+        loss = F.mse_loss(pred[mask], true[mask], reduction='mean')
+        
+        return loss
     
     def reset_prediciton_heads(self):
         self.node_out.reset_parameters()
         self.edge_out.reset_parameters()
         
-    def forward(self, batch, return_type=None):
-        if return_type not in ['output', 'loss']:
-            raise ValueError('Specify `output` or `loss` return_type')
+    def forward(self, batch):
+        # if return_type not in ['output', 'loss']:
+        #     raise ValueError('Specify `output` or `loss` return_type')
         # (input_ids, node_ids, _, edge_ids, _) = batch
-        input_ids = batch['input_ids']
-        node_ids = batch['node_ids']
-        node_labels = batch['node_labels']
-        edge_ids = batch['edge_ids']
-        edge_labels = batch['edge_labels']
+        input_ids = batch.input_ids
+        node_ids = batch.node_ids
+        node_labels = batch.node_labels
+        edge_ids = batch.edge_ids
+        edge_labels = batch.edge_labels
+        
+        logger.debug(input_ids.device)
+        logger.debug(node_labels.device)
+        logger.debug(edge_labels.device)
         
         out, _ = self.pretrained_encoder(input_ids, return_dict=False)
         
@@ -54,20 +73,19 @@ class PretrainedModel(nn.Module):
         node_output = self.activation(node_logits)*5
         edge_output = self.activation(edge_logits)*5
         
-        # assert torch.isnan(node_out).any() is not True
-        # assert torch.isnan(edge_out).any() is not True
-        # assert torch.isnan(node_logits).any() is not True
-        # assert torch.isnan(edge_logits).any() is not True
-        # assert torch.isnan(node_output).any() is not True
-        # assert torch.isnan(edge_output).any() is not True
+        node_loss = self.loss_fn(node_output, node_labels)
+        edge_loss = self.loss_fn(edge_output, edge_labels)
         
-        if return_type == 'output':
-            return node_output, edge_output
-        elif return_type == 'loss': 
-            node_loss = self.loss_fn(node_output, node_labels)
-            edge_loss = self.loss_fn(edge_output, edge_labels)
-            
-            return node_loss, edge_loss  
+        # assert torch.isnan(node_out).any() != True
+        # assert torch.isnan(edge_out).any() != True
+        # assert torch.isnan(node_logits).any() != True
+        # assert torch.isnan(edge_logits).any() != True
+        # assert torch.isnan(node_output).any() != True
+        # assert torch.isnan(edge_output).any() != True
+        # assert torch.isnan(node_loss).any() != True
+        # assert torch.isnan(edge_loss).any() != True
+        
+        return ModelOutput(node_output, edge_output, node_loss, edge_loss)
     
     def _index_node_logits(self, raw_logits, node_ids):
         # Indexing relevant words
@@ -97,25 +115,27 @@ def model_output_test(config):
     # Test function
     print('starts model output test')
     from torch.utils.data import DataLoader
-    from src.dataset.seq2seq_dataset import UDSDataset, collate_fn
+    from src.dataset.seq2seq_dataset import UDSDataset
     from transformers import RobertaTokenizerFast
     
     tokenizer = RobertaTokenizerFast.from_pretrained('roberta-base')
-    dataset = UDSDataset(config, 'train', tokenizer)
+    dataset = UDSDataset(config, 'train_subset', tokenizer)
     dataloader = DataLoader(dataset, 
-                            batch_size=4, 
-                            shuffle=True,
+                            batch_size=1, 
+                            shuffle=False,
                             drop_last=True,
-                            collate_fn=collate_fn)
+                            collate_fn=dataset.collate_fn)
     model = PretrainedModel(config)
     model.reset_prediciton_heads()
     
-    # for i, sample in enumerate(dataloader):
-    #     if i == 3: break  
-    #     print('==========')
-    #     node_logits, edge_logits = model(sample)
-    #     print(node_logits.size())  
-    #     print(edge_logits.size())
+    for i, sample in enumerate(dataloader):
+        if i == 3: break  
+        print('==========')
+        output = model(sample)
+        print(output.node_logits.size())  
+        print(output.edge_logits.size())
+        print(output.node_logits.tolist())
+        print(output.edge_logits.tolist())
 
 if __name__ == '__main__':
     import os

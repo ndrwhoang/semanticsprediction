@@ -1,20 +1,33 @@
 import re
 import os
 import json
-from torch._C import dtype
 from tqdm import tqdm
 import numpy as np
 import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
-from itertools import chain
+from typing import List, Tuple
 import logging
+from dataclasses import dataclass
 
 from src.utils import _get_masking_idx, _extract_masks
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+
+@dataclass
+class Batch:
+    input_ids: torch.Tensor
+    node_ids: List
+    node_labels: torch.Tensor
+    edge_ids: List
+    edge_labels: torch.Tensor
+    
+    def to_device(self, device):
+        self.input_ids = self.input_ids.to(device)
+        self.node_labels = self.node_labels.to(device)
+        self.edge_labels = self.edge_labels.to(device)
 
 class UDSDataset(Dataset):    
     def __init__(self, config, mode: str, tokenizer, finetune=False):
@@ -181,11 +194,13 @@ class UDSDataset(Dataset):
         node_labels = pad_sequence(node_labels, batch_first=True)
         edge_labels = pad_sequence(edge_labels, batch_first=True)
         
-        return {'input_ids': input_ids, 
-                'node_ids': node_ids, 
-                'node_labels': node_labels, 
-                'edge_ids': edge_ids, 
-                'edge_labels': edge_labels}
+        # return {'input_ids': input_ids, 
+        #         'node_ids': node_ids, 
+        #         'node_labels': node_labels, 
+        #         'edge_ids': edge_ids, 
+        #         'edge_labels': edge_labels}
+        
+        return Batch(input_ids, node_ids, node_labels, edge_ids, edge_labels)
 
 
 def dataloader_test(config):
@@ -195,17 +210,23 @@ def dataloader_test(config):
     dataset = UDSDataset(config, 'train_subset', tokenizer, True)
     dataloader = DataLoader(dataset, batch_size=1, collate_fn=dataset.collate_fn)
     for i, batch in enumerate(dataloader):
-        # if i == 3: break
+        if i == 5: break
         print('===========')
         print('*')
         print('*')
         print('*')
         # input_ids, node_ids, node_labels, edge_ids, edge_labels = batch
-        input_ids = batch['input_ids']
-        node_ids = batch['node_ids']
-        node_labels = batch['node_labels']
-        edge_ids = batch['edge_ids']
-        edge_labels = batch['edge_labels']
+        # input_ids = batch['input_ids']
+        # node_ids = batch['node_ids']
+        # node_labels = batch['node_labels']
+        # edge_ids = batch['edge_ids']
+        # edge_labels = batch['edge_labels']
+        
+        input_ids = batch.input_ids
+        node_ids = batch.node_ids
+        node_labels = batch.node_labels
+        edge_ids = batch.edge_ids
+        edge_labels = batch.edge_labels
         
         a = tokenizer.convert_ids_to_tokens(input_ids[0].tolist())
         print(a)

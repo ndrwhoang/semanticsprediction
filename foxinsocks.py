@@ -4,9 +4,11 @@ import torch
 import configparser
 from itertools import chain
 import numpy as np
+import torch.nn as nn
 from torch.nn.utils.rnn import pad_sequence
 from tqdm import tqdm
 import re
+import random
 
 from src.utils import _extract_masks
 
@@ -123,7 +125,7 @@ def test_make_label_tensor():
                     print('bbbbbbbbbbbbbb')
 
 
-def masking_loss():
+def calculate_masked_loss():
     null = float('nan')
     word_1 = torch.from_numpy(np.asarray([-1.3932, -1.3941, 1.4353, -1.3913, null, null, null, null, null, null, null, null, null, null, null, null, null, null]))
     word_2 = torch.from_numpy(np.asarray([null, null, null, null, 0.0458, -0.0, -0.0, -0.3556, -0.0561, 0.1096, 0.236, 0.236, -0.0561, -0.1343, -0.0, -0.0204, -0.1343, -0.2656]))
@@ -143,7 +145,28 @@ def masking_loss():
     a = (torch.nan_to_num(true_)**2)*mask_ 
     print(a)
 
+def masking_loss():
+    loss_fn = nn.MSELoss(reduction='none')
+    
+    null = float('nan')
+    word_1 = torch.from_numpy(np.asarray([-1.3932, -1.3941, 1.4353, -1.3913, null, null, null, null, null, null, null, null, null, null, null, null, null, null]))
+    word_2 = torch.from_numpy(np.asarray([null, null, null, null, 0.0458, -0.0, -0.0, -0.3556, -0.0561, 0.1096, 0.236, 0.236, -0.0561, -0.1343, -0.0, -0.0204, -0.1343, -0.2656]))
+    true_ = torch.stack([word_1, word_2], dim=0).unsqueeze(0)
+    pred = torch.rand(1, 2, 18, requires_grad=True)
+    mask = torch.isnan(true_) != True    
+    
+    loss_1 = (pred-true_)**2 
+    loss_2 = torch.sum(torch.nan_to_num(loss_fn(pred, true_))) / torch.sum(mask)
+    
+    print(loss_1)
+    print(loss_2)
+    print(torch.masked_select(pred, mask))
+    print(torch.masked_select(true_, mask))
+    
 if __name__ == '__main__':
     print('hello world')
+    torch.manual_seed(12)
+    random.seed(12)
+    np.random.seed(12)
     # test_output_indexing_new()
-    # masking_loss()
+    masking_loss()

@@ -13,7 +13,7 @@ from torch.nn.utils.rnn import pad_sequence
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import OneCycleLR
 
-from src.dataset.seq2seq_dataset import collate_fn
+# from src.dataset.seq2seq_dataset import collate_fn
 
 
 class Finetuner:
